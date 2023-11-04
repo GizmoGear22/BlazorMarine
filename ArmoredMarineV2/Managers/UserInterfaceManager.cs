@@ -9,12 +9,12 @@ namespace ArmoredMarineV2.Managers
             throw new NotImplementedException();
         }
 
-        public CharacterModel GetPrimaryStats()
+        public IMarine GetPrimaryStats()
         {
             throw new NotImplementedException();
         }
 
-        public CharacterModel GetSecondaryStats()
+        public IMarine GetSecondaryStats()
         {
             throw new NotImplementedException();
         }
@@ -24,27 +24,27 @@ namespace ArmoredMarineV2.Managers
             throw new NotImplementedException();
         }
 
-        public CharacterModel SetEquipWeapon()
+        public IMarine SetEquipWeapon()
         {
             throw new NotImplementedException();
         }
 
-        public CharacterModel SetMainWeapon()
+        public IMarine SetMainWeapon()
         {
             throw new NotImplementedException();
         }
 
-        public CharacterModel SetMeleeWeapon()
+        public IMarine SetMeleeWeapon()
         {
             throw new NotImplementedException();
         }
 
-        public CharacterModel SetPrimaryStats()
+        public IMarine SetPrimaryStats()
         {
             throw new NotImplementedException();
         }
 
-        public CharacterModel SetSecondaryWeapon()
+        public IMarine SetSecondaryWeapon()
         {
             throw new NotImplementedException();
         }
