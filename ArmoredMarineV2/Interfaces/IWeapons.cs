@@ -11,5 +11,7 @@
 
         double AccuracyCalculation();
         void DealRangedDamage();
+
+
     }
 }
