@@ -1,4 +1,5 @@
 ﻿using ArmoredMarineV2.Interfaces;
+using ArmoredMarineV2.Pages;
 
 namespace ArmoredMarineV2.Managers
 {
@@ -39,10 +40,10 @@ namespace ArmoredMarineV2.Managers
             throw new NotImplementedException();
         }
 
-        public StatsManager SetPrimaryStats()
+		public StatsManager SetPrimaryStats()
         {
-            throw new NotImplementedException();
-        }
+            return CharacterCreation
+		}
 
         public StatsManager SetSecondaryStats()
         {

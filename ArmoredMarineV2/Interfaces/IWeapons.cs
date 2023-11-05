@@ -10,7 +10,7 @@
         double Weight { get; }
 
         double AccuracyCalculation();
-        void DealRangedDamage();
+        void DamageDealt();
 
 
     }

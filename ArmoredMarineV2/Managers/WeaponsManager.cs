@@ -26,11 +26,11 @@ namespace ArmoredMarineV2.Managers
                     throw new NotImplementedException();
                 }
 
-                public void DealRangedDamage()
-                {
-                    throw new NotImplementedException();
-                }
-            }
+				public void DamageDealt()
+				{
+					throw new NotImplementedException();
+				}
+			}
             public class AutoBoltRifle : IWeapons
             {
 
@@ -51,7 +51,7 @@ namespace ArmoredMarineV2.Managers
                     throw new NotImplementedException();
                 }
 
-                public void DealRangedDamage()
+                public void DamageDealt()
                 {
                     throw new NotImplementedException();
                 }
@@ -79,7 +79,7 @@ namespace ArmoredMarineV2.Managers
                     throw new NotImplementedException();
                 }
 
-                public void DealRangedDamage()
+                public void DamageDealt()
                 {
                     throw new NotImplementedException();
                 }

@@ -1,13 +1,25 @@
-﻿@using Managers;
+﻿@page "/CharacterCreation"
+@using Managers;
+@using Interfaces;
 
 <h3>CharacterCreation</h3>
 
 <form class="form1">
 	<label for="Perception">Perception</label>
-	<input type="text" asp-for="Perception" @bind-value="HumanPlayer.PrimaryStats.Perception" />
-	<button type="submit" class="btn">Submit</button>
+	<input type="text" asp-for="Perception" @bind-value="stats.Perception"/>
+	<button class="btn" onclick="@SubmitForm">Submit</button>
 </form>
 
 @code {
-	MarineBuilder HumanPlayer = new MarineBuilder();
+
+	StatsManager.CharacterPrimaryStats stats = new StatsManager.CharacterPrimaryStats();
+	MarineManager PlayerMarine = new MarineManager();
+
+	string[] errors = {};
+	private void SubmitForm()
+	{
+		PlayerMarine.SecondaryStats.AttributePoints = 30;
+		PlayerMarine.PrimaryStats.Perception = stats.Perception;
+	}
+
 }

@@ -2,7 +2,7 @@
 
 namespace ArmoredMarineV2.Managers
 {
-    public class MarineBuilder : IMarine
+    public class MarineManager : IMarine
     {
         public StatsManager.CharacterPrimaryStats PrimaryStats { get; set; }
         public StatsManager.CharacterSecondaryStats SecondaryStats { get; set; }
@@ -13,7 +13,7 @@ namespace ArmoredMarineV2.Managers
         public IWeapons CurrentlyEquippedWeapon { get; set; }
         public CharacterLocation SetCharacterLocation { get; set; }
 
-        public MarineBuilder() 
+        public MarineManager() 
         {
             PrimaryStats = new StatsManager.CharacterPrimaryStats();
             SecondaryStats = new StatsManager.CharacterSecondaryStats();
