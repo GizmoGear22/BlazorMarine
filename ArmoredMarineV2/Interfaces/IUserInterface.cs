@@ -1,10 +1,12 @@
-﻿namespace ArmoredMarineV2.Interfaces
+﻿using ArmoredMarineV2.Managers;
+namespace ArmoredMarineV2.Interfaces
 {
     interface IUserInterface
     {
-        IMarine GetPrimaryStats();
-        IMarine GetSecondaryStats();
-        IMarine SetPrimaryStats();
+        StatsManager GetPrimaryStats();
+        StatsManager GetSecondaryStats();
+        StatsManager SetPrimaryStats();
+        StatsManager SetSecondaryStats();
         IMarine SetMainWeapon();
         IMarine SetSecondaryWeapon();
         IMarine SetMeleeWeapon();

@@ -6,11 +6,12 @@ namespace ArmoredMarineV2.Managers
     {
         public class Head : IArmor
         {
-            double IArmor.ArmorModifier { get; } = 0.6;
-            double IArmor.AccuracyModifier { get;} = 0.6;
+            public int ArmorValue { get; set; }
+            public double ArmorModifier { get; } = 0.6;
+            public double AccuracyModifier { get; } = 0.6;
 
 
-            public void ConvertResilienceToArmor()
+            public void ConvertResilienceToArmor(StatsManager Resilience)
             {
                 throw new NotImplementedException();
             }

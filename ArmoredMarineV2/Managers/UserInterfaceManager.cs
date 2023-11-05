@@ -9,12 +9,12 @@ namespace ArmoredMarineV2.Managers
             throw new NotImplementedException();
         }
 
-        public IMarine GetPrimaryStats()
+        public StatsManager GetPrimaryStats()
         {
             throw new NotImplementedException();
         }
 
-        public IMarine GetSecondaryStats()
+        public StatsManager GetSecondaryStats()
         {
             throw new NotImplementedException();
         }
@@ -39,7 +39,12 @@ namespace ArmoredMarineV2.Managers
             throw new NotImplementedException();
         }
 
-        public IMarine SetPrimaryStats()
+        public StatsManager SetPrimaryStats()
+        {
+            throw new NotImplementedException();
+        }
+
+        public StatsManager SetSecondaryStats()
         {
             throw new NotImplementedException();
         }

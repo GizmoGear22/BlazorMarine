@@ -1,9 +1,12 @@
-﻿namespace ArmoredMarineV2.Interfaces
+﻿using ArmoredMarineV2.Managers;
+
+namespace ArmoredMarineV2.Interfaces
 {
     public interface IArmor
     {
         double ArmorModifier { get; }
         double AccuracyModifier { get;}
+        int ArmorValue { get; set; }
 
         enum ArmorType
         {
@@ -15,6 +18,6 @@
             RightLeg
         }
 
-        public void ConvertResilienceToArmor();
+        public void ConvertResilienceToArmor(StatsManager Resilience);
     }
 }
