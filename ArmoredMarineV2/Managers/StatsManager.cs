@@ -11,7 +11,10 @@
         }
         public class CharacterSecondaryStats 
         {
-
+            public double Accuracy { get; set; }
+            public double Weight { get; set; }
+            public int ActionPoints { get; set; } = 2;
+            public int MovementDistance { get; set; }
         }
 
     }

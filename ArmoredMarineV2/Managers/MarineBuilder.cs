@@ -2,16 +2,23 @@
 
 namespace ArmoredMarineV2.Managers
 {
-    public class HumanMarineManager : IMarine
+    public class MarineBuilder : IMarine
     {
-        public CharacterPrimaryStats PrimaryStats { get; set; }
-        public CharacterSecondaryStats SecondaryStats { get; set; }
-        public Armor CharacterArmor { get; set; }
+        public StatsManager.CharacterPrimaryStats PrimaryStats { get; set; }
+        public StatsManager.CharacterSecondaryStats SecondaryStats { get; set; }
+        public ArmorManager CharacterArmor { get; set; }
         public WeaponsManager.MainWeapons MainWeapon { get; set; }
         public WeaponsManager.SecondaryWeapons SecondaryWeapon { get; set; }
         public WeaponsManager.MeleeWeapons MeleeWeapon { get; set; }
         public IWeapons CurrentlyEquippedWeapon { get; set; }
         public CharacterLocation SetCharacterLocation { get; set; }
+
+        public MarineBuilder() 
+        {
+            PrimaryStats = new StatsManager.CharacterPrimaryStats();
+            SecondaryStats = new StatsManager.CharacterSecondaryStats();
+            CharacterArmor = new ArmorManager();
+        }
 
         public void EquipWeapon()
         {

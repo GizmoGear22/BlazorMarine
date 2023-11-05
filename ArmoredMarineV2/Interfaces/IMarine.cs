@@ -4,9 +4,9 @@ namespace ArmoredMarineV2.Interfaces
 {
     public interface IMarine
     {
-        CharacterPrimaryStats PrimaryStats { get; set; }
-        CharacterSecondaryStats SecondaryStats { get; set; }
-        Armor CharacterArmor { get; set; }
+        StatsManager.CharacterPrimaryStats PrimaryStats { get; set; }
+        StatsManager.CharacterSecondaryStats SecondaryStats { get; set; }
+        ArmorManager CharacterArmor { get; set; }
         WeaponsManager.MainWeapons MainWeapon { get; set; }
         WeaponsManager.SecondaryWeapons SecondaryWeapon { get; set; }
         WeaponsManager.MeleeWeapons MeleeWeapon { get; set; }

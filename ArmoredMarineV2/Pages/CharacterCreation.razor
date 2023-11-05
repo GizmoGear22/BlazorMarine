@@ -1,0 +1,13 @@
+﻿@using Managers;
+
+<h3>CharacterCreation</h3>
+
+<form class="form1">
+	<label for="Perception">Perception</label>
+	<input type="text" asp-for="Perception" @bind-value="HumanPlayer.PrimaryStats.Perception" />
+	<button type="submit" class="btn">Submit</button>
+</form>
+
+@code {
+	MarineBuilder HumanPlayer = new MarineBuilder();
+}
