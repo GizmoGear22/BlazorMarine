@@ -15,10 +15,11 @@ builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddMudServices();
 
 
-builder.Services.AddScoped<IUserInterface, UserInterfaceManager>();
+builder.Services.AddSingleton<IUserInterface, UserInterfaceManager>();
+builder.Services.AddSingleton<IMarine, MarineManager>();
 
 
-var app = builder.Build();
+  var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

@@ -1,14 +1,15 @@
 ﻿using ArmoredMarineV2.Interfaces;
 using ArmoredMarineV2.Pages;
 
+
 namespace ArmoredMarineV2.Managers
 {
     public class UserInterfaceManager : IUserInterface
     {
-        MarineManager HumanPlayer { get; set; }
+        IMarine HumanPlayer { get; set; }
 
 
-        public UserInterfaceManager(MarineManager Player)
+        public UserInterfaceManager(IMarine Player)
         {
             HumanPlayer = Player;
         }
@@ -51,13 +52,12 @@ namespace ArmoredMarineV2.Managers
 
         public void SetPrimaryStats(CharacterPrimaryStats stats)
         {
-            /*
+            
             HumanPlayer.PrimaryStats.Strength = stats.Strength;
             HumanPlayer.PrimaryStats.Agility = stats.Agility;
             HumanPlayer.PrimaryStats.Perception = stats.Perception;
             HumanPlayer.PrimaryStats.Resilience = stats.Resilience;
-            */
-
+            
         }
 
         public StatsManager SetSecondaryStats()

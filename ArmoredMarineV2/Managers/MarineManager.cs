@@ -15,9 +15,11 @@ namespace ArmoredMarineV2.Managers
 
         public MarineManager() 
         {
+            
             PrimaryStats = new StatsManager.CharacterPrimaryStats();
             SecondaryStats = new StatsManager.CharacterSecondaryStats();
             CharacterArmor = new ArmorManager();
+            
         }
 
         public void EquipWeapon()
