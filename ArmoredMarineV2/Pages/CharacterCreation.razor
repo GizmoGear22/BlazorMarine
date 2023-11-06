@@ -37,17 +37,16 @@
 </MudGrid>
 
 @code {
+    bool success;
+    string[] errors = { };
+    MudForm form;
+    IUserInterface user;
 
-        StatsManager.CharacterPrimaryStats stats = new StatsManager.CharacterPrimaryStats();
-        MarineManager PlayerMarine = new MarineManager();
+    CharacterPrimaryStats stats = new();
 
-        bool success;
-        string[] errors = { };
-        MudForm form;
-        IUserInterface userInterface = new UserInterfaceManager();
-        private void SubmitForm()
-        {
-            userInterface.SetPrimaryStats(PlayerMarine, stats);
-        }
+    private void SubmitForm()
+    {
+        user.SetPrimaryStats(stats);
+    }
 
 }

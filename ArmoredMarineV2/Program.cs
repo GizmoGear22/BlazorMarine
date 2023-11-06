@@ -13,8 +13,10 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddMudServices();
-builder.Services.AddTransient<IMarine, MarineManager>();
-builder.Services.AddTransient<IUserInterface, UserInterfaceManager>();
+
+
+builder.Services.AddScoped<IUserInterface, UserInterfaceManager>();
+
 
 var app = builder.Build();
 
