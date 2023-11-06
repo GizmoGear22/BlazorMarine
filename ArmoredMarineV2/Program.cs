@@ -13,10 +13,13 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddMudServices();
-builder.Services.AddTransient<IMarine, MarineManager>();
-builder.Services.AddTransient<IUserInterface, UserInterfaceManager>();
 
-var app = builder.Build();
+
+builder.Services.AddSingleton<IUserInterface, UserInterfaceManager>();
+builder.Services.AddSingleton<IMarine, MarineManager>();
+
+
+  var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

@@ -1,11 +1,11 @@
 ﻿using ArmoredMarineV2.Managers;
 namespace ArmoredMarineV2.Interfaces
 {
-    interface IUserInterface
+    public interface IUserInterface
     {
         StatsManager GetPrimaryStats();
         StatsManager GetSecondaryStats();
-        MarineManager SetPrimaryStats(MarineManager player, StatsManager.CharacterPrimaryStats stats);
+        void SetPrimaryStats(CharacterPrimaryStats stats);
         StatsManager SetSecondaryStats();
         IMarine SetMainWeapon();
         IMarine SetSecondaryWeapon();

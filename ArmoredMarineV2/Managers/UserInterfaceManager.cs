@@ -1,10 +1,20 @@
 ﻿using ArmoredMarineV2.Interfaces;
 using ArmoredMarineV2.Pages;
 
+
 namespace ArmoredMarineV2.Managers
 {
     public class UserInterfaceManager : IUserInterface
     {
+        IMarine HumanPlayer { get; set; }
+
+
+        public UserInterfaceManager(IMarine Player)
+        {
+            HumanPlayer = Player;
+        }
+
+
         public CombatResults GetCombatResults()
         {
             throw new NotImplementedException();
@@ -40,16 +50,15 @@ namespace ArmoredMarineV2.Managers
             throw new NotImplementedException();
         }
 
-		MarineManager IUserInterface.SetPrimaryStats(MarineManager player, StatsManager.CharacterPrimaryStats stats)
+        public void SetPrimaryStats(CharacterPrimaryStats stats)
         {
-            player.PrimaryStats.Strength = stats.Strength;
-            player.PrimaryStats.Agility = stats.Agility;
-            player.PrimaryStats.Perception = stats.Perception;
-            player.PrimaryStats.Resilience = stats.Resilience;
-
-            return player;
-
-		}
+            
+            HumanPlayer.PrimaryStats.Strength = stats.Strength;
+            HumanPlayer.PrimaryStats.Agility = stats.Agility;
+            HumanPlayer.PrimaryStats.Perception = stats.Perception;
+            HumanPlayer.PrimaryStats.Resilience = stats.Resilience;
+            
+        }
 
         public StatsManager SetSecondaryStats()
         {

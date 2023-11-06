@@ -3,6 +3,8 @@
 @using Interfaces;
 @using MudBlazor;
 @using Constructors;
+@inject IUserInterface userInterface;
+
 
 <h3>CharacterCreation</h3>
 
@@ -37,17 +39,31 @@
 </MudGrid>
 
 @code {
+    bool success;
+    string[] errors = { };
+    MudForm form;
 
-        StatsManager.CharacterPrimaryStats stats = new StatsManager.CharacterPrimaryStats();
-        MarineManager PlayerMarine = new MarineManager();
+    public static CharacterPrimaryStats stats = new();
 
-        bool success;
-        string[] errors = { };
-        MudForm form;
-        IUserInterface userInterface = new UserInterfaceManager();
-        private void SubmitForm()
+    public void SubmitForm()
+    {
+        userInterface.SetPrimaryStats(stats);
+    }
+
+               /* 
+    public class Injection
+    {
+             private readonly IUserInterface _myInjection;
+
+        public Injection(IUserInterface myInjection)
         {
-            userInterface.SetPrimaryStats(PlayerMarine, stats);
+            _myInjection = myInjection;
         }
+        public void SubmitForm()
+        {
+            _myInjection.SetPrimaryStats(stats);
+        }*/
+
+    }
 
 }
