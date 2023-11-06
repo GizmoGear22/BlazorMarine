@@ -1,0 +1,53 @@
+﻿@page "/CharacterCreation"
+@using Managers;
+@using Interfaces;
+@using MudBlazor;
+@using Constructors;
+
+<h3>CharacterCreation</h3>
+
+<MudGrid>
+    <MudItem xs="12" sm="7">
+        <MudPaper Class="pa-4">
+            <MudForm @ref="form" @bind-IsValid="@success" @bind-Errors="@errors">
+                <MudTextField T="int" Label="Strength" @bind-Value="stats.Strength" />
+                <MudTextField T="int" Label="Agility" @bind-Value="stats.Agility" />
+                <MudTextField T="int" Label="Resilience" @bind-Value="stats.Resilience" />
+                <MudTextField T="int" Label="Perception" @bind-Value="stats.Perception" />
+
+            </MudForm>
+        </MudPaper>
+        <MudPaper Class="pa-4 mt-4">
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" DisableElevation="true" OnClick="@(() => form.Validate())">Validate</MudButton>
+            <MudButton Variant="Variant.Filled" Color="Color.Secondary" DisableElevation="true" OnClick="@(() => form.ResetAsync())" Class="mx-2">Reset</MudButton>
+            <MudButton Variant="Variant.Filled" DisableElevation="true" OnClick="@(() => form.ResetValidation())">Reset Validation</MudButton>
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" DisableElevation="true" OnClick="@SubmitForm">Submit</MudButton>
+
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="12" sm="5">
+        <MudPaper Class="pa-4 mud-height-full">
+            <MudText Typo="Typo.subtitle2">@($"Errors ({errors.Length})")</MudText>
+                @foreach (var error in errors)
+            {
+                <MudText Color="@Color.Error">@error</MudText>
+            }
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+
+@code {
+
+        StatsManager.CharacterPrimaryStats stats = new StatsManager.CharacterPrimaryStats();
+        MarineManager PlayerMarine = new MarineManager();
+
+        bool success;
+        string[] errors = { };
+        MudForm form;
+        IUserInterface userInterface = new UserInterfaceManager();
+        private void SubmitForm()
+        {
+            userInterface.SetPrimaryStats(PlayerMarine, stats);
+        }
+
+}

@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\ArmoredMarineV2.props" />
+</Project>

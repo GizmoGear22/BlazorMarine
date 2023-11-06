@@ -1,8 +1,25 @@
 {
   "version": 2,
-  "dgSpecHash": "JGY5lrgeZlJeCOTQ9k1e9Fgf9QGz36uTKwWv7JvlimydIYWSxs28KExpzwdHM4ek75tMbb7ihu5Oggyj2GsbbA==",
+  "dgSpecHash": "PjetsLJHqtqXURnnyyfO5aotzELSHCNFUzF5VAA34dvz4ufbHfWYkHiV5ql+XF8cGTS+HyDmjTJ2n+ryRK/6xA==",
   "success": true,
   "projectFilePath": "C:\\Users\\13134\\source\\repos\\ArmoredMarineV2\\ArmoredMarineV2\\ArmoredMarineV2.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\13134\\.nuget\\packages\\microsoft.aspnetcore.authorization\\7.0.5\\microsoft.aspnetcore.authorization.7.0.5.nupkg.sha512",
+    "C:\\Users\\13134\\.nuget\\packages\\microsoft.aspnetcore.components\\7.0.5\\microsoft.aspnetcore.components.7.0.5.nupkg.sha512",
+    "C:\\Users\\13134\\.nuget\\packages\\microsoft.aspnetcore.components.analyzers\\7.0.5\\microsoft.aspnetcore.components.analyzers.7.0.5.nupkg.sha512",
+    "C:\\Users\\13134\\.nuget\\packages\\microsoft.aspnetcore.components.forms\\7.0.5\\microsoft.aspnetcore.components.forms.7.0.5.nupkg.sha512",
+    "C:\\Users\\13134\\.nuget\\packages\\microsoft.aspnetcore.components.web\\7.0.5\\microsoft.aspnetcore.components.web.7.0.5.nupkg.sha512",
+    "C:\\Users\\13134\\.nuget\\packages\\microsoft.aspnetcore.metadata\\7.0.5\\microsoft.aspnetcore.metadata.7.0.5.nupkg.sha512",
+    "C:\\Users\\13134\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\7.0.0\\microsoft.extensions.dependencyinjection.7.0.0.nupkg.sha512",
+    "C:\\Users\\13134\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\7.0.0\\microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512",
+    "C:\\Users\\13134\\.nuget\\packages\\microsoft.extensions.localization\\7.0.5\\microsoft.extensions.localization.7.0.5.nupkg.sha512",
+    "C:\\Users\\13134\\.nuget\\packages\\microsoft.extensions.localization.abstractions\\7.0.5\\microsoft.extensions.localization.abstractions.7.0.5.nupkg.sha512",
+    "C:\\Users\\13134\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\7.0.0\\microsoft.extensions.logging.abstractions.7.0.0.nupkg.sha512",
+    "C:\\Users\\13134\\.nuget\\packages\\microsoft.extensions.options\\7.0.1\\microsoft.extensions.options.7.0.1.nupkg.sha512",
+    "C:\\Users\\13134\\.nuget\\packages\\microsoft.extensions.primitives\\7.0.0\\microsoft.extensions.primitives.7.0.0.nupkg.sha512",
+    "C:\\Users\\13134\\.nuget\\packages\\microsoft.jsinterop\\7.0.5\\microsoft.jsinterop.7.0.5.nupkg.sha512",
+    "C:\\Users\\13134\\.nuget\\packages\\mudblazor\\6.11.0\\mudblazor.6.11.0.nupkg.sha512",
+    "C:\\Users\\13134\\.nuget\\packages\\system.io.pipelines\\7.0.0\\system.io.pipelines.7.0.0.nupkg.sha512"
+  ],
   "logs": []
 }
