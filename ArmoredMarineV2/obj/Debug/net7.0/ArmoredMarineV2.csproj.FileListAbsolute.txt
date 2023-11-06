@@ -29,3 +29,15 @@ C:\Users\13134\source\repos\ArmoredMarineV2\ArmoredMarineV2\obj\Debug\net7.0\ref
 C:\Users\13134\source\repos\ArmoredMarineV2\ArmoredMarineV2\obj\Debug\net7.0\ArmoredMarineV2.pdb
 C:\Users\13134\source\repos\ArmoredMarineV2\ArmoredMarineV2\obj\Debug\net7.0\ArmoredMarineV2.genruntimeconfig.cache
 C:\Users\13134\source\repos\ArmoredMarineV2\ArmoredMarineV2\obj\Debug\net7.0\ref\ArmoredMarineV2.dll
+C:\Users\13134\source\repos\ArmoredMarineV2\ArmoredMarineV2\bin\Debug\net7.0\Microsoft.AspNetCore.Authorization.dll
+C:\Users\13134\source\repos\ArmoredMarineV2\ArmoredMarineV2\bin\Debug\net7.0\Microsoft.AspNetCore.Components.dll
+C:\Users\13134\source\repos\ArmoredMarineV2\ArmoredMarineV2\bin\Debug\net7.0\Microsoft.AspNetCore.Components.Forms.dll
+C:\Users\13134\source\repos\ArmoredMarineV2\ArmoredMarineV2\bin\Debug\net7.0\Microsoft.AspNetCore.Components.Web.dll
+C:\Users\13134\source\repos\ArmoredMarineV2\ArmoredMarineV2\bin\Debug\net7.0\Microsoft.AspNetCore.Metadata.dll
+C:\Users\13134\source\repos\ArmoredMarineV2\ArmoredMarineV2\bin\Debug\net7.0\Microsoft.Extensions.Localization.dll
+C:\Users\13134\source\repos\ArmoredMarineV2\ArmoredMarineV2\bin\Debug\net7.0\Microsoft.Extensions.Localization.Abstractions.dll
+C:\Users\13134\source\repos\ArmoredMarineV2\ArmoredMarineV2\bin\Debug\net7.0\Microsoft.Extensions.Options.dll
+C:\Users\13134\source\repos\ArmoredMarineV2\ArmoredMarineV2\bin\Debug\net7.0\Microsoft.JSInterop.dll
+C:\Users\13134\source\repos\ArmoredMarineV2\ArmoredMarineV2\bin\Debug\net7.0\MudBlazor.dll
+C:\Users\13134\source\repos\ArmoredMarineV2\ArmoredMarineV2\obj\Debug\net7.0\ArmoredMarineV2.csproj.AssemblyReference.cache
+C:\Users\13134\source\repos\ArmoredMarineV2\ArmoredMarineV2\obj\Debug\net7.0\ArmoredMarineV2.csproj.CopyComplete

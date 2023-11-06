@@ -5,7 +5,7 @@ namespace ArmoredMarineV2.Interfaces
     {
         StatsManager GetPrimaryStats();
         StatsManager GetSecondaryStats();
-        StatsManager SetPrimaryStats();
+        MarineManager SetPrimaryStats(MarineManager player, StatsManager.CharacterPrimaryStats stats);
         StatsManager SetSecondaryStats();
         IMarine SetMainWeapon();
         IMarine SetSecondaryWeapon();

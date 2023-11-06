@@ -1,13 +1,20 @@
 using ArmoredMarineV2.Data;
+using ArmoredMarineV2.Interfaces;
+using ArmoredMarineV2.Managers;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
+builder.Services.AddMudServices();
+builder.Services.AddTransient<IMarine, MarineManager>();
+builder.Services.AddTransient<IUserInterface, UserInterfaceManager>();
 
 var app = builder.Build();
 

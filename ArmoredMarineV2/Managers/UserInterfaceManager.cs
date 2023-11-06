@@ -40,9 +40,15 @@ namespace ArmoredMarineV2.Managers
             throw new NotImplementedException();
         }
 
-		public StatsManager SetPrimaryStats()
+		MarineManager IUserInterface.SetPrimaryStats(MarineManager player, StatsManager.CharacterPrimaryStats stats)
         {
-            return CharacterCreation
+            player.PrimaryStats.Strength = stats.Strength;
+            player.PrimaryStats.Agility = stats.Agility;
+            player.PrimaryStats.Perception = stats.Perception;
+            player.PrimaryStats.Resilience = stats.Resilience;
+
+            return player;
+
 		}
 
         public StatsManager SetSecondaryStats()
