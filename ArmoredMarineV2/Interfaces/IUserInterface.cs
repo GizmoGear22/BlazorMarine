@@ -5,14 +5,15 @@ namespace ArmoredMarineV2.Interfaces
     {
         StatsManager GetPrimaryStats();
         StatsManager GetSecondaryStats();
-        void SetPrimaryStats(CharacterPrimaryStats stats, IMarine player);
-        StatsManager SetSecondaryStats();
+        void SetPrimaryStats(StatsManager.CharacterPrimaryStats stats, IMarine player);
+        void SetSecondaryStats(StatsManager.CharacterSecondaryStats stats, IMarine player);
         IMarine SetMainWeapon();
         IMarine SetSecondaryWeapon();
         IMarine SetMeleeWeapon();
         IMarine SetEquipWeapon();
         AttackModel SetAttackAction();
         CombatResults GetCombatResults();
+        int UseAttributePoints(StatsManager.CharacterSecondaryStats attributePoints, int totalDifference);
 
     }
 

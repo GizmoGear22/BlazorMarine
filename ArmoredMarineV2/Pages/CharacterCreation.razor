@@ -2,7 +2,6 @@
 @using Managers;
 @using Interfaces;
 @using MudBlazor;
-@using Constructors;
 @inject IUserInterface userInterface;
 @inject IMarine HumanPlayer;
 
@@ -10,7 +9,12 @@
 <h3>CharacterCreation</h3>
 
 @code{
-        public static CharacterPrimaryStats stats = new();
+        public static StatsManager.CharacterPrimaryStats stats = new();
+        public static StatsManager.CharacterSecondaryStats secStats = new();
+        static int originalStrength = stats.Strength;
+        static int originalAgility = stats.Agility;
+        static int originalResilience = stats.Resilience;
+        static int originalPerception = stats.Perception;
 }
 
 <MudGrid>
@@ -43,10 +47,22 @@
     </MudItem>
 </MudGrid>
 
+<h2>Attribute Points Remaining: @(secStats.AttributePoints - stats.Strength)</h2>
+
+
 @code {
     bool success;
     string[] errors = { };
     MudForm form;
+
+    static int strengthDifference = stats.Strength - originalStrength;
+    static int agilityDifference = stats.Agility - originalAgility;
+    static int resilienceDifference = stats.Resilience - originalResilience;
+    static int perceptionDifference = stats.Perception - originalPerception;
+
+    static int totalStatDifference = strengthDifference + agilityDifference + resilienceDifference + perceptionDifference;
+
+
 
     public void SubmitForm()
     {
@@ -57,5 +73,6 @@
 
 
     }
+
 
 }

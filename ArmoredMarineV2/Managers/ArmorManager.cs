@@ -7,25 +7,31 @@ namespace ArmoredMarineV2.Managers
     public class ArmorManager
     {
         public class ArmorSet
-        { 
-            List<ArmorPieces> Pieces = new List<ArmorPieces>
-    {
-        new ArmorPieces {Name = "Head", ArmorValue = 0.6, AccuracyModifier = 0.6},
-        new ArmorPieces {Name = "Torso", ArmorValue = 1.3, AccuracyModifier = 1.2},
-        new ArmorPieces {Name = "LeftPauldron", ArmorValue = 1.1, AccuracyModifier = 1},
-        new ArmorPieces {Name = "RightPauldron", ArmorValue = 1.1, AccuracyModifier= 1},
-        new ArmorPieces {Name = "LeftArm", ArmorValue = 0.8, AccuracyModifier = 0.8},
-        new ArmorPieces {Name = "RightArm", ArmorValue = 0.8, AccuracyModifier = 0.8},
-        new ArmorPieces {Name = "LeftLeg", ArmorValue = 0.8, AccuracyModifier = 0.8},
-        new ArmorPieces {Name = "RightLeg", ArmorValue = 0.8, AccuracyModifier = 0.8}
-    };
+        {
+            public List<ArmorPieces> ArmorList { get; set; }
+            public ArmorSet() 
+            {
+                List<ArmorPieces> ArmorList = new List<ArmorPieces>
+                {
+                new ArmorPieces {Name = "Head", ArmorValue = 0.6, AccuracyModifier = 0.6},
+                new ArmorPieces {Name = "Torso", ArmorValue = 1.3, AccuracyModifier = 1.2},
+                new ArmorPieces {Name = "LeftPauldron", ArmorValue = 1.1, AccuracyModifier = 1},
+                new ArmorPieces {Name = "RightPauldron", ArmorValue = 1.1, AccuracyModifier= 1},
+                new ArmorPieces {Name = "LeftArm", ArmorValue = 0.8, AccuracyModifier = 0.8},
+                new ArmorPieces {Name = "RightArm", ArmorValue = 0.8, AccuracyModifier = 0.8},
+                new ArmorPieces {Name = "LeftLeg", ArmorValue = 0.8, AccuracyModifier = 0.8},
+                new ArmorPieces {Name = "RightLeg", ArmorValue = 0.8, AccuracyModifier = 0.8}
+                };
+            }
+
             public void ResilienceToArmor(IMarine marine)
             {
-                foreach (ArmorPieces piece in Pieces)
+                foreach (ArmorPieces piece in ArmorList)
                 {
                     piece.ArmorValue = piece.ArmorValue * marine.PrimaryStats.Resilience * 10;
                 }
             }
+
         }
         public class ArmorPieces : IArmor
         {
