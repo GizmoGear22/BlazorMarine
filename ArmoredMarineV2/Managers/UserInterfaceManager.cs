@@ -6,12 +6,10 @@ namespace ArmoredMarineV2.Managers
 {
     public class UserInterfaceManager : IUserInterface
     {
-        IMarine HumanPlayer { get; set; }
 
 
-        public UserInterfaceManager(IMarine Player)
+        public UserInterfaceManager()
         {
-            HumanPlayer = Player;
         }
 
 
@@ -50,7 +48,7 @@ namespace ArmoredMarineV2.Managers
             throw new NotImplementedException();
         }
 
-        public void SetPrimaryStats(CharacterPrimaryStats stats)
+        public void SetPrimaryStats(CharacterPrimaryStats stats, IMarine HumanPlayer)
         {
             
             HumanPlayer.PrimaryStats.Strength = stats.Strength;

@@ -4,6 +4,7 @@
 @using MudBlazor;
 @using Constructors;
 @inject IUserInterface userInterface;
+@inject IMarine HumanPlayer
 
 
 <h3>CharacterCreation</h3>
@@ -47,22 +48,9 @@
 
     public void SubmitForm()
     {
-        userInterface.SetPrimaryStats(stats);
+        userInterface.SetPrimaryStats(stats, HumanPlayer);
     }
 
-               /* 
-    public class Injection
-    {
-             private readonly IUserInterface _myInjection;
-
-        public Injection(IUserInterface myInjection)
-        {
-            _myInjection = myInjection;
-        }
-        public void SubmitForm()
-        {
-            _myInjection.SetPrimaryStats(stats);
-        }*/
 
     }
 

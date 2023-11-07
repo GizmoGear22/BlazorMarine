@@ -5,7 +5,7 @@ namespace ArmoredMarineV2.Interfaces
     {
         StatsManager GetPrimaryStats();
         StatsManager GetSecondaryStats();
-        void SetPrimaryStats(CharacterPrimaryStats stats);
+        void SetPrimaryStats(CharacterPrimaryStats stats, IMarine player);
         StatsManager SetSecondaryStats();
         IMarine SetMainWeapon();
         IMarine SetSecondaryWeapon();
@@ -36,7 +36,6 @@ namespace ArmoredMarineV2.Interfaces
     {
 
     }
-
     public class CombatResults
     {
 
