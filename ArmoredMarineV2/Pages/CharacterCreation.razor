@@ -4,7 +4,7 @@
 @using MudBlazor;
 @using Constructors;
 @inject IUserInterface userInterface;
-@inject IMarine HumanPlayer
+@inject IMarine HumanPlayer;
 
 
 <h3>CharacterCreation</h3>
@@ -49,6 +49,7 @@
     public void SubmitForm()
     {
         userInterface.SetPrimaryStats(stats, HumanPlayer);
+
     }
 
 

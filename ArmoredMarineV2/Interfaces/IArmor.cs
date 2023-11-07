@@ -4,9 +4,9 @@ namespace ArmoredMarineV2.Interfaces
 {
     public interface IArmor
     {
-        double ArmorModifier { get; }
-        double AccuracyModifier { get;}
-        int ArmorValue { get; set; }
+        double ArmorModifier { get; set; }
+        double AccuracyModifier { get; set; }
+        double ArmorValue { get; set; }
 
         enum ArmorType
         {

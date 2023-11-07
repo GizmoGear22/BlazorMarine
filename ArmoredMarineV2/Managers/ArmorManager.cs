@@ -1,14 +1,20 @@
-﻿using ArmoredMarineV2.Interfaces;
+﻿using System.Collections;
+using ArmoredMarineV2.Interfaces;
 
 namespace ArmoredMarineV2.Managers
 {
     public class ArmorManager
     {
+        public string Name { get; set; }
+        public double ArmorValue { get; set; }
+        public double AccuracyModifier { get; set; }
+
+  
         public class Head : IArmor
         {
-            public int ArmorValue { get; set; }
-            public double ArmorModifier { get; } = 0.6;
-            public double AccuracyModifier { get; } = 0.6;
+            public double ArmorValue { get; set; }
+            public double ArmorModifier { get; set; } = 0.6;
+            public double AccuracyModifier { get; set; } = 0.6;
 
 
             public void ConvertResilienceToArmor(StatsManager Resilience)
@@ -53,5 +59,7 @@ namespace ArmoredMarineV2.Managers
             public double ArmorModifier = 0.8;
             public double AccuracyModifier = 0.8;
         }
+
     }
+
 }
