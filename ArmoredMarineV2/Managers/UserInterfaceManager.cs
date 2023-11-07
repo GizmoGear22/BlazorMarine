@@ -50,7 +50,7 @@ namespace ArmoredMarineV2.Managers
             throw new NotImplementedException();
         }
 
-        public void SetPrimaryStats(CharacterPrimaryStats stats)
+        public void SetPrimaryStats(StatsManager.CharacterPrimaryStats stats)
         {
             
             HumanPlayer.PrimaryStats.Strength = stats.Strength;
@@ -60,9 +60,12 @@ namespace ArmoredMarineV2.Managers
             
         }
 
-        public StatsManager SetSecondaryStats()
+        public void SetSecondaryStats(StatsManager.CharacterSecondaryStats stats)
         {
-            throw new NotImplementedException();
+            HumanPlayer.SecondaryStats.Credits = stats.Credits;
+            HumanPlayer.SecondaryStats.ActionPoints = stats.ActionPoints;
+            HumanPlayer.SecondaryStats.AttributePoints = stats.AttributePoints;
+            HumanPlayer.SecondaryStats.Accuracy = stats.Accuracy;
         }
 
         public IMarine SetSecondaryWeapon()

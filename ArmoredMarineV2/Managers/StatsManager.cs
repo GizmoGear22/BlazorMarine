@@ -5,10 +5,11 @@
 
         public class CharacterPrimaryStats
         {
-            public int Strength { get; set; }
-            public int Agility { get; set; }
-            public int Resilience { get; set; }
-            public int Perception { get; set; }
+            public int Strength { get; set; } = 1;
+            public int Agility { get; set; } = 1;
+            public int Resilience { get; set; } = 1;
+            public int Perception { get; set; } = 1;
+
         }
         public class CharacterSecondaryStats 
         {
@@ -17,7 +18,7 @@
             public int ActionPoints { get; set; } = 2;
             public int MovementDistance { get; set; }
             public int Credits { get; set; }
-            public int AttributePoints { get; set; }
+            public int AttributePoints { get; set; } = 30;
         }
 
     }

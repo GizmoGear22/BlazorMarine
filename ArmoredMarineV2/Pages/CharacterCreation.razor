@@ -6,24 +6,34 @@
 @inject IUserInterface userInterface;
 
 
+@code{
+    public static StatsManager.CharacterPrimaryStats PrimaryStats = new();
+    public static StatsManager.CharacterSecondaryStats SecondaryStats = new();
+
+    static int currentStrength = PrimaryStats.Strength;
+    static int currentAgility = PrimaryStats.Agility;
+    static int currentResilience = PrimaryStats.Resilience;
+    static int currentPerception = PrimaryStats.Perception;
+
+}
+
 <h3>CharacterCreation</h3>
 
 <MudGrid>
     <MudItem xs="12" sm="7">
         <MudPaper Class="pa-4">
             <MudForm @ref="form" @bind-IsValid="@success" @bind-Errors="@errors">
-                <MudTextField T="int" Label="Strength" @bind-Value="stats.Strength" />
-                <MudTextField T="int" Label="Agility" @bind-Value="stats.Agility" />
-                <MudTextField T="int" Label="Resilience" @bind-Value="stats.Resilience" />
-                <MudTextField T="int" Label="Perception" @bind-Value="stats.Perception" />
+                <MudNumericField Label="Strength" @bind-Value="PrimaryStats.Strength" Min="1" 
+                />
+                <MudNumericField Label="Agility" @bind-Value="PrimaryStats.Agility" Min="1" />
+                <MudNumericField Label="Resilience" @bind-Value="PrimaryStats.Resilience" Min="1" />
+                <MudNumericField Label="Perception" @bind-Value="PrimaryStats.Perception" Min="1" />
 
             </MudForm>
         </MudPaper>
         <MudPaper Class="pa-4 mt-4">
-            <MudButton Variant="Variant.Filled" Color="Color.Primary" DisableElevation="true" OnClick="@(() => form.Validate())">Validate</MudButton>
             <MudButton Variant="Variant.Filled" Color="Color.Secondary" DisableElevation="true" OnClick="@(() => form.ResetAsync())" Class="mx-2">Reset</MudButton>
-            <MudButton Variant="Variant.Filled" DisableElevation="true" OnClick="@(() => form.ResetValidation())">Reset Validation</MudButton>
-            <MudButton Variant="Variant.Filled" Color="Color.Primary" DisableElevation="true" OnClick="@SubmitForm">Submit</MudButton>
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" DisableElevation="true" OnClick="@ValidateAndSubmit">Submit</MudButton>
 
         </MudPaper>
     </MudItem>
@@ -37,33 +47,57 @@
         </MudPaper>
     </MudItem>
 </MudGrid>
-
+<h3>@SecondaryStats.AttributePoints</h3>
+<h3>@PrimaryStats.Strength</h3>
+<h3>@currentStrength</h3> 
+<h3>@{
+    strengthDifference = Convert.ToInt32(PrimaryStats.Strength) - currentStrength;
+	}
+    @strengthDifference
+</h3>
 @code {
+
+    int strengthDifference;
     bool success;
+    bool validationSuccess;
     string[] errors = { };
     MudForm form;
 
-    public static CharacterPrimaryStats stats = new();
 
-    public void SubmitForm()
+    private enum StatType
     {
-        userInterface.SetPrimaryStats(stats);
+        Strength,
+        Agility,
+        Resilience,
+        Perception
     }
 
-               /* 
-    public class Injection
+    private string StatCheck()
     {
-             private readonly IUserInterface _myInjection;
-
-        public Injection(IUserInterface myInjection)
+        if (PrimaryStats.Strength < 1)
         {
-            _myInjection = myInjection;
+            return "Stat must be greater than 1!";
         }
-        public void SubmitForm()
-        {
-            _myInjection.SetPrimaryStats(stats);
-        }*/
+
+        return "";
+
 
     }
 
+    private async Task ValidateAndSubmit()
+    {   
+        validationSuccess = true;
+        if (validationSuccess)
+        {
+            await SubmitForm();
+        }
+        
+    }
+
+	private async Task SubmitForm()
+	{
+		userInterface.SetPrimaryStats(PrimaryStats);
+	}
 }
+
+

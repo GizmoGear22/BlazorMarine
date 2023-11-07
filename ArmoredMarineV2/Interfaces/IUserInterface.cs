@@ -5,8 +5,8 @@ namespace ArmoredMarineV2.Interfaces
     {
         StatsManager GetPrimaryStats();
         StatsManager GetSecondaryStats();
-        void SetPrimaryStats(CharacterPrimaryStats stats);
-        StatsManager SetSecondaryStats();
+        void SetPrimaryStats(StatsManager.CharacterPrimaryStats stats);
+        void SetSecondaryStats(StatsManager.CharacterSecondaryStats stats);
         IMarine SetMainWeapon();
         IMarine SetSecondaryWeapon();
         IMarine SetMeleeWeapon();
@@ -14,14 +14,6 @@ namespace ArmoredMarineV2.Interfaces
         AttackModel SetAttackAction();
         CombatResults GetCombatResults();
 
-    }
-
-    public class CharacterPrimaryStats
-    {
-        public int Strength { get; set; }
-        public int Agility { get; set; }
-        public int Resilience { get; set; }
-        public int Perception { get; set; }
     }
 
     public class CharacterSecondaryStats 

@@ -1,3 +1,4 @@
+using System.Threading.RateLimiting;
 using ArmoredMarineV2.Data;
 using ArmoredMarineV2.Interfaces;
 using ArmoredMarineV2.Managers;
@@ -18,8 +19,7 @@ builder.Services.AddMudServices();
 builder.Services.AddSingleton<IUserInterface, UserInterfaceManager>();
 builder.Services.AddSingleton<IMarine, MarineManager>();
 
-
-  var app = builder.Build();
+var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
