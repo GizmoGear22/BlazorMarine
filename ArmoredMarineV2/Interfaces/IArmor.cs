@@ -4,7 +4,7 @@ namespace ArmoredMarineV2.Interfaces
 {
     public interface IArmor
     {
-        double ArmorModifier { get; set; }
+        string Name { get; set; }
         double AccuracyModifier { get; set; }
         double ArmorValue { get; set; }
 
@@ -18,6 +18,5 @@ namespace ArmoredMarineV2.Interfaces
             RightLeg
         }
 
-        public void ConvertResilienceToArmor(StatsManager Resilience);
     }
 }

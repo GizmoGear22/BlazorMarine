@@ -9,14 +9,18 @@
 
 <h3>CharacterCreation</h3>
 
+@code{
+        public static CharacterPrimaryStats stats = new();
+}
+
 <MudGrid>
     <MudItem xs="12" sm="7">
         <MudPaper Class="pa-4">
             <MudForm @ref="form" @bind-IsValid="@success" @bind-Errors="@errors">
-                <MudTextField T="int" Label="Strength" @bind-Value="stats.Strength" />
-                <MudTextField T="int" Label="Agility" @bind-Value="stats.Agility" />
-                <MudTextField T="int" Label="Resilience" @bind-Value="stats.Resilience" />
-                <MudTextField T="int" Label="Perception" @bind-Value="stats.Perception" />
+                <MudNumericField T="int" Label="Strength" @bind-Value="stats.Strength" />
+                <MudNumericField T="int" Label="Agility" @bind-Value="stats.Agility" />
+                <MudNumericField T="int" Label="Resilience" @bind-Value="stats.Resilience" />
+                <MudNumericField T="int" Label="Perception" @bind-Value="stats.Perception" />
 
             </MudForm>
         </MudPaper>
@@ -44,11 +48,10 @@
     string[] errors = { };
     MudForm form;
 
-    public static CharacterPrimaryStats stats = new();
-
     public void SubmitForm()
     {
         userInterface.SetPrimaryStats(stats, HumanPlayer);
+        HumanPlayer.CharacterArmor.ResilienceToArmor(HumanPlayer);
 
     }
 
