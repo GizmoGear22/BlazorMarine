@@ -51,6 +51,9 @@
 
 
 @code {
+    [Inject]
+    NavigationManager NavigationManager { get; set; }
+
     bool success;
     string[] errors = { };
     MudForm form;
@@ -67,7 +70,10 @@
     public void SubmitForm()
     {
         userInterface.SetPrimaryStats(stats, HumanPlayer);
+        userInterface.SetSecondaryStats(secStats, HumanPlayer);
         HumanPlayer.CharacterArmor.ResilienceToArmor(HumanPlayer);
+
+        NavigationManager.NavigateTo("/CharacterPreview");
 
     }
 

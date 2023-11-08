@@ -1,4 +1,5 @@
-﻿using ArmoredMarineV2.Interfaces;
+﻿using System.Net.NetworkInformation;
+using ArmoredMarineV2.Interfaces;
 
 namespace ArmoredMarineV2.Managers
 {
@@ -19,8 +20,6 @@ namespace ArmoredMarineV2.Managers
             PrimaryStats = new StatsManager.CharacterPrimaryStats();
             SecondaryStats = new StatsManager.CharacterSecondaryStats();
             CharacterArmor = new ArmorManager.ArmorSet();
-
-
         }
 
         public void EquipWeapon()

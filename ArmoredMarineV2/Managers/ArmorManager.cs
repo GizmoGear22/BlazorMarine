@@ -11,7 +11,7 @@ namespace ArmoredMarineV2.Managers
             public List<ArmorPieces> ArmorList { get; set; }
             public ArmorSet() 
             {
-                List<ArmorPieces> ArmorList = new List<ArmorPieces>
+                ArmorList = new List<ArmorPieces>
                 {
                 new ArmorPieces {Name = "Head", ArmorValue = 0.6, AccuracyModifier = 0.6},
                 new ArmorPieces {Name = "Torso", ArmorValue = 1.3, AccuracyModifier = 1.2},
@@ -23,13 +23,15 @@ namespace ArmoredMarineV2.Managers
                 new ArmorPieces {Name = "RightLeg", ArmorValue = 0.8, AccuracyModifier = 0.8}
                 };
             }
-
+         
             public void ResilienceToArmor(IMarine marine)
+
             {
-                foreach (ArmorPieces piece in ArmorList)
+                foreach (ArmorPieces piece in marine.CharacterArmor.ArmorList)
                 {
                     piece.ArmorValue = piece.ArmorValue * marine.PrimaryStats.Resilience * 10;
                 }
+
             }
 
         }
