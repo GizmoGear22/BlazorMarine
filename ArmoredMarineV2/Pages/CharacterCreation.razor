@@ -9,19 +9,16 @@
 <h3>CharacterCreation</h3>
 
 @code{
-       public static StatsManager.CharacterPrimaryStats stats = new();
-        public static StatsManager.CharacterSecondaryStats secStats = new();
-        static int originalStrength = stats.Strength;
-        static int originalAgility = stats.Agility;
-        static int originalResilience = stats.Resilience;
-        static int originalPerception = stats.Perception;
+    public static StatsManager.CharacterPrimaryStats stats = new();
+    public static StatsManager.CharacterSecondaryStats secStats = new();
 }
 
 <MudGrid>
     <MudItem xs="12" sm="7">
         <MudPaper Class="pa-4">
             <MudForm @ref="form" @bind-IsValid="@success" @bind-Errors="@errors">
-                <MudNumericField T="int" Label="Strength" @bind-Value="stats.Strength" 
+                <MudNumericField T="int" Label="Strength" @bind-Value="stats.Strength"
+                onclick="@(userInterface.UseAttributePoints(secStats, statDifference))"
                 />
                 
                 <MudNumericField T="int" Label="Agility" @bind-Value="stats.Agility" />
@@ -49,17 +46,9 @@
         </MudPaper>
     </MudItem>
 </MudGrid>
-@code {
-    static int strengthDifference = stats.Strength - originalStrength;
-    static int agilityDifference = stats.Agility - originalAgility;
-    static int resilienceDifference = stats.Resilience - originalResilience;
-    static int perceptionDifference = stats.Perception - originalPerception;
 
-    static int totalStatDifference = strengthDifference + agilityDifference + resilienceDifference + perceptionDifference;
-}
-
-<h2 @>Attribute Points Remaining: @(HumanPlayer.SecondaryStats.AttributePoints)</h2>
-
+<h3>Stat Points Remaining: @secStats.AttributePoints</h3>
+<h3>Strength Stat: @stats.Strength</h3>
 
 @code {
     [Inject]
@@ -77,7 +66,7 @@
 
     private int statRange { get; set; }
 
-
+    public int statDifference = stats.Strength - 1;
 
 
     public void SubmitForm()
@@ -107,4 +96,4 @@
     }
 
 
-}
+

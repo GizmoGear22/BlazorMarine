@@ -8,8 +8,6 @@ namespace ArmoredMarineV2.Managers
 
         public class CharacterPrimaryStats
         {
-            [Required]
-            [Range(1, 30)]
             public int Strength { get; set; } = 1;
             public int Agility { get; set; } = 1;
             public int Resilience { get; set; } = 1;

@@ -47,7 +47,7 @@ namespace ArmoredMarineV2.Managers
 
         public void SetPrimaryStats(StatsManager.CharacterPrimaryStats stats, IMarine HumanPlayer)
         {
-            
+            HumanPlayer.PrimaryStats = new StatsManager.CharacterPrimaryStats();
             HumanPlayer.PrimaryStats.Strength = stats.Strength;
             HumanPlayer.PrimaryStats.Agility = stats.Agility;
             HumanPlayer.PrimaryStats.Perception = stats.Perception;
@@ -57,6 +57,7 @@ namespace ArmoredMarineV2.Managers
 
         public void SetSecondaryStats(StatsManager.CharacterSecondaryStats stats, IMarine HumanPlayer)
         {
+            HumanPlayer.SecondaryStats = new StatsManager.CharacterSecondaryStats();
             HumanPlayer.SecondaryStats.AttributePoints = stats.AttributePoints;
             HumanPlayer.SecondaryStats.Credits = stats.Credits;
             HumanPlayer.SecondaryStats.ActionPoints = stats.ActionPoints;
@@ -69,9 +70,9 @@ namespace ArmoredMarineV2.Managers
             throw new NotImplementedException();
         }
 
-        public int UseAttributePoints(StatsManager.CharacterSecondaryStats secStats, int totalDifference)
+        public int UseAttributePoints(StatsManager.CharacterSecondaryStats SecondaryStats, int totalDifference)
         {
-            return secStats.AttributePoints -= totalDifference;
+            return SecondaryStats.AttributePoints -= totalDifference;
         }
 
     }
