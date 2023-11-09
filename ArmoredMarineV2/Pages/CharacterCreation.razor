@@ -9,7 +9,7 @@
 <h3>CharacterCreation</h3>
 
 @code{
-        public static StatsManager.CharacterPrimaryStats stats = new();
+       public static StatsManager.CharacterPrimaryStats stats = new();
         public static StatsManager.CharacterSecondaryStats secStats = new();
         static int originalStrength = stats.Strength;
         static int originalAgility = stats.Agility;
@@ -21,10 +21,13 @@
     <MudItem xs="12" sm="7">
         <MudPaper Class="pa-4">
             <MudForm @ref="form" @bind-IsValid="@success" @bind-Errors="@errors">
-                <MudNumericField T="int" Label="Strength" @bind-Value="stats.Strength" />
+                <MudNumericField T="int" Label="Strength" @bind-Value="stats.Strength" 
+                />
+                
                 <MudNumericField T="int" Label="Agility" @bind-Value="stats.Agility" />
                 <MudNumericField T="int" Label="Resilience" @bind-Value="stats.Resilience" />
                 <MudNumericField T="int" Label="Perception" @bind-Value="stats.Perception" />
+                
 
             </MudForm>
         </MudPaper>
@@ -46,34 +49,57 @@
         </MudPaper>
     </MudItem>
 </MudGrid>
-
-<h2>Attribute Points Remaining: @(secStats.AttributePoints - stats.Strength)</h2>
-
-
 @code {
-    [Inject]
-    NavigationManager NavigationManager { get; set; }
-
-    bool success;
-    string[] errors = { };
-    MudForm form;
-
     static int strengthDifference = stats.Strength - originalStrength;
     static int agilityDifference = stats.Agility - originalAgility;
     static int resilienceDifference = stats.Resilience - originalResilience;
     static int perceptionDifference = stats.Perception - originalPerception;
 
     static int totalStatDifference = strengthDifference + agilityDifference + resilienceDifference + perceptionDifference;
+}
+
+<h2 @>Attribute Points Remaining: @(HumanPlayer.SecondaryStats.AttributePoints)</h2>
+
+
+@code {
+    [Inject]
+    private NavigationManager NavigationManager { get; set; }
+
+    bool success;
+    string[] errors = { };
+    MudForm form;
+    bool isStrengthValid = true;
+    bool isAgilityValid = true;
+    bool isResilienceValid = true;
+    bool isPerceptionValid = true;
+
+    bool isValid;
+
+    private int statRange { get; set; }
+
 
 
 
     public void SubmitForm()
     {
-        userInterface.SetPrimaryStats(stats, HumanPlayer);
-        userInterface.SetSecondaryStats(secStats, HumanPlayer);
-        HumanPlayer.CharacterArmor.ResilienceToArmor(HumanPlayer);
+        if (stats.Strength < 1 || stats.Agility < 1 || stats.Perception < 1 || stats.Resilience < 1 || secStats.AttributePoints < 0)
+        {
+            isValid = false;
+        } else
+        {
+            isValid = true;
+        }
+        if (isValid == true)
+		{
+			userInterface.SetPrimaryStats(stats, HumanPlayer);
+			userInterface.SetSecondaryStats(secStats, HumanPlayer);
+			HumanPlayer.CharacterArmor.ResilienceToArmor(HumanPlayer);
 
-        NavigationManager.NavigateTo("/CharacterPreview");
+			HumanPlayer.SecondaryStats.WeightCalculation(HumanPlayer.CharacterArmor.ArmorList);
+			HumanPlayer.SecondaryStats.PossibleMovementDistance(HumanPlayer);
+
+			NavigationManager.NavigateTo("./BattlePage");
+		}
 
     }
 

@@ -1,4 +1,5 @@
-﻿using ArmoredMarineV2.Interfaces;
+﻿using System.ComponentModel.DataAnnotations;
+using ArmoredMarineV2.Interfaces;
 
 namespace ArmoredMarineV2.Managers
 {
@@ -7,10 +8,13 @@ namespace ArmoredMarineV2.Managers
 
         public class CharacterPrimaryStats
         {
+            [Required]
+            [Range(1, 30)]
             public int Strength { get; set; } = 1;
             public int Agility { get; set; } = 1;
             public int Resilience { get; set; } = 1;
             public int Perception { get; set; } = 1;
+
         }
         public class CharacterSecondaryStats 
         {

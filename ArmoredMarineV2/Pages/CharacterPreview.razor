@@ -6,7 +6,14 @@
 @inject IMarine HumanPlayer;
 
 <h3>This is fine, right?</h3>
-<h3>@HumanPlayer.PrimaryStats.Strength</h3>
+<div class="Stats", id="PrimaryStats">
+	<h3>Strength: @(HumanPlayer.PrimaryStats.Strength)</h3>
+	<h3>Agility: @(HumanPlayer.PrimaryStats.Agility)</h3>
+	<h3>Resilience: @(HumanPlayer.PrimaryStats.Resilience)</h3>
+	<h3>Perception: @(HumanPlayer.PrimaryStats.Perception)</h3>
+</div>
+
+
 
 @code {
 

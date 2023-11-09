@@ -3,7 +3,8 @@ namespace ArmoredMarineV2.Interfaces
 {
     public interface IUserInterface
     {
-        StatsManager GetPrimaryStats();
+        Random RandomNumberSeed { get; set; }
+		StatsManager GetPrimaryStats();
         StatsManager GetSecondaryStats();
         void SetPrimaryStats(StatsManager.CharacterPrimaryStats stats, IMarine player);
         void SetSecondaryStats(StatsManager.CharacterSecondaryStats stats, IMarine player);

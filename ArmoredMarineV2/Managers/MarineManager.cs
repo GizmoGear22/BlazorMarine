@@ -21,8 +21,9 @@ namespace ArmoredMarineV2.Managers
             SecondaryStats = new StatsManager.CharacterSecondaryStats();
             CharacterArmor = new ArmorManager.ArmorSet();
         }
+		
 
-        public void EquipWeapon()
+		public void EquipWeapon()
         {
             throw new NotImplementedException();
         }

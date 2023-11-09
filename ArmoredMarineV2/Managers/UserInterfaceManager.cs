@@ -6,14 +6,11 @@ namespace ArmoredMarineV2.Managers
 {
     public class UserInterfaceManager : IUserInterface
     {
+        public Random RandomNumberSeed { get; set; }
 
+		public UserInterfaceManager() { RandomNumberSeed = new Random(); }
 
-        public UserInterfaceManager()
-        {
-        }
-
-
-        public CombatResults GetCombatResults()
+		public CombatResults GetCombatResults()
         {
             throw new NotImplementedException();
         }
@@ -72,9 +69,9 @@ namespace ArmoredMarineV2.Managers
             throw new NotImplementedException();
         }
 
-        public int UseAttributePoints(StatsManager.CharacterSecondaryStats attributePoints, int totalDifference)
+        public int UseAttributePoints(StatsManager.CharacterSecondaryStats secStats, int totalDifference)
         {
-            return attributePoints.AttributePoints -= totalDifference;
+            return secStats.AttributePoints -= totalDifference;
         }
 
     }

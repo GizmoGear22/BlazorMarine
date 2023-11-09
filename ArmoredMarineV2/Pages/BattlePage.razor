@@ -1,0 +1,15 @@
+﻿@page "/BattlePage"
+@using Managers;
+@using Interfaces;
+@using MudBlazor;
+@inject IUserInterface userInterface;
+@inject IMarine HumanPlayer;
+
+<h3>BattlePage</h3>
+
+@code {
+	Random RandomNumberSeed = new Random();
+	MarineManager ComputerPlayer = new MarineManager();
+	
+
+}
