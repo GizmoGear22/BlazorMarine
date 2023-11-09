@@ -8,14 +8,6 @@
 
 <h3>CharacterCreation</h3>
 
-@code{
-       public static StatsManager.CharacterPrimaryStats stats = new();
-        public static StatsManager.CharacterSecondaryStats secStats = new();
-        static int originalStrength = stats.Strength;
-        static int originalAgility = stats.Agility;
-        static int originalResilience = stats.Resilience;
-        static int originalPerception = stats.Perception;
-}
 
 <MudGrid>
     <MudItem xs="12" sm="7">
@@ -49,19 +41,13 @@
         </MudPaper>
     </MudItem>
 </MudGrid>
-@code {
-    static int strengthDifference = stats.Strength - originalStrength;
-    static int agilityDifference = stats.Agility - originalAgility;
-    static int resilienceDifference = stats.Resilience - originalResilience;
-    static int perceptionDifference = stats.Perception - originalPerception;
 
-    static int totalStatDifference = strengthDifference + agilityDifference + resilienceDifference + perceptionDifference;
-}
-
-<h2 @>Attribute Points Remaining: @(HumanPlayer.SecondaryStats.AttributePoints)</h2>
 
 
 @code {
+    public StatsManager.CharacterPrimaryStats stats = new();
+    public StatsManager.CharacterSecondaryStats secStats = new();
+
     [Inject]
     private NavigationManager NavigationManager { get; set; }
 
@@ -90,10 +76,10 @@
             isValid = true;
         }
         if (isValid == true)
-		{
-			userInterface.SetPrimaryStats(stats, HumanPlayer);
-			userInterface.SetSecondaryStats(secStats, HumanPlayer);
-			HumanPlayer.CharacterArmor.ResilienceToArmor(HumanPlayer);
+        {
+            userInterface.SetPrimaryStats(stats, HumanPlayer);
+            userInterface.SetSecondaryStats(secStats, HumanPlayer);
+            HumanPlayer.CharacterArmor.ResilienceToArmor(HumanPlayer);
 
 			HumanPlayer.SecondaryStats.WeightCalculation(HumanPlayer.CharacterArmor.ArmorList);
 			HumanPlayer.SecondaryStats.PossibleMovementDistance(HumanPlayer);
