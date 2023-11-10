@@ -8,12 +8,17 @@
 
 <h3>CharacterCreation</h3>
 
+@code {
+    public static StatsManager.CharacterPrimaryStats stats = new();
+    public static StatsManager.CharacterSecondaryStats secStats = new();
+}
 
 <MudGrid>
     <MudItem xs="12" sm="7">
         <MudPaper Class="pa-4">
             <MudForm @ref="form" @bind-IsValid="@success" @bind-Errors="@errors">
                 <MudNumericField T="int" Label="Strength" @bind-Value="stats.Strength" 
+                oninput="@userInterface.UseAttributePoints(secStats, StrengthDifference)"
                 />
                 
                 <MudNumericField T="int" Label="Agility" @bind-Value="stats.Agility" />
@@ -42,11 +47,16 @@
     </MudItem>
 </MudGrid>
 
+<h3>Remaining Stat Points: @secStats.AttributePoints</h3>
+<h3>New Strength: @NewStrength</h3>
+<h3>Binding Strength: @stats.Strength</h3>
+
 
 
 @code {
-    public StatsManager.CharacterPrimaryStats stats = new();
-    public StatsManager.CharacterSecondaryStats secStats = new();
+
+    public int NewStrength = stats.Strength;
+    public int StrengthDifference = stats.Strength - 1;
 
     [Inject]
     private NavigationManager NavigationManager { get; set; }
@@ -62,9 +72,6 @@
     bool isValid;
 
     private int statRange { get; set; }
-
-
-
 
     public void SubmitForm()
     {
