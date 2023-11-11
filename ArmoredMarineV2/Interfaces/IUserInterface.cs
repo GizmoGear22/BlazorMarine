@@ -1,4 +1,6 @@
 ﻿using ArmoredMarineV2.Managers;
+using Microsoft.AspNetCore.Components;
+
 namespace ArmoredMarineV2.Interfaces
 {
     public interface IUserInterface
@@ -14,7 +16,6 @@ namespace ArmoredMarineV2.Interfaces
         IMarine SetEquipWeapon();
         AttackModel SetAttackAction();
         CombatResults GetCombatResults();
-        int UseAttributePoints(StatsManager.CharacterSecondaryStats attributePoints, int totalDifference);
 
     }
 

@@ -1,6 +1,6 @@
 ﻿using ArmoredMarineV2.Interfaces;
 using ArmoredMarineV2.Pages;
-
+using Microsoft.AspNetCore.Components;
 
 namespace ArmoredMarineV2.Managers
 {
@@ -47,33 +47,30 @@ namespace ArmoredMarineV2.Managers
 
         public void SetPrimaryStats(StatsManager.CharacterPrimaryStats stats, IMarine HumanPlayer)
         {
-            HumanPlayer.PrimaryStats = new StatsManager.CharacterPrimaryStats();
-            HumanPlayer.PrimaryStats.Strength = stats.Strength;
-            HumanPlayer.PrimaryStats.Agility = stats.Agility;
-            HumanPlayer.PrimaryStats.Perception = stats.Perception;
-            HumanPlayer.PrimaryStats.Resilience = stats.Resilience;
-            
+            HumanPlayer.PrimaryStats = new StatsManager.CharacterPrimaryStats
+            {
+                Strength = stats.Strength,
+                Agility = stats.Agility,
+                Perception = stats.Perception,
+                Resilience = stats.Resilience
+            };
+
         }
 
         public void SetSecondaryStats(StatsManager.CharacterSecondaryStats stats, IMarine HumanPlayer)
         {
-            HumanPlayer.SecondaryStats = new StatsManager.CharacterSecondaryStats();
-            HumanPlayer.SecondaryStats.AttributePoints = stats.AttributePoints;
-            HumanPlayer.SecondaryStats.Credits = stats.Credits;
-            HumanPlayer.SecondaryStats.ActionPoints = stats.ActionPoints;
-            HumanPlayer.SecondaryStats.Accuracy = stats.Accuracy;
-            HumanPlayer.SecondaryStats.Weight = stats.Weight;
+            HumanPlayer.SecondaryStats = new StatsManager.CharacterSecondaryStats
+            {
+                AttributePoints = stats.AttributePoints,
+                Credits = stats.Credits,
+                ActionPoints = stats.ActionPoints,
+                Accuracy = stats.Accuracy,
+                Weight = stats.Weight
+            };
         }
-
         public IMarine SetSecondaryWeapon()
         {
             throw new NotImplementedException();
-        }
-
-        public int UseAttributePoints(StatsManager.CharacterSecondaryStats secStats, int totalDifference)
-        {
-            return secStats.AttributePoints -= totalDifference;
-
         }
 
     }

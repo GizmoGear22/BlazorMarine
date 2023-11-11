@@ -16,14 +16,15 @@
 <MudGrid>
     <MudItem xs="12" sm="7">
         <MudPaper Class="pa-4">
-            <MudForm @ref="form" @bind-IsValid="@success" @bind-Errors="@errors">
-                <MudNumericField T="int" Label="Strength" @bind-Value="stats.Strength" 
-                oninput="@userInterface.UseAttributePoints(secStats, StrengthDifference)"
+            <MudForm @ref="form" @bind-IsValid="@success" @bind-Errors="@errors" >
+                <MudNumericField T="int" Label="Strength" @bind-Value="stats.Strength" Min="1"
                 />
                 
-                <MudNumericField T="int" Label="Agility" @bind-Value="stats.Agility" />
-                <MudNumericField T="int" Label="Resilience" @bind-Value="stats.Resilience" />
-                <MudNumericField T="int" Label="Perception" @bind-Value="stats.Perception" />
+                <MudNumericField T="int" Label="Agility" @bind-Value="stats.Agility" Min="1" />
+
+                <MudNumericField T="int" Label="Resilience" @bind-Value="stats.Resilience" Min="1" />
+
+                <MudNumericField T="int" Label="Perception" @bind-Value="stats.Perception" Min="1" />
                 
 
             </MudForm>
@@ -47,19 +48,24 @@
     </MudItem>
 </MudGrid>
 
-<h3>Remaining Stat Points: @secStats.AttributePoints</h3>
-<h3>New Strength: @NewStrength</h3>
-<h3>Binding Strength: @stats.Strength</h3>
-
+<h3>Stat Points: @(GetAttributePoints())</h3>
+<h3>@newStrength</h3>
 
 
 @code {
-
+    public static int originalStrength = stats.Strength;
+    public static int GetAttributePoints()
+    {
+        return secStats.AttributePoints;
+    }
+    //public static int StrengthDifference = GetStrengthStat() - 1;
+    //public int AgilityDifference = GetAgilityStat() - 1;
+    //public int ResilienceDifference = GetResilienceStat() - 1;
     public int NewStrength = stats.Strength;
-    public int StrengthDifference = stats.Strength - 1;
 
     [Inject]
     private NavigationManager NavigationManager { get; set; }
+
 
     bool success;
     string[] errors = { };
@@ -69,9 +75,16 @@
     bool isResilienceValid = true;
     bool isPerceptionValid = true;
 
+    int newStrength;
+
     bool isValid;
 
     private int statRange { get; set; }
+
+    private void AddStrength()
+    {
+        newStrength = stats.Strength;
+    }
 
     public void SubmitForm()
     {
