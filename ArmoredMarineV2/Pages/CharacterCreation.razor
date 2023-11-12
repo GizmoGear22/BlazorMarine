@@ -18,13 +18,17 @@
         <MudPaper Class="pa-4">
             <MudForm @ref="form" @bind-IsValid="@success" @bind-Errors="@errors" >
                 <MudNumericField T="int" Label="Strength" @bind-Value="stats.Strength" Min="1"
-                />
+                oninput="@(ChangeAttributeNumberFromStrength())"
+                  />
                 
-                <MudNumericField T="int" Label="Agility" @bind-Value="stats.Agility" Min="1" />
+                <MudNumericField T="int" Label="Agility" @bind-Value="stats.Agility" Min="1"
+                 oninput="@(ChangeAttributeNumberFromAgility())" />
 
-                <MudNumericField T="int" Label="Resilience" @bind-Value="stats.Resilience" Min="1" />
+                <MudNumericField T="int" Label="Resilience" @bind-Value="stats.Resilience" Min="1"
+                oninput="@(ChangeAttributeNumberFromResilience())"/>
 
-                <MudNumericField T="int" Label="Perception" @bind-Value="stats.Perception" Min="1" />
+                <MudNumericField T="int" Label="Perception" @bind-Value="stats.Perception" Min="1"
+                oninput="@(ChangeAttributeNumberFromPerception())" />
                 
 
             </MudForm>
@@ -49,19 +53,18 @@
 </MudGrid>
 
 <h3>Stat Points: @(GetAttributePoints())</h3>
-<h3>@newStrength</h3>
 
 
 @code {
-    public static int originalStrength = stats.Strength;
-    public static int GetAttributePoints()
+    private int originalStrength = stats.Strength;
+    private int originalAgility = stats.Agility;
+    private int originalResilience = stats.Resilience;
+    private int originalPerception = stats.Perception;
+    private int GetAttributePoints()
     {
         return secStats.AttributePoints;
     }
-    //public static int StrengthDifference = GetStrengthStat() - 1;
-    //public int AgilityDifference = GetAgilityStat() - 1;
-    //public int ResilienceDifference = GetResilienceStat() - 1;
-    public int NewStrength = stats.Strength;
+
 
     [Inject]
     private NavigationManager NavigationManager { get; set; }
@@ -70,20 +73,67 @@
     bool success;
     string[] errors = { };
     MudForm form;
-    bool isStrengthValid = true;
-    bool isAgilityValid = true;
-    bool isResilienceValid = true;
-    bool isPerceptionValid = true;
-
-    int newStrength;
 
     bool isValid;
 
-    private int statRange { get; set; }
+    private int ChangeAttributeNumberFromStrength()
+    { 
+        int NewStrength = stats.Strength;
+        if (originalStrength < NewStrength)
+        {
+            secStats.AttributePoints -= 1;
+        } 
+        else if (originalStrength > NewStrength)
+        {
+            secStats.AttributePoints += 1;
+        }
+        originalStrength = NewStrength;
+        return secStats.AttributePoints;
+    }
 
-    private void AddStrength()
+    private int ChangeAttributeNumberFromAgility()
     {
-        newStrength = stats.Strength;
+        int NewAgility = stats.Agility;
+        if (originalAgility < NewAgility)
+        {
+            secStats.AttributePoints -= 1;
+        }
+        else if (originalAgility > NewAgility)
+        {
+            secStats.AttributePoints += 1;
+        }
+        originalAgility = NewAgility;
+        return secStats.AttributePoints;
+    }
+
+    private int ChangeAttributeNumberFromResilience()
+    {
+        int NewResilience = stats.Resilience;
+        if (originalResilience < NewResilience)
+        {
+            secStats.AttributePoints -= 1;
+        }
+        else if (originalResilience > NewResilience)
+        {
+            secStats.AttributePoints += 1;
+        }
+        originalResilience = NewResilience;
+        return secStats.AttributePoints;
+    }
+
+    private int ChangeAttributeNumberFromPerception()
+    {
+        int NewPerception = stats.Perception;
+        if (originalPerception < NewPerception)
+        {
+            secStats.AttributePoints -= 1;
+        }
+        else if (originalPerception > NewPerception)
+        {
+            secStats.AttributePoints += 1;
+        }
+        originalPerception = NewPerception;
+        return secStats.AttributePoints;
     }
 
     public void SubmitForm()

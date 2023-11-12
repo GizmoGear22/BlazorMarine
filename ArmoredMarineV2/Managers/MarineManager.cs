@@ -20,11 +20,6 @@ namespace ArmoredMarineV2.Managers
         }
 		
 
-		public void EquipWeapon()
-        {
-            throw new NotImplementedException();
-        }
-
         public void ReduceArmor()
         {
             throw new NotImplementedException();

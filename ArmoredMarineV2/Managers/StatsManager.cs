@@ -8,8 +8,6 @@ namespace ArmoredMarineV2.Managers
 
         public class CharacterPrimaryStats
         {
-            [Required]
-            [Range(1, 30)]
             public int Strength { get; set; } = 1;
             public int Agility { get; set; } = 1;
             public int Resilience { get; set; } = 1;
@@ -24,6 +22,7 @@ namespace ArmoredMarineV2.Managers
             public int MovementDistance { get; set; }
             public int Credits { get; set; }
             public int AttributePoints { get; set; } = 30;
+            public int Health { get; set; } = 100;
 
             public void AccuracyCalculation(IMarine Shooter, double Range =1, double ArmorTarget = 1, double Upgrade = 1)
             {

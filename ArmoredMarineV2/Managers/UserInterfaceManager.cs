@@ -1,15 +1,13 @@
-﻿using ArmoredMarineV2.Interfaces;
+﻿using ArmoredMarineV2.DataCode;
+using ArmoredMarineV2.Interfaces;
 using ArmoredMarineV2.Pages;
 using Microsoft.AspNetCore.Components;
+using MudBlazor;
 
 namespace ArmoredMarineV2.Managers
 {
     public class UserInterfaceManager : IUserInterface
     {
-        public Random RandomNumberSeed { get; set; }
-
-		public UserInterfaceManager() { RandomNumberSeed = new Random(); }
-
 		public CombatResults GetCombatResults()
         {
             throw new NotImplementedException();
@@ -23,6 +21,25 @@ namespace ArmoredMarineV2.Managers
         public StatsManager GetSecondaryStats()
         {
             throw new NotImplementedException();
+        }
+        public string GetCombatStats<T>(IMarine HumanPlayer, string message)
+        {
+            List<string>ShownCombatStats = new List<string>();
+            var ArmorList = HumanPlayer.CharacterArmor.ArmorList;
+            var Health = HumanPlayer.SecondaryStats.Health;
+            var Accuracy = HumanPlayer.SecondaryStats.Accuracy;
+            var CurrentEquip = HumanPlayer.CurrentlyEquippedWeapon;
+            ShownCombatStats.Add(ArmorList.ToString());
+            ShownCombatStats.Add(Health.ToString());
+            ShownCombatStats.Add(Accuracy.ToString());
+            ShownCombatStats.Add(CurrentEquip.ToString());
+            foreach (var item in ShownCombatStats)
+            {
+                message = $"{item}";
+            }
+
+            return message;
+
         }
 
         public AttackModel SetAttackAction()

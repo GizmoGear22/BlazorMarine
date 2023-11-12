@@ -13,7 +13,6 @@ namespace ArmoredMarineV2.Interfaces
         IWeapons CurrentlyEquippedWeapon { get; set; }
         CharacterLocation SetCharacterLocation { get; set; }
 
-        public void EquipWeapon();
         public void ReduceArmor();
         public void ReduceHealth();
 

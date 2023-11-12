@@ -7,9 +7,22 @@
 
 <h3>BattlePage</h3>
 
-@code {
-	Random RandomNumberSeed = new Random();
-	MarineManager ComputerPlayer = new MarineManager();
-	
+<MudStack>
+	<MudPaper Class="pa-3">
+		<MudButton Variant="Variant.Filled" Color="Color.Primary">Fire</MudButton>
+	</MudPaper>
+	<MudPaper Class="pa-3">
+		<MudButton Variant="Variant.Filled" Color="Color.Primary">Move</MudButton>
+	</MudPaper>
+	<MudPaper Class="pa-3">
+		<MudButton Variant="Variant.Filled" Color="Color.Primary">Status</MudButton>
+	</MudPaper>
+</MudStack>
 
+@code {
+
+	public Random RandomNumberSeed = new Random();
+	MarineManager ComputerPlayer = new MarineManager();
+	public StatsManager ComputerStats = new StatsManager();
+	
 }
