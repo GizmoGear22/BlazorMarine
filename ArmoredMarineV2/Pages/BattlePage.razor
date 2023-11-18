@@ -16,7 +16,7 @@
 			<MudButton Variant="Variant.Filled" Color="Color.Primary">Move</MudButton>
 		</MudPaper>
 		<MudPaper Class="pa-3">
-			<MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="CombatStatusButtonHandler">Status</MudButton>
+			<MudButton Variant="Variant.Filled" Color="Color.Primary">Status</MudButton>
 		</MudPaper>
 	</div>
 
@@ -24,9 +24,9 @@
 <div class="statusblock">@{
 		if (combatStatusButtonEnable == true)
 		{
-			statusArray = userInterface.GetCombatStats(HumanPlayer);
+			statstatusArray = userInterface.GetCombatStats(HumanPlayer);
 			armorStatusArray = userInterface.GetArmorStats(HumanPlayer);
-			@foreach(var item in statusArray)
+			@foreach(var item in statstatusArray)
 			{
 				<p class="statslist">@item</p>
 			}
@@ -76,9 +76,9 @@
 
 	[Parameter]
 	public string message { get; set; }
-	public List<string> statusArray;
+	public List<string> statstatusArray;
 	public List<string> armorStatusArray;
-	public bool combatStatusButtonEnable = false;
+	public static bool combatStatusButtonEnable = true;
 	public bool fireStatusButtonEnable = false;
 	public bool playerTurn = false;
 
@@ -89,7 +89,7 @@
 
 	public ArmorManager.ArmorPieces fireTarget;
 
-	public void CombatStatusButtonHandler()
+	/*public void CombatStatusButtonHandler()
 	{
 		if(combatStatusButtonEnable == false)
 		{
@@ -99,6 +99,7 @@
 			combatStatusButtonEnable = false;
 		}
 	}
+	*/
 
 	public void FireButtonHandler()
 	{

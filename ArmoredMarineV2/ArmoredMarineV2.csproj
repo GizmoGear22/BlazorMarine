@@ -7,11 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MudBlazor" Version="6.11.0" />
+    <Compile Remove="Constructors\**" />
+    <Content Remove="Constructors\**" />
+    <EmbeddedResource Remove="Constructors\**" />
+    <None Remove="Constructors\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Constructors\" />
+    <PackageReference Include="MudBlazor" Version="6.11.0" />
   </ItemGroup>
 
 </Project>
