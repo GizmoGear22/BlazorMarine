@@ -22,37 +22,53 @@ namespace ArmoredMarineV2.Managers
         {
             throw new NotImplementedException();
         }
-        public string GetCombatStats<T>(IMarine HumanPlayer, string message)
+        public List<string> GetCombatStats(IMarine HumanPlayer)
         {
             List<string>ShownCombatStats = new List<string>();
-            var ArmorList = HumanPlayer.CharacterArmor.ArmorList;
+
+
             var Health = HumanPlayer.SecondaryStats.Health;
             var Accuracy = HumanPlayer.SecondaryStats.Accuracy;
             var CurrentEquip = HumanPlayer.CurrentlyEquippedWeapon;
-            ShownCombatStats.Add(ArmorList.ToString());
+            ShownCombatStats.Add("Health");
             ShownCombatStats.Add(Health.ToString());
+            ShownCombatStats.Add("Accuracy");
             ShownCombatStats.Add(Accuracy.ToString());
-            ShownCombatStats.Add(CurrentEquip.ToString());
-            foreach (var item in ShownCombatStats)
-            {
-                message = $"{item}";
-            }
+            //ShownCombatStats.Add(CurrentEquip.ToString());
 
-            return message;
-
+            return ShownCombatStats;
         }
 
-        public AttackModel SetAttackAction()
+        public List<string> GetArmorStats(IMarine HumanPlayer)
+        {
+			List<string> ShownArmorStats = new List<string>();
+			var ArmorList = HumanPlayer.CharacterArmor.ArmorList;
+			foreach (var armor in ArmorList)
+			{
+                ShownArmorStats.Add($"{armor.Name.ToString()}: {armor.ArmorValue.ToString()}" );
+			}
+
+            return ShownArmorStats;
+		}
+
+        public AttackModel SetAttackAction(IMarine player, IMarine opponent)
         {
             throw new NotImplementedException();
         }
 
-        public IMarine SetEquipWeapon()
+        public void SetEquipWeapon(IMarine player, IWeapons weapon)
         {
-            throw new NotImplementedException();
+            player.CurrentlyEquippedWeapon = weapon;
+            player.SecondaryStats.AccuracyCalculation(player);
         }
 
-        public IMarine SetMainWeapon()
+        public void SetEquipWeapon(IMarine player, IMarine opponent, IWeapons weapon)
+        {
+            player.CurrentlyEquippedWeapon = weapon;
+            player.SecondaryStats.AccuracyCalculation(player, opponent);
+        }
+
+        public IMarine SetMainWeapon(IMarine player, IMainWeapons weapon)
         {
             throw new NotImplementedException();
         }

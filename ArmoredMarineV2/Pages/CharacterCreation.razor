@@ -151,8 +151,12 @@
             userInterface.SetSecondaryStats(secStats, HumanPlayer);
             HumanPlayer.CharacterArmor.ResilienceToArmor(HumanPlayer);
 
-			HumanPlayer.SecondaryStats.WeightCalculation(HumanPlayer.CharacterArmor.ArmorList);
-			HumanPlayer.SecondaryStats.PossibleMovementDistance(HumanPlayer);
+            HumanPlayer.SecondaryStats.WeightCalculation(HumanPlayer.CharacterArmor.ArmorList);
+            HumanPlayer.SecondaryStats.PossibleMovementDistance(HumanPlayer);
+
+            userInterface.SetEquipWeapon(HumanPlayer, new WeaponsManager.MainWeapons.BoltRifle());
+            secStats.AccuracyCalculation(HumanPlayer);
+            
 
 			NavigationManager.NavigateTo("./BattlePage");
 		}

@@ -2,10 +2,10 @@
 using ArmoredMarineV2.Managers;
 using MudBlazor.Extensions;
 
-namespace ArmoredMarineV2.DataCode
+namespace ArmoredMarineV2.Handlers
 
 {
-    public class StatAllocationManager
+    public class StatAllocationHandler
     {
 
 

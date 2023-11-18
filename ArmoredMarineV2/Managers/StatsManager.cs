@@ -30,8 +30,14 @@ namespace ArmoredMarineV2.Managers
                 var Aim = PerceptionBonus * Shooter.CurrentlyEquippedWeapon.Accuracy * Upgrade * Range * ArmorTarget;
                 Accuracy = Aim;
             }
+			public void AccuracyCalculation(IMarine Shooter, IMarine opponent, double Range = 1, double Upgrade = 1)
+			{
+				var PerceptionBonus = (2 * Shooter.PrimaryStats.Perception) / (2 * Shooter.PrimaryStats.Perception + 5);
+                var Aim = PerceptionBonus * Shooter.CurrentlyEquippedWeapon.Accuracy * Upgrade * Range;
+				Accuracy = Aim;
+			}
 
-            public void WeightCalculation(List<ArmorManager.ArmorPieces> List) //Will need to make a pattern for this. Having to do overloads here
+			public void WeightCalculation(List<ArmorManager.ArmorPieces> List) //Will need to make a pattern for this. Having to do overloads here
             {
                 double ArmorWeight = 0;
                 foreach (var pieces in List)
@@ -41,7 +47,7 @@ namespace ArmoredMarineV2.Managers
                 Weight = ArmorWeight;
             }
 
-            public void WeightCalculation(List<ArmorManager.ArmorPieces> List, IWeapons weapon) 
+            public void WeightCalculation(List<ArmorManager.ArmorPieces> List, IMainWeapons weapon) 
             {
                 double ArmorWeight = 0;
                 foreach (var pieces in List)

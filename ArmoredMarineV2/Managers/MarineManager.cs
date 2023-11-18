@@ -20,9 +20,11 @@ namespace ArmoredMarineV2.Managers
         }
 		
 
-        public void ReduceArmor()
+        public void ReduceArmor(ArmorManager.ArmorPieces Target)
         {
-            throw new NotImplementedException();
+            ArmorManager.ArmorPieces ArmorPieceTarget;
+        
+
         }
 
         public void ReduceHealth()

@@ -7,22 +7,115 @@
 
 <h3>BattlePage</h3>
 
-<MudStack>
-	<MudPaper Class="pa-3">
-		<MudButton Variant="Variant.Filled" Color="Color.Primary">Fire</MudButton>
-	</MudPaper>
-	<MudPaper Class="pa-3">
-		<MudButton Variant="Variant.Filled" Color="Color.Primary">Move</MudButton>
-	</MudPaper>
-	<MudPaper Class="pa-3">
-		<MudButton Variant="Variant.Filled" Color="Color.Primary">Status</MudButton>
-	</MudPaper>
+<MudStack Class="container">
+	<div class="d-flex justify-content-center mt-auto">
+		<MudPaper Class="pa-3">
+			<MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="FireButtonHandler">Fire</MudButton>
+		</MudPaper>
+		<MudPaper Class="pa-3">
+			<MudButton Variant="Variant.Filled" Color="Color.Primary">Move</MudButton>
+		</MudPaper>
+		<MudPaper Class="pa-3">
+			<MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="CombatStatusButtonHandler">Status</MudButton>
+		</MudPaper>
+	</div>
+
 </MudStack>
+<div class="statusblock">@{
+		if (combatStatusButtonEnable == true)
+		{
+			statusArray = userInterface.GetCombatStats(HumanPlayer);
+			armorStatusArray = userInterface.GetArmorStats(HumanPlayer);
+			@foreach(var item in statusArray)
+			{
+				<p class="statslist">@item</p>
+			}
+			<h3>Armor</h3>
+			@foreach(var item in armorStatusArray)
+			{
+				<p class="statslist">@item</p>
+			}
+		}
+	}
+</div>
+<div class="fireblock">
+	@{
+		if (fireStatusButtonEnable == true)
+		{
+			<p>Pick Your Target</p>
+			<MudStack Class="fire-container">
+				<div class="d-flex justify-content-center mt-auto">
+					<MudPaper Class="pa-3">
+						<MudButton Variant="Variant.Filled" Color="Color.Primary" @bind-Value="headValue">Head</MudButton>
+					</MudPaper>
+					<MudPaper Class="pa-3">
+						<MudButton Variant="Variant.Filled" Color="Color.Primary" @bind-Value="torsoValue">Torso</MudButton>
+					</MudPaper>
+					<MudPaper Class="pa-3">
+						<MudButton Variant="Variant.Filled" Color="Color.Primary">Left Pauldron</MudButton>
+					</MudPaper>
+				</div>
+
+			</MudStack>
+		}
+
+		ArmorManager.ArmorPieces buttonValue;
+		<p>@headValue</p>
+		
+
+	}
+	
+</div>
+
 
 @code {
 
 	public Random RandomNumberSeed = new Random();
 	MarineManager ComputerPlayer = new MarineManager();
 	public StatsManager ComputerStats = new StatsManager();
-	
+
+	[Parameter]
+	public string message { get; set; }
+	public List<string> statusArray;
+	public List<string> armorStatusArray;
+	public bool combatStatusButtonEnable = false;
+	public bool fireStatusButtonEnable = false;
+	public bool playerTurn = false;
+
+	public bool headValue = false;
+	public bool torsoValue = false;
+
+
+
+	public ArmorManager.ArmorPieces fireTarget;
+
+	public void CombatStatusButtonHandler()
+	{
+		if(combatStatusButtonEnable == false)
+		{
+			combatStatusButtonEnable = true;
+		} else if (combatStatusButtonEnable == true)
+		{
+			combatStatusButtonEnable = false;
+		}
+	}
+
+	public void FireButtonHandler()
+	{
+		if(fireStatusButtonEnable == false)
+		{
+			fireStatusButtonEnable = true;
+		} else if (fireStatusButtonEnable == true)
+		{
+			fireStatusButtonEnable = false;
+		}
+	}
+
+	public void HeadButton()
+	{
+		headValue = true;
+		FireButtonHandler();
+	}
+
+
 }

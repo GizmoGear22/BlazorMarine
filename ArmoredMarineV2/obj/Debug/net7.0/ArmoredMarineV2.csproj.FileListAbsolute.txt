@@ -41,3 +41,4 @@ C:\Users\13134\source\repos\ArmoredMarineV2\ArmoredMarineV2\bin\Debug\net7.0\Mic
 C:\Users\13134\source\repos\ArmoredMarineV2\ArmoredMarineV2\bin\Debug\net7.0\MudBlazor.dll
 C:\Users\13134\source\repos\ArmoredMarineV2\ArmoredMarineV2\obj\Debug\net7.0\ArmoredMarineV2.csproj.AssemblyReference.cache
 C:\Users\13134\source\repos\ArmoredMarineV2\ArmoredMarineV2\obj\Debug\net7.0\ArmoredMarineV2.csproj.CopyComplete
+C:\Users\13134\source\repos\ArmoredMarineV2\ArmoredMarineV2\obj\Debug\net7.0\ArmoredMarineV2.sourcelink.json

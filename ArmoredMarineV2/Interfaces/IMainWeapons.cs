@@ -1,6 +1,6 @@
 ﻿namespace ArmoredMarineV2.Interfaces
 {
-    public interface IWeapons
+    public interface IMainWeapons
     {
         double Accuracy { get; }
         int Damage { get; }
@@ -10,5 +10,7 @@
         double Weight { get; }
 
         void DamageDealt();
+
+
     }
 }
