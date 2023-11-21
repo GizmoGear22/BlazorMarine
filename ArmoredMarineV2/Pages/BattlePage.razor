@@ -9,19 +9,23 @@
 
 <MudStack Class="container">
 	<div class="d-flex justify-content-center mt-auto">
+		@{
+
+		}
 		<MudPaper Class="pa-3">
 			<MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="FireButtonHandler">Fire</MudButton>
 		</MudPaper>
 		<MudPaper Class="pa-3">
-			<MudButton Variant="Variant.Filled" Color="Color.Primary">Move</MudButton>
+			<MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="() => userInterface.ChangeLocation(HumanPlayer)">Move</MudButton>
 		</MudPaper>
 		<MudPaper Class="pa-3">
-			<MudButton Variant="Variant.Filled" Color="Color.Primary">Status</MudButton>
+			<MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="() => CombatStatusButtonHandler()">Status</MudButton>
 		</MudPaper>
 	</div>
 
 </MudStack>
 <div class="statusblock">@{
+
 		if (combatStatusButtonEnable == true)
 		{
 			statstatusArray = userInterface.GetCombatStats(HumanPlayer);
@@ -46,7 +50,7 @@
 			<MudStack Class="fire-container">
 				<div class="d-flex justify-content-center mt-auto">
 					<MudPaper Class="pa-3">
-						<MudButton Variant="Variant.Filled" Color="Color.Primary" @bind-Value="headValue">Head</MudButton>
+						<MudButton Variant="Variant.Filled" Color="Color.Primary" >Head</MudButton>
 					</MudPaper>
 					<MudPaper Class="pa-3">
 						<MudButton Variant="Variant.Filled" Color="Color.Primary" @bind-Value="torsoValue">Torso</MudButton>
@@ -61,10 +65,10 @@
 
 		ArmorManager.ArmorPieces buttonValue;
 		<p>@headValue</p>
-		
-
 	}
-	
+</div>
+<div>
+	<p>@HumanPlayer.CharacterLocation</p>
 </div>
 
 
@@ -78,8 +82,10 @@
 	public string message { get; set; }
 	public List<string> statstatusArray;
 	public List<string> armorStatusArray;
-	public static bool combatStatusButtonEnable = true;
+
+
 	public bool fireStatusButtonEnable = false;
+	public bool combatStatusButtonEnable { get; set; } = false;
 	public bool playerTurn = false;
 
 	public bool headValue = false;
@@ -89,7 +95,7 @@
 
 	public ArmorManager.ArmorPieces fireTarget;
 
-	/*public void CombatStatusButtonHandler()
+	public void CombatStatusButtonHandler()
 	{
 		if(combatStatusButtonEnable == false)
 		{
@@ -99,7 +105,7 @@
 			combatStatusButtonEnable = false;
 		}
 	}
-	*/
+	
 
 	public void FireButtonHandler()
 	{

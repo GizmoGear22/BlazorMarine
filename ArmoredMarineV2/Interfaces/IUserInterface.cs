@@ -14,11 +14,11 @@ namespace ArmoredMarineV2.Interfaces
         IMarine SetMeleeWeapon();
         void SetEquipWeapon(IMarine player, IWeapons weapon);
         void SetEquipWeapon(IMarine player, IMarine opponent, IWeapons weapon);
-        AttackModel SetAttackAction(IMarine attacker, IMarine defender);
+        void SetAttackAction(IMarine attacker, IMarine defender, ArmorManager.ArmorType type);
         CombatResults GetCombatResults();
         List<string> GetCombatStats(IMarine HumanPlayer);
         List<string> GetArmorStats(IMarine HumanPlayer);
-
+        void ChangeLocation(IMarine player);
     }
 
 
@@ -31,10 +31,6 @@ namespace ArmoredMarineV2.Interfaces
 
     }
 
-    public class CharacterLocation
-    {
-        public int xLocation { get; set; }
-        public int yLocation { get; set; }
-    }
+
 
 }

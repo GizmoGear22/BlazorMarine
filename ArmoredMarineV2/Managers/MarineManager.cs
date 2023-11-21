@@ -12,24 +12,26 @@ namespace ArmoredMarineV2.Managers
         public WeaponsManager.SecondaryWeapons SecondaryWeapon { get; set; }
         public WeaponsManager.MeleeWeapons MeleeWeapon { get; set; }
         public IWeapons CurrentlyEquippedWeapon { get; set; }
-        public CharacterLocation SetCharacterLocation { get; set; }
+		public FieldManager.CharacterLocation CharacterLocation { get ; set ; }
 
-        public MarineManager()
+		public MarineManager()
         {
             CharacterArmor = new ArmorManager.ArmorSet();
         }
 		
-
         public void ReduceArmor(ArmorManager.ArmorPieces Target)
         {
             ArmorManager.ArmorPieces ArmorPieceTarget;
         
-
         }
-
         public void ReduceHealth()
         {
             throw new NotImplementedException();
         }
-    }
+
+		public void SetCharacterLocation()
+		{
+            CharacterLocation = new FieldManager.CharacterLocation(50, 50);
+		}
+	}
 }

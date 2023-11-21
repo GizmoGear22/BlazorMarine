@@ -45,14 +45,23 @@ namespace ArmoredMarineV2.Managers
 			var ArmorList = HumanPlayer.CharacterArmor.ArmorList;
 			foreach (var armor in ArmorList)
 			{
-                ShownArmorStats.Add($"{armor.Name.ToString()}: {armor.ArmorValue.ToString()}" );
+				ShownArmorStats.Add($"{armor.Name}: {armor.ArmorValue}");
 			}
 
             return ShownArmorStats;
 		}
 
-        public AttackModel SetAttackAction(IMarine player, IMarine opponent)
+        public void SetAttackAction(IMarine player, IMarine opponent, ArmorManager.ArmorType Type)
         {
+			
+            IEnumerable<double> target;
+            switch (Type)
+            {
+                case ArmorManager.ArmorType.Head:
+                    target = opponent.CharacterArmor.ArmorList.Where(x => x.Name == "Head").Select(x => x.ArmorValue);
+                    break;		
+			}
+            
             throw new NotImplementedException();
         }
 
@@ -106,5 +115,9 @@ namespace ArmoredMarineV2.Managers
             throw new NotImplementedException();
         }
 
-    }
+		public void ChangeLocation(IMarine player)
+		{
+            player.CharacterLocation.XLocation -= player.SecondaryStats.MovementDistance;
+		}
+	}
 }

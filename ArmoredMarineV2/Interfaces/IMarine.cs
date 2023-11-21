@@ -11,10 +11,10 @@ namespace ArmoredMarineV2.Interfaces
         WeaponsManager.SecondaryWeapons SecondaryWeapon { get; set; }
         WeaponsManager.MeleeWeapons MeleeWeapon { get; set; }
         IWeapons CurrentlyEquippedWeapon { get; set; }
-        CharacterLocation SetCharacterLocation { get; set; }
+        FieldManager.CharacterLocation CharacterLocation { get; set; }
 
         public void ReduceArmor(ArmorManager.ArmorPieces pieces);
         public void ReduceHealth();
-
+        public void SetCharacterLocation();
     }
 }

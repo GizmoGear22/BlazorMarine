@@ -6,6 +6,19 @@ namespace ArmoredMarineV2.Managers
 {
     public class ArmorManager
     {
+
+        public enum ArmorType
+        {
+            Head,
+            Torso,
+            LeftPauldron,
+            RightPauldron,
+            LeftArm,
+            RightArm,
+            LeftLeg,
+            RightLeg,
+        }
+
         public class ArmorSet
         {
             public List<ArmorPieces> ArmorList { get; set; }
