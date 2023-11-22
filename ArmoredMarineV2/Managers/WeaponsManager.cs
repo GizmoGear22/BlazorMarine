@@ -41,10 +41,6 @@ namespace ArmoredMarineV2.Managers
 
                 public double Weight => throw new NotImplementedException();
 
-                public double AccuracyCalculation()
-                {
-                    throw new NotImplementedException();
-                }
 
                 public void DamageDealt()
                 {
@@ -69,10 +65,6 @@ namespace ArmoredMarineV2.Managers
 
                 public double Weight => throw new NotImplementedException();
 
-                public double AccuracyCalculation()
-                {
-                    throw new NotImplementedException();
-                }
 
                 public void DamageDealt()
                 {

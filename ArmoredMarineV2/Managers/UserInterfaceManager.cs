@@ -1,4 +1,4 @@
-﻿using ArmoredMarineV2.DataCode;
+﻿
 using ArmoredMarineV2.Interfaces;
 using ArmoredMarineV2.Pages;
 using Microsoft.AspNetCore.Components;
@@ -53,7 +53,11 @@ namespace ArmoredMarineV2.Managers
 
         public void SetAttackAction(IMarine player, IMarine opponent, ArmorManager.ArmorType Type)
         {
-			
+            //What should this method do?
+            //Should bundle all the necessary methods to attack into here. 
+            player.CurrentlyEquippedWeapon.DamageDealt();
+
+            /*
             IEnumerable<double> target;
             switch (Type)
             {
@@ -61,8 +65,11 @@ namespace ArmoredMarineV2.Managers
                     target = opponent.CharacterArmor.ArmorList.Where(x => x.Name == "Head").Select(x => x.ArmorValue);
                     break;		
 			}
+			var range = FieldManager.DistanceBetweenCharacters(player, opponent);
+			double AccuracyRangeComponent = (range + 30) / (2 * range);
+			throw new NotImplementedException();
+            */
             
-            throw new NotImplementedException();
         }
 
         public void SetEquipWeapon(IMarine player, IWeapons weapon)

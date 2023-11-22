@@ -1,4 +1,5 @@
-﻿using ArmoredMarineV2.Pages;
+﻿using ArmoredMarineV2.Interfaces;
+using ArmoredMarineV2.Pages;
 
 namespace ArmoredMarineV2.Managers
 {
@@ -13,5 +14,11 @@ namespace ArmoredMarineV2.Managers
 
 		}
 
+		public static int DistanceBetweenCharacters(IMarine player, IMarine computer)
+		{
+			int distanceApart = player.CharacterLocation.XLocation + computer.CharacterLocation.XLocation;
+			return distanceApart;
+
+		}
 	}
 }

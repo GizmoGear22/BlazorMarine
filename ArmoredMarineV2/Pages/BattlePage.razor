@@ -105,7 +105,7 @@
 			combatStatusButtonEnable = false;
 		}
 	}
-	
+
 
 	public void FireButtonHandler()
 	{
@@ -118,11 +118,30 @@
 		}
 	}
 
-	public void HeadButton()
+	protected override void OnInitialized()
 	{
-		headValue = true;
-		FireButtonHandler();
-	}
+		FieldManager battleField = new();
 
+		StatsManager.CharacterPrimaryStats computerPrimaryStats = new();
+		StatsManager.CharacterSecondaryStats computerSecondaryStats = new();
+
+		HumanPlayer.SetCharacterLocation();
+
+		userInterface.SetPrimaryStats(computerPrimaryStats, ComputerPlayer);
+		userInterface.SetSecondaryStats(computerSecondaryStats, ComputerPlayer);
+
+		var computerStatArray = ComputerPrimaryStatManager.RandomStatsArray(RandomNumberSeed);
+
+		ComputerPrimaryStatManager.AssignIndividualComputerStats(ComputerPrimaryStatManager.MainStats.Strength, computerStatArray, ComputerPlayer);
+		ComputerPrimaryStatManager.AssignIndividualComputerStats(ComputerPrimaryStatManager.MainStats.Agility, computerStatArray, ComputerPlayer);
+		ComputerPrimaryStatManager.AssignIndividualComputerStats(ComputerPrimaryStatManager.MainStats.Resilience, computerStatArray, ComputerPlayer);
+		ComputerPrimaryStatManager.AssignIndividualComputerStats(ComputerPrimaryStatManager.MainStats.Perception, computerStatArray, ComputerPlayer);
+
+
+
+		ComputerPlayer.SetCharacterLocation();
+
+		base.OnInitialized();
+	}
 
 }

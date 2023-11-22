@@ -4,7 +4,7 @@ using ArmoredMarineV2.Interfaces;
 
 namespace ArmoredMarineV2.Managers
 {
-	public class ComputerStatManager
+	public class ComputerPrimaryStatManager
 	{
 		public enum MainStats
 		{
@@ -14,7 +14,7 @@ namespace ArmoredMarineV2.Managers
 			Perception
 		}
 
-		public int[] RandomStats(Random RandomNumberSeed)
+		public static int[] RandomStatsArray(Random RandomNumberSeed)
 		{
 
 			var statPointsAvailable = 30;
@@ -33,7 +33,7 @@ namespace ArmoredMarineV2.Managers
 			HelperFunctions.Shuffle(statStorage, RandomNumberSeed);
 			return statStorage;
 		}
-		public void AssignIndividualComputerStats(MainStats stat, int[] StatsArray, MarineManager computerMarine)
+		public static void AssignIndividualComputerStats(MainStats stat, int[] StatsArray, MarineManager computerMarine)
 		{
 			switch (stat)
 			{

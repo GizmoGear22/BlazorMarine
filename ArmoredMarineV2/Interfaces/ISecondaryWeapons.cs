@@ -9,7 +9,6 @@
         int Ammo { get; set; }
         double Weight { get; }
 
-        double AccuracyCalculation();
         void DamageDealt();
     }
 }
