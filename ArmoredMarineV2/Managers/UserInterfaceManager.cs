@@ -55,7 +55,7 @@ namespace ArmoredMarineV2.Managers
         {
             //What should this method do?
             //Should bundle all the necessary methods to attack into here. 
-            player.CurrentlyEquippedWeapon.DamageDealt();
+            player.CurrentlyEquippedWeapon.DamageDealt(player, opponent);
 
             /*
             IEnumerable<double> target;
@@ -81,7 +81,6 @@ namespace ArmoredMarineV2.Managers
         public void SetEquipWeapon(IMarine player, IMarine opponent, IWeapons weapon)
         {
             player.CurrentlyEquippedWeapon = weapon;
-            player.SecondaryStats.AccuracyCalculation(player, opponent);
         }
 
         public IMarine SetMainWeapon(IMarine player, IMainWeapons weapon)

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using ArmoredMarineV2.Handlers;
 using ArmoredMarineV2.Interfaces;
 
 namespace ArmoredMarineV2.Managers
@@ -24,17 +25,18 @@ namespace ArmoredMarineV2.Managers
             public int AttributePoints { get; set; } = 30;
             public int Health { get; set; } = 100;
 
-            public void AccuracyCalculation(IMarine Shooter, double Range =1, double ArmorTarget = 1, double Upgrade = 1)
+            public void AccuracyCalculation(IMarine Shooter, double Upgrade = 1)
             {
                 var PerceptionBonus = (2 * Shooter.PrimaryStats.Perception) / (2 * Shooter.PrimaryStats.Perception + 5);
-                var Aim = PerceptionBonus * Shooter.CurrentlyEquippedWeapon.Accuracy * Upgrade * Range * ArmorTarget;
+                var Aim = PerceptionBonus * Shooter.CurrentlyEquippedWeapon.Accuracy * Upgrade;
 
                 Accuracy = Aim;
             }
-			public void AccuracyCalculation(IMarine Shooter, IMarine opponent, double Range = 1, double Upgrade = 1)
+			public void AccuracyCalculation(IMarine Shooter, IMarine opponent, ArmorManager.ArmorType target, double Range, double Upgrade = 1)
 			{
+                var targetAccuracy = AttackHandler.ArmorTargetAccuracyHandler(target, opponent);
 				var PerceptionBonus = (2 * Shooter.PrimaryStats.Perception) / (2 * Shooter.PrimaryStats.Perception + 5);
-                var Aim = PerceptionBonus * Shooter.CurrentlyEquippedWeapon.Accuracy * Upgrade * Range;
+                var Aim = PerceptionBonus * Shooter.CurrentlyEquippedWeapon.Accuracy * Upgrade * Range * targetAccuracy;
 				Accuracy = Aim;
 			}
 

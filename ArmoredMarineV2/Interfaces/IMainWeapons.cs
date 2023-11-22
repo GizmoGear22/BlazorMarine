@@ -9,8 +9,8 @@
         int Ammo { get; set; }
         double Weight { get; }
 
-        void DamageDealt();
+		void DamageDealt(IMarine attacker, IMarine opponent);
 
 
-    }
+	}
 }

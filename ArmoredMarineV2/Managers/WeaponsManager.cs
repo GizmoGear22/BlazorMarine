@@ -21,9 +21,14 @@ namespace ArmoredMarineV2.Managers
 
 				public int Cost => throw new NotImplementedException();
 
-				public void DamageDealt()
+				public void DamageDealt(IMarine attacker, IMarine opponent)
 				{
-					throw new NotImplementedException();
+					
+                    for (int i = 0; i < attacker.CurrentlyEquippedWeapon.ShotsPerRound; i++)
+                    {
+                        double hitChance = attacker.SecondaryStats.Accuracy;
+                    }
+                    throw new NotImplementedException();
 				}
 			}
             public class AutoBoltRifle : IMainWeapons, IWeapons
@@ -41,12 +46,11 @@ namespace ArmoredMarineV2.Managers
 
                 public double Weight => throw new NotImplementedException();
 
-
-                public void DamageDealt()
-                {
-                    throw new NotImplementedException();
-                }
-            }
+				public void DamageDealt(IMarine attacker, IMarine opponent)
+				{
+					throw new NotImplementedException();
+				}
+			}
         }
 
         public class SecondaryWeapons
@@ -66,11 +70,11 @@ namespace ArmoredMarineV2.Managers
                 public double Weight => throw new NotImplementedException();
 
 
-                public void DamageDealt()
-                {
-                    throw new NotImplementedException();
-                }
-            }
+				public void DamageDealt(IMarine attacker, IMarine opponent)
+				{
+					throw new NotImplementedException();
+				}
+			}
         }
 
         public class MeleeWeapons
