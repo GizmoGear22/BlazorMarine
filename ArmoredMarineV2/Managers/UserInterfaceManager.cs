@@ -52,13 +52,13 @@ namespace ArmoredMarineV2.Managers
             return ShownArmorStats;
 		}
 
-        public void SetAttackAction(IMarine shooter, IMarine opponent, ArmorManager.ArmorType Type)
+        public void SetAttackAction(IMarine shooter, IMarine opponent, ArmorManager.ArmorType type, Random randomNumberSeed)
         {
             //What should this method do?
             //Should bundle all the necessary methods to attack into here. 
             var rangeAdjuster = AttackHandler.RangeAccuracyAdjuster(shooter, opponent);
-            SecondaryStatsHandler.AccuracyCalculation(shooter, opponent, Type, rangeAdjuster);
-            shooter.CurrentlyEquippedWeapon.DamageDealt(shooter, opponent);
+            SecondaryStatsHandler.AccuracyCalculation(shooter, opponent, type, rangeAdjuster);
+            shooter.CurrentlyEquippedWeapon.DamageDealt(shooter, opponent, randomNumberSeed, type);
 
             /*
             IEnumerable<double> target;

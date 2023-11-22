@@ -1,4 +1,6 @@
-﻿namespace ArmoredMarineV2.Interfaces
+﻿using ArmoredMarineV2.Managers;
+
+namespace ArmoredMarineV2.Interfaces
 {
     public interface IWeapons
     {
@@ -9,6 +11,6 @@
         int Ammo { get; set; }
         double Weight { get; }
 
-        void DamageDealt(IMarine attacker, IMarine opponent);
+        void DamageDealt(IMarine attacker, IMarine opponent, Random randomNumberSeed, ArmorManager.ArmorType type);
     }
 }

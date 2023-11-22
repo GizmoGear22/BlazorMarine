@@ -14,7 +14,7 @@ namespace ArmoredMarineV2.Interfaces
         IMarine SetMeleeWeapon();
         void SetEquipWeapon(IMarine player, IWeapons weapon);
         void SetEquipWeapon(IMarine player, IMarine opponent, IWeapons weapon);
-        void SetAttackAction(IMarine attacker, IMarine defender, ArmorManager.ArmorType type);
+        void SetAttackAction(IMarine attacker, IMarine defender, ArmorManager.ArmorType type, Random randomNumberSeed);
         CombatResults GetCombatResults();
         List<string> GetCombatStats(IMarine HumanPlayer);
         List<string> GetArmorStats(IMarine HumanPlayer);

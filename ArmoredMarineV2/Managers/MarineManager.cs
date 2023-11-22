@@ -19,9 +19,10 @@ namespace ArmoredMarineV2.Managers
             CharacterArmor = new ArmorManager.ArmorSet();
         }
 		
-        public void ReduceArmor(ArmorManager.ArmorPieces Target)
+        public void ReduceArmor(IMarine attacker, ArmorManager.ArmorType type)
         {
-            ArmorManager.ArmorPieces ArmorPieceTarget;
+            var armorValue = CharacterArmor.ArmorList.Where(x => x.Name == type.ToString()).Select(x => x.ArmorValue).Single();
+            armorValue -= attacker.CurrentlyEquippedWeapon.Damage;
         
         }
         public void ReduceHealth()

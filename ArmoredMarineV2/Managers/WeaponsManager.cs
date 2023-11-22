@@ -19,18 +19,22 @@ namespace ArmoredMarineV2.Managers
 
                 public double Weight { get; } = 10;
 
-				public int Cost => throw new NotImplementedException();
+                public int Cost => throw new NotImplementedException();
 
-				public void DamageDealt(IMarine attacker, IMarine opponent)
-				{
-					
-                    for (int i = 0; i < attacker.CurrentlyEquippedWeapon.ShotsPerRound; i++)
+                public void DamageDealt(IMarine attacker, IMarine opponent, Random randomNumberSeed, ArmorManager.ArmorType type)
+                {
+                    var currentArmorValue = opponent.CharacterArmor.ArmorList.Where(x => x.Name == type.ToString()).Select(x => x.ArmorValue).Single();
+                    for (int i = 0; i <= attacker.CurrentlyEquippedWeapon.ShotsPerRound; i++)
                     {
-                        double hitChance = attacker.SecondaryStats.Accuracy;
+                        var shotHitChance = attacker.SecondaryStats.Accuracy;
+                        var confirmedHit = HelperFunctions.RandomNumber(100, randomNumberSeed);
+                        if (confirmedHit < shotHitChance && currentArmorValue > 0)
+                        {
+                            opponent.ReduceArmor(attacker, type);
+                        }
                     }
-                    throw new NotImplementedException();
-				}
-			}
+                }
+            }
             public class AutoBoltRifle : IMainWeapons, IWeapons
             {
 
@@ -46,12 +50,13 @@ namespace ArmoredMarineV2.Managers
 
                 public double Weight => throw new NotImplementedException();
 
-				public void DamageDealt(IMarine attacker, IMarine opponent)
-				{
-					throw new NotImplementedException();
-				}
-			}
+                public void DamageDealt(IMarine attacker, IMarine opponent, Random randomNumberSeed, ArmorManager.ArmorType type)
+                {
+                    throw new NotImplementedException();
+                }
+            }
         }
+
 
         public class SecondaryWeapons
         {
@@ -70,20 +75,11 @@ namespace ArmoredMarineV2.Managers
                 public double Weight => throw new NotImplementedException();
 
 
-				public void DamageDealt(IMarine attacker, IMarine opponent, Random randomNumberSeed)
-				{
-                    for (int i = 0; i <= attacker.CurrentlyEquippedWeapon.ShotsPerRound; i++)
-                    {
-                        var shotHitChance = attacker.SecondaryStats.Accuracy;
-                        var confirmedHit = HelperFunctions.RandomNumber(100, randomNumberSeed);
-                        if (confirmedHit < shotHitChance && opponent.)
-                        {
-
-                        }
-                    }
-					throw new NotImplementedException();
-				}
-			}
+                public void DamageDealt(IMarine attacker, IMarine opponent, Random randomNumberSeed, ArmorManager.ArmorType type)
+                {
+                    throw new NotImplementedException();
+                }
+            }
         }
 
         public class MeleeWeapons
@@ -93,5 +89,6 @@ namespace ArmoredMarineV2.Managers
 
             }
         }
+
     }
 }

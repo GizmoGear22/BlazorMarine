@@ -13,7 +13,7 @@ namespace ArmoredMarineV2.Interfaces
         IWeapons CurrentlyEquippedWeapon { get; set; }
         FieldManager.CharacterLocation CharacterLocation { get; set; }
 
-        public void ReduceArmor(ArmorManager.ArmorPieces pieces);
+        public void ReduceArmor(IMarine attacker, ArmorManager.ArmorType type);
         public void ReduceHealth();
         public void SetCharacterLocation();
     }
