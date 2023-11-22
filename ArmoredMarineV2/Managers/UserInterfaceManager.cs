@@ -1,4 +1,5 @@
 ﻿
+using ArmoredMarineV2.Handlers;
 using ArmoredMarineV2.Interfaces;
 using ArmoredMarineV2.Pages;
 using Microsoft.AspNetCore.Components;
@@ -51,11 +52,13 @@ namespace ArmoredMarineV2.Managers
             return ShownArmorStats;
 		}
 
-        public void SetAttackAction(IMarine player, IMarine opponent, ArmorManager.ArmorType Type)
+        public void SetAttackAction(IMarine shooter, IMarine opponent, ArmorManager.ArmorType Type)
         {
             //What should this method do?
             //Should bundle all the necessary methods to attack into here. 
-            player.CurrentlyEquippedWeapon.DamageDealt(player, opponent);
+            var rangeAdjuster = AttackHandler.RangeAccuracyAdjuster(shooter, opponent);
+            SecondaryStatsHandler.AccuracyCalculation(shooter, opponent, Type, rangeAdjuster);
+            shooter.CurrentlyEquippedWeapon.DamageDealt(shooter, opponent);
 
             /*
             IEnumerable<double> target;

@@ -5,6 +5,13 @@ namespace ArmoredMarineV2.Handlers
 {
 	public class AttackHandler
 	{
+
+		public static double RangeAccuracyAdjuster(IMarine player, IMarine computer)
+		{
+			var range = FieldManager.DistanceBetweenCharacters(player, computer);
+			double RangeAimAdjust = (range + 30) / (2 * range);
+			return RangeAimAdjust;
+		}
 		public static double ArmorTargetAccuracyHandler(ArmorManager.ArmorType type, IMarine opponent)
 		{
 			double target = 0;

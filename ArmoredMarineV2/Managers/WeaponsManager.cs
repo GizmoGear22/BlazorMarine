@@ -70,8 +70,17 @@ namespace ArmoredMarineV2.Managers
                 public double Weight => throw new NotImplementedException();
 
 
-				public void DamageDealt(IMarine attacker, IMarine opponent)
+				public void DamageDealt(IMarine attacker, IMarine opponent, Random randomNumberSeed)
 				{
+                    for (int i = 0; i <= attacker.CurrentlyEquippedWeapon.ShotsPerRound; i++)
+                    {
+                        var shotHitChance = attacker.SecondaryStats.Accuracy;
+                        var confirmedHit = HelperFunctions.RandomNumber(100, randomNumberSeed);
+                        if (confirmedHit < shotHitChance && opponent.)
+                        {
+
+                        }
+                    }
 					throw new NotImplementedException();
 				}
 			}
