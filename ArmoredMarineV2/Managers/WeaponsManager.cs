@@ -22,7 +22,7 @@ namespace ArmoredMarineV2.Managers
 
                 public int Cost => throw new NotImplementedException();
 
-                public string DamageDealt(IMarine attacker, IMarine opponent, Random randomNumberSeed, ArmorManager.ArmorType type)
+                public void DamageDealt(IMarine attacker, IMarine opponent, Random randomNumberSeed, ArmorManager.ArmorType type)
                 {
                     string message = "";
                     int armorDamage = 0;
@@ -45,7 +45,6 @@ namespace ArmoredMarineV2.Managers
                         attacker.CurrentlyEquippedWeapon.Ammo -= 1;
                     }
                     message = $"{armorDamage} was done to armor, {healthDamage} was done to health";
-                    return message;
                 }
             }
             public class AutoBoltRifle : IMainWeapons, IWeapons
@@ -65,7 +64,7 @@ namespace ArmoredMarineV2.Managers
 
 				public string Name => throw new NotImplementedException();
 
-				public string DamageDealt(IMarine attacker, IMarine opponent, Random randomNumberSeed, ArmorManager.ArmorType type)
+				public void DamageDealt(IMarine attacker, IMarine opponent, Random randomNumberSeed, ArmorManager.ArmorType type)
                 {
                     throw new NotImplementedException();
                 }
@@ -91,7 +90,7 @@ namespace ArmoredMarineV2.Managers
 
 				public string Name => throw new NotImplementedException();
 
-				public string DamageDealt(IMarine attacker, IMarine opponent, Random randomNumberSeed, ArmorManager.ArmorType type)
+				public void DamageDealt(IMarine attacker, IMarine opponent, Random randomNumberSeed, ArmorManager.ArmorType type)
                 {
                     throw new NotImplementedException();
                 }

@@ -50,7 +50,7 @@
 			<MudStack Class="fire-container">
 				<div class="d-flex justify-content-center mt-auto">
 					<MudPaper Class="pa-3">
-						<MudButton Variant="Variant.Filled" Color="Color.Primary" >Head</MudButton>
+						<MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="() => userInterface.SetAttackAction(HumanPlayer, ComputerPlayer, ArmorManager.ArmorType.Head, RandomNumberSeed)">Head</MudButton>
 					</MudPaper>
 					<MudPaper Class="pa-3">
 						<MudButton Variant="Variant.Filled" Color="Color.Primary" @bind-Value="torsoValue">Torso</MudButton>
@@ -63,7 +63,7 @@
 			</MudStack>
 		}
 
-		ArmorManager.ArmorPieces buttonValue;
+
 		<p>@headValue</p>
 	}
 </div>
@@ -137,8 +137,8 @@
 		ComputerPrimaryStatManager.AssignIndividualComputerStats(ComputerPrimaryStatManager.MainStats.Resilience, computerStatArray, ComputerPlayer);
 		ComputerPrimaryStatManager.AssignIndividualComputerStats(ComputerPrimaryStatManager.MainStats.Perception, computerStatArray, ComputerPlayer);
 
-
-
+		userInterface.SetEquipWeapon(ComputerPlayer, new WeaponsManager.MainWeapons.BoltRifle());
+		ComputerPlayer.CharacterArmor.ResilienceToArmor(ComputerPlayer);
 		ComputerPlayer.SetCharacterLocation();
 
 		base.OnInitialized();
