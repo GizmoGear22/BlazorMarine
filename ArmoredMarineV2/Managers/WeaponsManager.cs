@@ -8,6 +8,7 @@ namespace ArmoredMarineV2.Managers
         {
             public class BoltRifle : IMainWeapons, IWeapons
             {
+                public string Name { get; } = "BoltRifle";
 
                 public double Accuracy { get; } = 1;
 
@@ -21,8 +22,11 @@ namespace ArmoredMarineV2.Managers
 
                 public int Cost => throw new NotImplementedException();
 
-                public void DamageDealt(IMarine attacker, IMarine opponent, Random randomNumberSeed, ArmorManager.ArmorType type)
+                public string DamageDealt(IMarine attacker, IMarine opponent, Random randomNumberSeed, ArmorManager.ArmorType type)
                 {
+                    string message = "";
+                    int armorDamage = 0;
+                    int healthDamage = 0;
                     var currentArmorValue = opponent.CharacterArmor.ArmorList.Where(x => x.Name == type.ToString()).Select(x => x.ArmorValue).Single();
                     for (int i = 0; i <= attacker.CurrentlyEquippedWeapon.ShotsPerRound; i++)
                     {
@@ -31,8 +35,17 @@ namespace ArmoredMarineV2.Managers
                         if (confirmedHit < shotHitChance && currentArmorValue > 0)
                         {
                             opponent.ReduceArmor(attacker, type);
+                            armorDamage += attacker.CurrentlyEquippedWeapon.Damage;
+                        } else if (confirmedHit < shotHitChance && currentArmorValue <= 0)
+                        {
+                            currentArmorValue = 0;
+                            opponent.ReduceHealth(attacker);
+                            healthDamage += attacker.CurrentlyEquippedWeapon.Damage;
                         }
+                        attacker.CurrentlyEquippedWeapon.Ammo -= 1;
                     }
+                    message = $"{armorDamage} was done to armor, {healthDamage} was done to health";
+                    return message;
                 }
             }
             public class AutoBoltRifle : IMainWeapons, IWeapons
@@ -50,7 +63,9 @@ namespace ArmoredMarineV2.Managers
 
                 public double Weight => throw new NotImplementedException();
 
-                public void DamageDealt(IMarine attacker, IMarine opponent, Random randomNumberSeed, ArmorManager.ArmorType type)
+				public string Name => throw new NotImplementedException();
+
+				public string DamageDealt(IMarine attacker, IMarine opponent, Random randomNumberSeed, ArmorManager.ArmorType type)
                 {
                     throw new NotImplementedException();
                 }
@@ -74,8 +89,9 @@ namespace ArmoredMarineV2.Managers
 
                 public double Weight => throw new NotImplementedException();
 
+				public string Name => throw new NotImplementedException();
 
-                public void DamageDealt(IMarine attacker, IMarine opponent, Random randomNumberSeed, ArmorManager.ArmorType type)
+				public string DamageDealt(IMarine attacker, IMarine opponent, Random randomNumberSeed, ArmorManager.ArmorType type)
                 {
                     throw new NotImplementedException();
                 }

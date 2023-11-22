@@ -30,7 +30,7 @@ namespace ArmoredMarineV2.Managers
 
             var Health = HumanPlayer.SecondaryStats.Health;
             var Accuracy = HumanPlayer.SecondaryStats.Accuracy;
-            var CurrentEquip = HumanPlayer.CurrentlyEquippedWeapon;
+            var CurrentEquip = HumanPlayer.CurrentlyEquippedWeapon.Name;
             ShownCombatStats.Add("Health");
             ShownCombatStats.Add(Health.ToString());
             ShownCombatStats.Add("Accuracy");
@@ -61,13 +61,6 @@ namespace ArmoredMarineV2.Managers
             shooter.CurrentlyEquippedWeapon.DamageDealt(shooter, opponent, randomNumberSeed, type);
 
             /*
-            IEnumerable<double> target;
-            switch (Type)
-            {
-                case ArmorManager.ArmorType.Head:
-                    target = opponent.CharacterArmor.ArmorList.Where(x => x.Name == "Head").Select(x => x.ArmorValue);
-                    break;		
-			}
 			var range = FieldManager.DistanceBetweenCharacters(player, opponent);
 			double AccuracyRangeComponent = (range + 30) / (2 * range);
 			throw new NotImplementedException();

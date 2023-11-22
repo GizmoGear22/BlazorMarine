@@ -14,7 +14,7 @@ namespace ArmoredMarineV2.Interfaces
         FieldManager.CharacterLocation CharacterLocation { get; set; }
 
         public void ReduceArmor(IMarine attacker, ArmorManager.ArmorType type);
-        public void ReduceHealth();
+        public void ReduceHealth(IMarine attacker);
         public void SetCharacterLocation();
     }
 }

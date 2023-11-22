@@ -11,7 +11,7 @@ namespace ArmoredMarineV2.Interfaces
         int Ammo { get; set; }
         double Weight { get; }
 
-		void DamageDealt(IMarine attacker, IMarine opponent, Random randomNumberSeed, ArmorManager.ArmorType type);
+		string DamageDealt(IMarine attacker, IMarine opponent, Random randomNumberSeed, ArmorManager.ArmorType type);
 
 
 	}

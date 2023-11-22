@@ -25,9 +25,9 @@ namespace ArmoredMarineV2.Managers
             armorValue -= attacker.CurrentlyEquippedWeapon.Damage;
         
         }
-        public void ReduceHealth()
+        public void ReduceHealth(IMarine attacker)
         {
-            throw new NotImplementedException();
+            SecondaryStats.Health -= attacker.CurrentlyEquippedWeapon.Damage;
         }
 
 		public void SetCharacterLocation()
