@@ -1,4 +1,5 @@
-﻿using ArmoredMarineV2.Interfaces;
+﻿using System.Net.NetworkInformation;
+using ArmoredMarineV2.Interfaces;
 
 namespace ArmoredMarineV2.Managers
 {
@@ -6,35 +7,44 @@ namespace ArmoredMarineV2.Managers
     {
         public StatsManager.CharacterPrimaryStats PrimaryStats { get; set; }
         public StatsManager.CharacterSecondaryStats SecondaryStats { get; set; }
-        public ArmorManager CharacterArmor { get; set; }
+        public ArmorManager.ArmorSet CharacterArmor { get; set; }
         public WeaponsManager.MainWeapons MainWeapon { get; set; }
         public WeaponsManager.SecondaryWeapons SecondaryWeapon { get; set; }
         public WeaponsManager.MeleeWeapons MeleeWeapon { get; set; }
         public IWeapons CurrentlyEquippedWeapon { get; set; }
-        public CharacterLocation SetCharacterLocation { get; set; }
+		public FieldManager.CharacterLocation CharacterLocation { get ; set ; }
 
-        public MarineManager() 
+		public MarineManager()
         {
-            
-            PrimaryStats = new StatsManager.CharacterPrimaryStats();
-            SecondaryStats = new StatsManager.CharacterSecondaryStats();
-            CharacterArmor = new ArmorManager();
-            
+            CharacterArmor = new ArmorManager.ArmorSet();
+        }
+		
+        public void ReduceArmor(IMarine attacker, ArmorManager.ArmorType type)
+        {
+            var armorValue = CharacterArmor.ArmorList.Where(x => x.Name == type.ToString()).Select(x => x.ArmorValue).Single();
+            armorValue -= attacker.CurrentlyEquippedWeapon.Damage;
+        
+        }
+        public void ReduceHealth(IMarine attacker)
+        {
+            SecondaryStats.Health -= attacker.CurrentlyEquippedWeapon.Damage;
         }
 
-        public void EquipWeapon()
+		public void SetCharacterLocation()
+		{
+            CharacterLocation = new FieldManager.CharacterLocation(50, 50);
+		}
+
+        public void EquipWeapon(IMarine shooter, IWeapons weapon)
         {
-            throw new NotImplementedException();
+			CurrentlyEquippedWeapon = weapon;
+            SecondaryStats.AccuracyCalculation(shooter);           
+		}
+
+        public void ChangeLocation()
+        {
+            CharacterLocation.XLocation -= SecondaryStats.MovementDistance;
         }
 
-        public void ReduceArmor()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ReduceHealth()
-        {
-            throw new NotImplementedException();
-        }
-    }
+	}
 }

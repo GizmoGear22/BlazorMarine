@@ -6,16 +6,17 @@ namespace ArmoredMarineV2.Interfaces
     {
         StatsManager.CharacterPrimaryStats PrimaryStats { get; set; }
         StatsManager.CharacterSecondaryStats SecondaryStats { get; set; }
-        ArmorManager CharacterArmor { get; set; }
+        ArmorManager.ArmorSet CharacterArmor { get; set; }
         WeaponsManager.MainWeapons MainWeapon { get; set; }
         WeaponsManager.SecondaryWeapons SecondaryWeapon { get; set; }
         WeaponsManager.MeleeWeapons MeleeWeapon { get; set; }
         IWeapons CurrentlyEquippedWeapon { get; set; }
-        CharacterLocation SetCharacterLocation { get; set; }
+        FieldManager.CharacterLocation CharacterLocation { get; set; }
 
-        public void EquipWeapon();
-        public void ReduceArmor();
-        public void ReduceHealth();
-
+        public void ReduceArmor(IMarine attacker, ArmorManager.ArmorType type);
+        public void ReduceHealth(IMarine attacker);
+        public void SetCharacterLocation();
+        public void EquipWeapon(IMarine shooter, IWeapons weapon);
+        public void ChangeLocation();
     }
 }

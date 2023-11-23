@@ -1,21 +1,15 @@
-﻿using ArmoredMarineV2.Interfaces;
+﻿
+using ArmoredMarineV2.Handlers;
+using ArmoredMarineV2.Interfaces;
 using ArmoredMarineV2.Pages;
-
+using Microsoft.AspNetCore.Components;
+using MudBlazor;
 
 namespace ArmoredMarineV2.Managers
 {
     public class UserInterfaceManager : IUserInterface
     {
-        IMarine HumanPlayer { get; set; }
-
-
-        public UserInterfaceManager(IMarine Player)
-        {
-            HumanPlayer = Player;
-        }
-
-
-        public CombatResults GetCombatResults()
+		public CombatResults GetCombatResults()
         {
             throw new NotImplementedException();
         }
@@ -29,18 +23,27 @@ namespace ArmoredMarineV2.Managers
         {
             throw new NotImplementedException();
         }
-
-        public AttackModel SetAttackAction()
+        public List<string> GetCombatStats(IMarine HumanPlayer)
         {
-            throw new NotImplementedException();
+            return StatsManager.CharacterSecondaryStats.ListCombatStats(HumanPlayer);
         }
 
-        public IMarine SetEquipWeapon()
+        public List<string> GetArmorStats(IMarine HumanPlayer)
         {
-            throw new NotImplementedException();
+            return HumanPlayer.CharacterArmor.ArmorStats(HumanPlayer);
+		}
+
+        public void SetAttackAction(IMarine shooter, IMarine opponent, ArmorManager.ArmorType type, Random randomNumberSeed)
+        {
+            AttackHandler.AttackTarget(shooter, opponent, type, randomNumberSeed);
         }
 
-        public IMarine SetMainWeapon()
+        public void SetEquipWeapon(IMarine player, IWeapons weapon)
+        {
+            player.EquipWeapon(player, weapon);
+        }
+
+        public IMarine SetMainWeapon(IMarine player, IMainWeapons weapon)
         {
             throw new NotImplementedException();
         }
@@ -50,24 +53,24 @@ namespace ArmoredMarineV2.Managers
             throw new NotImplementedException();
         }
 
-        public void SetPrimaryStats(CharacterPrimaryStats stats)
+        public void SetPrimaryStats(IMarine humanPlayer, StatsManager.CharacterPrimaryStats newStats)
         {
-            
-            HumanPlayer.PrimaryStats.Strength = stats.Strength;
-            HumanPlayer.PrimaryStats.Agility = stats.Agility;
-            HumanPlayer.PrimaryStats.Perception = stats.Perception;
-            HumanPlayer.PrimaryStats.Resilience = stats.Resilience;
-            
+            StatsManager.CharacterPrimaryStats.PrimaryStatAllocation(humanPlayer, newStats);
         }
 
-        public StatsManager SetSecondaryStats()
+        public void SetSecondaryStats(StatsManager.CharacterSecondaryStats stats, IMarine HumanPlayer)
         {
-            throw new NotImplementedException();
+            stats.SecondaryStatAllocation(HumanPlayer, stats);
         }
 
         public IMarine SetSecondaryWeapon()
         {
             throw new NotImplementedException();
         }
-    }
+
+		public void SetNewLocation(IMarine player)
+		{
+            player.ChangeLocation();
+		}
+	}
 }

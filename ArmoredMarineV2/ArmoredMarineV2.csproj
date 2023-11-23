@@ -7,7 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Constructors\**" />
+    <Content Remove="Constructors\**" />
+    <EmbeddedResource Remove="Constructors\**" />
+    <None Remove="Constructors\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MudBlazor" Version="6.11.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DataCode\" />
   </ItemGroup>
 
 </Project>

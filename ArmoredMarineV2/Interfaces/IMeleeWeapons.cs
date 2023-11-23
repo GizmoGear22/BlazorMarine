@@ -2,9 +2,8 @@
 
 namespace ArmoredMarineV2.Interfaces
 {
-    public interface IWeapons
+    public interface IMeleeWeapons
     {
-        string Name { get; }
         double Accuracy { get; }
         int Damage { get; }
         int Cost { get; }
@@ -12,6 +11,6 @@ namespace ArmoredMarineV2.Interfaces
         int Ammo { get; set; }
         double Weight { get; }
 
-        void DamageDealt(IMarine attacker, IMarine opponent, Random randomNumberSeed, ArmorManager.ArmorType type);
-    }
+		void DamageDealt(IMarine attacker, IMarine opponent, Random randomNumberSeed, ArmorManager.ArmorType type);
+	}
 }

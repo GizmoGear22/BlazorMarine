@@ -66,3 +66,20 @@ a, .btn-link {
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
+
+.container {
+    
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.statusblock {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    right: 0;
+    width: 20%;
+}

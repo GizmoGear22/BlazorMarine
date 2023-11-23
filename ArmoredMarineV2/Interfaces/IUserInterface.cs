@@ -1,72 +1,35 @@
 ﻿using ArmoredMarineV2.Managers;
+using Microsoft.AspNetCore.Components;
+
 namespace ArmoredMarineV2.Interfaces
 {
     public interface IUserInterface
     {
-        StatsManager GetPrimaryStats();
+		StatsManager GetPrimaryStats();
         StatsManager GetSecondaryStats();
-        void SetPrimaryStats(CharacterPrimaryStats stats);
-        StatsManager SetSecondaryStats();
-        IMarine SetMainWeapon();
+        void SetPrimaryStats(IMarine humanPlayer, StatsManager.CharacterPrimaryStats newStats);
+        void SetSecondaryStats(StatsManager.CharacterSecondaryStats stats, IMarine HumanPlayer);
+        IMarine SetMainWeapon(IMarine player, IMainWeapons weapon);
         IMarine SetSecondaryWeapon();
         IMarine SetMeleeWeapon();
-        IMarine SetEquipWeapon();
-        AttackModel SetAttackAction();
+        void SetEquipWeapon(IMarine player, IWeapons weapon);
+        void SetAttackAction(IMarine shooter, IMarine opponent, ArmorManager.ArmorType type, Random randomNumberSeed);
         CombatResults GetCombatResults();
-
+        List<string> GetCombatStats(IMarine HumanPlayer);
+        List<string> GetArmorStats(IMarine HumanPlayer);
+        void SetNewLocation(IMarine player);
     }
 
-    public class CharacterPrimaryStats
-    {
-        public int Strength { get; set; }
-        public int Agility { get; set; }
-        public int Resilience { get; set; }
-        public int Perception { get; set; }
-    }
-
-    public class CharacterSecondaryStats 
-    {
-        public double Accuracy { get; set; }
-        public double Weight { get; set; }
-        public int ActionPoints { get; set; } = 2;
-
-    }
 
     public class AttackModel
     {
 
     }
-
     public class CombatResults
     {
 
     }
 
-    public class CharacterLocation
-    {
-        public int xLocation { get; set; }
-        public int yLocation { get; set; }
-    }
 
 
-
-    public class Armor
-    {
-        public double ArmorModifier { get; set; }
-        public double AccuracyModifier { get; set; }
-
-        public enum ArmorType
-        {
-            Head,
-            Torso,
-            LeftArm,
-            RightArm,
-            LeftLeg,
-            RightLeg
-        }
-
-        
-
-       
-    }
 }

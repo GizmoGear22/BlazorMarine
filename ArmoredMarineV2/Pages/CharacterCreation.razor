@@ -2,20 +2,34 @@
 @using Managers;
 @using Interfaces;
 @using MudBlazor;
-@using Constructors;
 @inject IUserInterface userInterface;
+@inject IMarine HumanPlayer;
 
 
 <h3>CharacterCreation</h3>
 
+@code {
+    public static StatsManager.CharacterPrimaryStats stats = new();
+    public static StatsManager.CharacterSecondaryStats secStats = new();
+}
+
 <MudGrid>
     <MudItem xs="12" sm="7">
         <MudPaper Class="pa-4">
-            <MudForm @ref="form" @bind-IsValid="@success" @bind-Errors="@errors">
-                <MudTextField T="int" Label="Strength" @bind-Value="stats.Strength" />
-                <MudTextField T="int" Label="Agility" @bind-Value="stats.Agility" />
-                <MudTextField T="int" Label="Resilience" @bind-Value="stats.Resilience" />
-                <MudTextField T="int" Label="Perception" @bind-Value="stats.Perception" />
+            <MudForm @ref="form" @bind-IsValid="@success" @bind-Errors="@errors" >
+                <MudNumericField T="int" Label="Strength" @bind-Value="stats.Strength" Min="1"
+                oninput="@(ChangeAttributeNumberFromStrength())"
+                  />
+                
+                <MudNumericField T="int" Label="Agility" @bind-Value="stats.Agility" Min="1"
+                 oninput="@(ChangeAttributeNumberFromAgility())" />
+
+                <MudNumericField T="int" Label="Resilience" @bind-Value="stats.Resilience" Min="1"
+                oninput="@(ChangeAttributeNumberFromResilience())"/>
+
+                <MudNumericField T="int" Label="Perception" @bind-Value="stats.Perception" Min="1"
+                oninput="@(ChangeAttributeNumberFromPerception())" />
+                
 
             </MudForm>
         </MudPaper>
@@ -38,32 +52,119 @@
     </MudItem>
 </MudGrid>
 
+<h3>Stat Points: @(GetAttributePoints())</h3>
+
+
 @code {
+    private int originalStrength = stats.Strength;
+    private int originalAgility = stats.Agility;
+    private int originalResilience = stats.Resilience;
+    private int originalPerception = stats.Perception;
+    private int GetAttributePoints()
+    {
+        return secStats.AttributePoints;
+    }
+
+
+    [Inject]
+    private NavigationManager NavigationManager { get; set; }
+
+
     bool success;
     string[] errors = { };
     MudForm form;
 
-    public static CharacterPrimaryStats stats = new();
+    bool isValid;
+
+    private int ChangeAttributeNumberFromStrength()
+    { 
+        int NewStrength = stats.Strength;
+        if (originalStrength < NewStrength)
+        {
+            secStats.AttributePoints -= 1;
+        } 
+        else if (originalStrength > NewStrength)
+        {
+            secStats.AttributePoints += 1;
+        }
+        originalStrength = NewStrength;
+        return secStats.AttributePoints;
+    }
+
+    private int ChangeAttributeNumberFromAgility()
+    {
+        int NewAgility = stats.Agility;
+        if (originalAgility < NewAgility)
+        {
+            secStats.AttributePoints -= 1;
+        }
+        else if (originalAgility > NewAgility)
+        {
+            secStats.AttributePoints += 1;
+        }
+        originalAgility = NewAgility;
+        return secStats.AttributePoints;
+    }
+
+    private int ChangeAttributeNumberFromResilience()
+    {
+        int NewResilience = stats.Resilience;
+        if (originalResilience < NewResilience)
+        {
+            secStats.AttributePoints -= 1;
+        }
+        else if (originalResilience > NewResilience)
+        {
+            secStats.AttributePoints += 1;
+        }
+        originalResilience = NewResilience;
+        return secStats.AttributePoints;
+    }
+
+    private int ChangeAttributeNumberFromPerception()
+    {
+        int NewPerception = stats.Perception;
+        if (originalPerception < NewPerception)
+        {
+            secStats.AttributePoints -= 1;
+        }
+        else if (originalPerception > NewPerception)
+        {
+            secStats.AttributePoints += 1;
+        }
+        originalPerception = NewPerception;
+        return secStats.AttributePoints;
+    }
 
     public void SubmitForm()
     {
-        userInterface.SetPrimaryStats(stats);
-    }
-
-               /* 
-    public class Injection
-    {
-             private readonly IUserInterface _myInjection;
-
-        public Injection(IUserInterface myInjection)
+        if (stats.Strength < 1 || stats.Agility < 1 || stats.Perception < 1 || stats.Resilience < 1 || secStats.AttributePoints < 0)
         {
-            _myInjection = myInjection;
+            isValid = false;
+        } else
+        {
+            isValid = true;
         }
-        public void SubmitForm()
+        if (isValid == true)
         {
-            _myInjection.SetPrimaryStats(stats);
-        }*/
+            userInterface.SetPrimaryStats(HumanPlayer, stats);
+            userInterface.SetSecondaryStats(secStats, HumanPlayer);
+            HumanPlayer.CharacterArmor.ResilienceToArmor(HumanPlayer);
+
+            HumanPlayer.SecondaryStats.WeightCalculation(HumanPlayer.CharacterArmor.ArmorList);
+            HumanPlayer.SecondaryStats.PossibleMovementDistance(HumanPlayer);
+
+            userInterface.SetEquipWeapon(HumanPlayer, new WeaponsManager.MainWeapons.BoltRifle());
+            secStats.AccuracyCalculation(HumanPlayer);
+            
+
+			NavigationManager.NavigateTo("./BattlePage");
+		}
 
     }
+
+
+    }
+
 
 }

@@ -1,0 +1,157 @@
+﻿@page "/BattlePage"
+@using Managers;
+@using Interfaces;
+@using MudBlazor;
+@inject IUserInterface userInterface;
+@inject IMarine HumanPlayer;
+
+<h3>BattlePage</h3>
+
+<MudStack Class="container">
+	<div class="d-flex justify-content-center mt-auto">
+		@{
+
+		}
+		<MudPaper Class="pa-3">
+			<MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="FireButtonHandler">Fire</MudButton>
+		</MudPaper>
+		<MudPaper Class="pa-3">
+			<MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="() => userInterface.SetNewLocation(HumanPlayer)">Move</MudButton>
+		</MudPaper>
+		<MudPaper Class="pa-3">
+			<MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="() => CombatStatusButtonHandler()">Status</MudButton>
+		</MudPaper>
+	</div>
+
+</MudStack>
+<div class="statusblock">@{
+
+		if (combatStatusButtonEnable == true)
+		{
+			statstatusArray = userInterface.GetCombatStats(HumanPlayer);
+			armorStatusArray = userInterface.GetArmorStats(HumanPlayer);
+			@foreach(var item in statstatusArray)
+			{
+				<p class="statslist">@item</p>
+			}
+			<h3>Armor</h3>
+			@foreach(var item in armorStatusArray)
+			{
+				<p class="statslist">@item</p>
+			}
+		}
+	}
+</div>
+<div class="fireblock">
+	@{
+		if (fireStatusButtonEnable == true)
+		{
+			<p>Pick Your Target</p>
+			<MudStack Class="fire-container">
+				<div class="d-flex justify-content-center mt-auto">
+					<MudPaper Class="pa-3">
+						<MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="() => userInterface.SetAttackAction(HumanPlayer, ComputerPlayer, ArmorManager.ArmorType.Head, RandomNumberSeed)">Head</MudButton>
+					</MudPaper>
+					<MudPaper Class="pa-3">
+						<MudButton Variant="Variant.Filled" Color="Color.Primary" @bind-Value="torsoValue" @onclick="() => userInterface.SetAttackAction(HumanPlayer, ComputerPlayer, ArmorManager.ArmorType.Torso, RandomNumberSeed)">Torso</MudButton>
+					</MudPaper>
+					<MudPaper Class="pa-3">
+						<MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="() => userInterface.SetAttackAction(HumanPlayer, ComputerPlayer, ArmorManager.ArmorType.LeftPauldron, RandomNumberSeed)">Left Pauldron</MudButton>
+					</MudPaper>
+					<MudPaper Class="pa-3">
+						<MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="() => userInterface.SetAttackAction(HumanPlayer, ComputerPlayer, ArmorManager.ArmorType.RightPauldron, RandomNumberSeed)">Right Pauldron</MudButton>
+					</MudPaper>
+					<MudPaper Class="pa-3">
+						<MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="() => userInterface.SetAttackAction(HumanPlayer, ComputerPlayer, ArmorManager.ArmorType.LeftArm, RandomNumberSeed)">Left Arm</MudButton>
+					</MudPaper>
+					<MudPaper Class="pa-3">
+						<MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="() => userInterface.SetAttackAction(HumanPlayer, ComputerPlayer, ArmorManager.ArmorType.RightArm, RandomNumberSeed)">Right Arm</MudButton>
+					</MudPaper>
+					<MudPaper Class="pa-3">
+						<MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="() => userInterface.SetAttackAction(HumanPlayer, ComputerPlayer, ArmorManager.ArmorType.LeftLeg, RandomNumberSeed)">Left Leg</MudButton>
+					</MudPaper>
+					<MudPaper Class="pa-3">
+						<MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="() => userInterface.SetAttackAction(HumanPlayer, ComputerPlayer, ArmorManager.ArmorType.RightLeg, RandomNumberSeed)">Right Leg</MudButton>
+					</MudPaper>
+				</div>
+
+			</MudStack>
+		}
+	}
+</div>
+
+
+
+@code {
+
+	public Random RandomNumberSeed = new Random();
+	MarineManager ComputerPlayer = new MarineManager();
+	public StatsManager ComputerStats = new StatsManager();
+
+	[Parameter]
+	public string message { get; set; }
+	public List<string> statstatusArray;
+	public List<string> armorStatusArray;
+
+
+	public bool fireStatusButtonEnable = false;
+	public bool combatStatusButtonEnable { get; set; } = false;
+	public bool playerTurn = false;
+
+	public bool headValue = false;
+	public bool torsoValue = false;
+
+
+
+	public ArmorManager.ArmorPieces fireTarget;
+
+	public void CombatStatusButtonHandler()
+	{
+		if(combatStatusButtonEnable == false)
+		{
+			combatStatusButtonEnable = true;
+		} else if (combatStatusButtonEnable == true)
+		{
+			combatStatusButtonEnable = false;
+		}
+	}
+
+
+	public void FireButtonHandler()
+	{
+		if(fireStatusButtonEnable == false)
+		{
+			fireStatusButtonEnable = true;
+		} else if (fireStatusButtonEnable == true)
+		{
+			fireStatusButtonEnable = false;
+		}
+	}
+
+	protected override void OnInitialized()
+	{
+		FieldManager battleField = new();
+
+		StatsManager.CharacterPrimaryStats computerPrimaryStats = new();
+		StatsManager.CharacterSecondaryStats computerSecondaryStats = new();
+
+		HumanPlayer.SetCharacterLocation();
+
+		userInterface.SetPrimaryStats(ComputerPlayer, computerPrimaryStats);
+		userInterface.SetSecondaryStats(computerSecondaryStats, ComputerPlayer);
+
+		var computerStatArray = ComputerPrimaryStatManager.RandomStatsArray(RandomNumberSeed);
+
+		ComputerPrimaryStatManager.AssignIndividualComputerStats(ComputerPrimaryStatManager.MainStats.Strength, computerStatArray, ComputerPlayer);
+		ComputerPrimaryStatManager.AssignIndividualComputerStats(ComputerPrimaryStatManager.MainStats.Agility, computerStatArray, ComputerPlayer);
+		ComputerPrimaryStatManager.AssignIndividualComputerStats(ComputerPrimaryStatManager.MainStats.Resilience, computerStatArray, ComputerPlayer);
+		ComputerPrimaryStatManager.AssignIndividualComputerStats(ComputerPrimaryStatManager.MainStats.Perception, computerStatArray, ComputerPlayer);
+
+		userInterface.SetEquipWeapon(ComputerPlayer, new WeaponsManager.MainWeapons.BoltRifle());
+		ComputerPlayer.CharacterArmor.ResilienceToArmor(ComputerPlayer);
+		ComputerPlayer.SetCharacterLocation();
+
+		base.OnInitialized();
+	}
+
+}
