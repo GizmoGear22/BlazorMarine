@@ -51,7 +51,7 @@ namespace ArmoredMarineV2.Managers
 			}
 			public static List<string> ListCombatStats(IMarine HumanPlayer)
 			{
-				List<string> ShownCombatStats = new List<string>();
+				List<string> ShownCombatStats = new();
 
 				var Health = HumanPlayer.SecondaryStats.Health;
 				var Accuracy = HumanPlayer.SecondaryStats.Accuracy;

@@ -53,23 +53,33 @@
 						<MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="() => userInterface.SetAttackAction(HumanPlayer, ComputerPlayer, ArmorManager.ArmorType.Head, RandomNumberSeed)">Head</MudButton>
 					</MudPaper>
 					<MudPaper Class="pa-3">
-						<MudButton Variant="Variant.Filled" Color="Color.Primary" @bind-Value="torsoValue">Torso</MudButton>
+						<MudButton Variant="Variant.Filled" Color="Color.Primary" @bind-Value="torsoValue" @onclick="() => userInterface.SetAttackAction(HumanPlayer, ComputerPlayer, ArmorManager.ArmorType.Torso, RandomNumberSeed)">Torso</MudButton>
 					</MudPaper>
 					<MudPaper Class="pa-3">
-						<MudButton Variant="Variant.Filled" Color="Color.Primary">Left Pauldron</MudButton>
+						<MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="() => userInterface.SetAttackAction(HumanPlayer, ComputerPlayer, ArmorManager.ArmorType.LeftPauldron, RandomNumberSeed)">Left Pauldron</MudButton>
+					</MudPaper>
+					<MudPaper Class="pa-3">
+						<MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="() => userInterface.SetAttackAction(HumanPlayer, ComputerPlayer, ArmorManager.ArmorType.RightPauldron, RandomNumberSeed)">Right Pauldron</MudButton>
+					</MudPaper>
+					<MudPaper Class="pa-3">
+						<MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="() => userInterface.SetAttackAction(HumanPlayer, ComputerPlayer, ArmorManager.ArmorType.LeftArm, RandomNumberSeed)">Left Arm</MudButton>
+					</MudPaper>
+					<MudPaper Class="pa-3">
+						<MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="() => userInterface.SetAttackAction(HumanPlayer, ComputerPlayer, ArmorManager.ArmorType.RightArm, RandomNumberSeed)">Right Arm</MudButton>
+					</MudPaper>
+					<MudPaper Class="pa-3">
+						<MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="() => userInterface.SetAttackAction(HumanPlayer, ComputerPlayer, ArmorManager.ArmorType.LeftLeg, RandomNumberSeed)">Left Leg</MudButton>
+					</MudPaper>
+					<MudPaper Class="pa-3">
+						<MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="() => userInterface.SetAttackAction(HumanPlayer, ComputerPlayer, ArmorManager.ArmorType.RightLeg, RandomNumberSeed)">Right Leg</MudButton>
 					</MudPaper>
 				</div>
 
 			</MudStack>
 		}
-
-
-		<p>@headValue</p>
 	}
 </div>
-<div>
-	<p>@HumanPlayer.CharacterLocation</p>
-</div>
+
 
 
 @code {

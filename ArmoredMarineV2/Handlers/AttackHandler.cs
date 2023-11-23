@@ -8,7 +8,7 @@ namespace ArmoredMarineV2.Handlers
 
 		public static void AttackTarget(IMarine shooter, IMarine opponent, ArmorManager.ArmorType type, Random randomNumberSeed)
 		{
-			var rangeAdjuster = AttackHandler.RangeAccuracyAdjuster(shooter, opponent);
+			var rangeAdjuster = RangeAccuracyAdjuster(shooter, opponent);
 			SecondaryStatsHandler.AccuracyCalculation(shooter, opponent, type, rangeAdjuster);
 			shooter.CurrentlyEquippedWeapon.DamageDealt(shooter, opponent, randomNumberSeed, type);
 		}
@@ -16,7 +16,7 @@ namespace ArmoredMarineV2.Handlers
 		public static double RangeAccuracyAdjuster(IMarine player, IMarine computer)
 		{
 			var range = FieldManager.DistanceBetweenCharacters(player, computer);
-			double RangeAimAdjust = (range + 30) / (2 * range);
+			double RangeAimAdjust = (range + 30.0) / (2.0 * range);
 			return RangeAimAdjust;
 		}
 		public static double ArmorTargetAccuracyHandler(ArmorManager.ArmorType type, IMarine opponent)

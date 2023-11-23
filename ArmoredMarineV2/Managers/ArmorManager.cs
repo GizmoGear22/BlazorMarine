@@ -26,14 +26,14 @@ namespace ArmoredMarineV2.Managers
             {
                 ArmorList = new List<ArmorPieces>
                 {
-                new ArmorPieces {Name = "Head", ArmorValue = 0.6, AccuracyModifier = 0.6},
-                new ArmorPieces {Name = "Torso", ArmorValue = 1.3, AccuracyModifier = 1.2},
-                new ArmorPieces {Name = "LeftPauldron", ArmorValue = 1.1, AccuracyModifier = 1},
-                new ArmorPieces {Name = "RightPauldron", ArmorValue = 1.1, AccuracyModifier= 1},
-                new ArmorPieces {Name = "LeftArm", ArmorValue = 0.8, AccuracyModifier = 0.8},
-                new ArmorPieces {Name = "RightArm", ArmorValue = 0.8, AccuracyModifier = 0.8},
-                new ArmorPieces {Name = "LeftLeg", ArmorValue = 0.8, AccuracyModifier = 0.8},
-                new ArmorPieces {Name = "RightLeg", ArmorValue = 0.8, AccuracyModifier = 0.8}
+                new() {Name = "Head", ArmorValue = 0.6, AccuracyModifier = 0.6},
+                new() {Name = "Torso", ArmorValue = 1.3, AccuracyModifier = 1.2},
+				new()  {Name = "LeftPauldron", ArmorValue = 1.1, AccuracyModifier = 1},
+				new()  {Name = "RightPauldron", ArmorValue = 1.1, AccuracyModifier= 1},
+				new()  {Name = "LeftArm", ArmorValue = 0.8, AccuracyModifier = 0.8},
+				new()  {Name = "RightArm", ArmorValue = 0.8, AccuracyModifier = 0.8},
+				new()  {Name = "LeftLeg", ArmorValue = 0.8, AccuracyModifier = 0.8},
+				new()  {Name = "RightLeg", ArmorValue = 0.8, AccuracyModifier = 0.8}
                 };
             }
          
@@ -49,7 +49,7 @@ namespace ArmoredMarineV2.Managers
 
             public List<string> ArmorStats(IMarine player)
             {
-				List<string> ShownArmorStats = new List<string>();
+				List<string> ShownArmorStats = new();
 				var ArmorList = player.CharacterArmor.ArmorList;
 				foreach (var armor in ArmorList)
 				{
