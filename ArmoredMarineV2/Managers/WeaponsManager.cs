@@ -24,7 +24,6 @@ namespace ArmoredMarineV2.Managers
 
                 public void DamageDealt(IMarine attacker, IMarine opponent, Random randomNumberSeed, ArmorManager.ArmorType type)
                 {
-                    string message = "";
                     int armorDamage = 0;
                     int healthDamage = 0;
                     var currentArmorValue = opponent.CharacterArmor.ArmorList.Where(x => x.Name == type.ToString()).Select(x => x.ArmorValue).Single();
@@ -44,7 +43,6 @@ namespace ArmoredMarineV2.Managers
                         }
                         attacker.CurrentlyEquippedWeapon.Ammo -= 1;
                     }
-                    message = $"{armorDamage} was done to armor, {healthDamage} was done to health";
                 }
             }
             public class AutoBoltRifle : IMainWeapons, IWeapons
