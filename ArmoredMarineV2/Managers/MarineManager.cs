@@ -34,5 +34,17 @@ namespace ArmoredMarineV2.Managers
 		{
             CharacterLocation = new FieldManager.CharacterLocation(50, 50);
 		}
+
+        public void EquipWeapon(IMarine shooter, IWeapons weapon)
+        {
+			CurrentlyEquippedWeapon = weapon;
+            SecondaryStats.AccuracyCalculation(shooter);           
+		}
+
+        public void ChangeLocation()
+        {
+            CharacterLocation.XLocation -= SecondaryStats.MovementDistance;
+        }
+
 	}
 }

@@ -6,6 +6,13 @@ namespace ArmoredMarineV2.Handlers
 	public class AttackHandler
 	{
 
+		public static void AttackTarget(IMarine shooter, IMarine opponent, ArmorManager.ArmorType type, Random randomNumberSeed)
+		{
+			var rangeAdjuster = AttackHandler.RangeAccuracyAdjuster(shooter, opponent);
+			SecondaryStatsHandler.AccuracyCalculation(shooter, opponent, type, rangeAdjuster);
+			shooter.CurrentlyEquippedWeapon.DamageDealt(shooter, opponent, randomNumberSeed, type);
+		}
+
 		public static double RangeAccuracyAdjuster(IMarine player, IMarine computer)
 		{
 			var range = FieldManager.DistanceBetweenCharacters(player, computer);

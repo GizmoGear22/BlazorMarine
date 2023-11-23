@@ -16,5 +16,7 @@ namespace ArmoredMarineV2.Interfaces
         public void ReduceArmor(IMarine attacker, ArmorManager.ArmorType type);
         public void ReduceHealth(IMarine attacker);
         public void SetCharacterLocation();
+        public void EquipWeapon(IMarine shooter, IWeapons weapon);
+        public void ChangeLocation();
     }
 }

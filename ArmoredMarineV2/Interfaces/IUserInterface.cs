@@ -7,18 +7,17 @@ namespace ArmoredMarineV2.Interfaces
     {
 		StatsManager GetPrimaryStats();
         StatsManager GetSecondaryStats();
-        void SetPrimaryStats(StatsManager.CharacterPrimaryStats stats, IMarine player);
-        void SetSecondaryStats(StatsManager.CharacterSecondaryStats stats, IMarine player);
+        void SetPrimaryStats(IMarine humanPlayer, StatsManager.CharacterPrimaryStats newStats);
+        void SetSecondaryStats(StatsManager.CharacterSecondaryStats stats, IMarine HumanPlayer);
         IMarine SetMainWeapon(IMarine player, IMainWeapons weapon);
         IMarine SetSecondaryWeapon();
         IMarine SetMeleeWeapon();
         void SetEquipWeapon(IMarine player, IWeapons weapon);
-        void SetEquipWeapon(IMarine player, IMarine opponent, IWeapons weapon);
-        void SetAttackAction(IMarine attacker, IMarine defender, ArmorManager.ArmorType type, Random randomNumberSeed);
+        void SetAttackAction(IMarine shooter, IMarine opponent, ArmorManager.ArmorType type, Random randomNumberSeed);
         CombatResults GetCombatResults();
         List<string> GetCombatStats(IMarine HumanPlayer);
         List<string> GetArmorStats(IMarine HumanPlayer);
-        void ChangeLocation(IMarine player);
+        void SetNewLocation(IMarine player);
     }
 
 

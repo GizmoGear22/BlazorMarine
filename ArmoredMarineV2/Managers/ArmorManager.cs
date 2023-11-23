@@ -47,6 +47,18 @@ namespace ArmoredMarineV2.Managers
 
             }
 
+            public List<string> ArmorStats(IMarine player)
+            {
+				List<string> ShownArmorStats = new List<string>();
+				var ArmorList = player.CharacterArmor.ArmorList;
+				foreach (var armor in ArmorList)
+				{
+					ShownArmorStats.Add($"{armor.Name}: {armor.ArmorValue}");
+				}
+
+				return ShownArmorStats;
+			}
+
         }
         public class ArmorPieces : IArmor
         {

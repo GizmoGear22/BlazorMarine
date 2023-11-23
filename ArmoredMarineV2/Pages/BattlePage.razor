@@ -16,7 +16,7 @@
 			<MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="FireButtonHandler">Fire</MudButton>
 		</MudPaper>
 		<MudPaper Class="pa-3">
-			<MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="() => userInterface.ChangeLocation(HumanPlayer)">Move</MudButton>
+			<MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="() => userInterface.SetNewLocation(HumanPlayer)">Move</MudButton>
 		</MudPaper>
 		<MudPaper Class="pa-3">
 			<MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="() => CombatStatusButtonHandler()">Status</MudButton>
@@ -127,7 +127,7 @@
 
 		HumanPlayer.SetCharacterLocation();
 
-		userInterface.SetPrimaryStats(computerPrimaryStats, ComputerPlayer);
+		userInterface.SetPrimaryStats(ComputerPlayer, computerPrimaryStats);
 		userInterface.SetSecondaryStats(computerSecondaryStats, ComputerPlayer);
 
 		var computerStatArray = ComputerPrimaryStatManager.RandomStatsArray(RandomNumberSeed);
