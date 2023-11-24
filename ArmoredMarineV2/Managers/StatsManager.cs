@@ -66,7 +66,7 @@ namespace ArmoredMarineV2.Managers
 			}
 			public void StartingStatAccuracyCalculation(IMarine Shooter, double Upgrade = 1)
             {
-                var PerceptionBonus = (2 * Shooter.PrimaryStats.Perception) / (2 * Shooter.PrimaryStats.Perception + 5);
+                var PerceptionBonus = (2.0 * Shooter.PrimaryStats.Perception) / (2.0 * Shooter.PrimaryStats.Perception + 5.0);
                 var Aim = PerceptionBonus * Shooter.CurrentlyEquippedWeapon.Accuracy * Upgrade * 100;
 
                 Accuracy = Aim;
