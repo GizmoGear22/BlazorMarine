@@ -38,7 +38,7 @@ namespace ArmoredMarineV2.Managers
         public void EquipWeapon(IMarine shooter, IWeapons weapon)
         {
 			CurrentlyEquippedWeapon = weapon;
-            SecondaryStats.AccuracyCalculation(shooter);           
+            SecondaryStats.StartingStatAccuracyCalculation(shooter);           
 		}
 
         public void ChangeLocation()
