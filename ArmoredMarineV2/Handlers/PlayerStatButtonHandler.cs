@@ -3,7 +3,7 @@ using ArmoredMarineV2.Managers;
 
 namespace ArmoredMarineV2.Handlers
 {
-	public class PlayerStatDistributionHandler
+	public class PlayerStatButtonHandler
 	{
 		public static int ChangeAttributeNumberFromStrength(StatsManager.CharacterPrimaryStats stats, StatsManager.CharacterSecondaryStats secStats, ref int originalStrength)
 		{

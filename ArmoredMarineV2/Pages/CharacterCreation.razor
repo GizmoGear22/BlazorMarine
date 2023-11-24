@@ -18,17 +18,17 @@
         <MudPaper Class="pa-4">
             <MudForm @ref="form" @bind-IsValid="@success" @bind-Errors="@errors" >
                 <MudNumericField T="int" Label="Strength" @bind-Value="stats.Strength" Min="1"
-                oninput="@(Handlers.PlayerStatDistributionHandler.ChangeAttributeNumberFromStrength(stats, secStats, ref originalStrength))"
+                oninput="@(Handlers.PlayerStatButtonHandler.ChangeAttributeNumberFromStrength(stats, secStats, ref originalStrength))"
                   />
                 
                 <MudNumericField T="int" Label="Agility" @bind-Value="stats.Agility" Min="1"
-                 oninput="@(Handlers.PlayerStatDistributionHandler.ChangeAttributeNumberFromAgility(stats, secStats, ref originalAgility))" />
+                                 oninput="@(Handlers.PlayerStatButtonHandler.ChangeAttributeNumberFromAgility(stats, secStats, ref originalAgility))" />
 
                 <MudNumericField T="int" Label="Resilience" @bind-Value="stats.Resilience" Min="1"
-                oninput="@(Handlers.PlayerStatDistributionHandler.ChangeAttributeNumberFromResilience(stats, secStats, ref originalResilience))"/>
+                                 oninput="@(Handlers.PlayerStatButtonHandler.ChangeAttributeNumberFromResilience(stats, secStats, ref originalResilience))" />
 
                 <MudNumericField T="int" Label="Perception" @bind-Value="stats.Perception" Min="1"
-                oninput="@((Handlers.PlayerStatDistributionHandler.ChangeAttributeNumberFromPerception(stats, secStats, ref originalPerception)))" />
+                                 oninput="@((Handlers.PlayerStatButtonHandler.ChangeAttributeNumberFromPerception(stats, secStats, ref originalPerception)))" />
                 
 
             </MudForm>
@@ -52,7 +52,7 @@
     </MudItem>
 </MudGrid>
 
-<h3>Stat Points: @(Handlers.PlayerStatDistributionHandler.GetAttributePoints(secStats))</h3>
+<h3>Stat Points: @(Handlers.PlayerStatButtonHandler.GetAttributePoints(secStats))</h3>
 
 
 @code {
