@@ -65,5 +65,9 @@ namespace ArmoredMarineV2.Handlers
             originalAgility = NewAgility;
             return secStats.AttributePoints;
         }
-	}
+        public static int GetAttributePoints(StatsManager.CharacterSecondaryStats secStats)
+        {
+            return secStats.AttributePoints;
+        }
+    }
 }

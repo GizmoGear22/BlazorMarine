@@ -52,7 +52,7 @@
     </MudItem>
 </MudGrid>
 
-<h3>Stat Points: @(GetAttributePoints())</h3>
+<h3>Stat Points: @(Handlers.PlayerStatDistributionHandler.GetAttributePoints(secStats))</h3>
 
 
 @code {
@@ -60,10 +60,7 @@
     private int originalAgility = stats.Agility;
     private int originalResilience = stats.Resilience;
     private int originalPerception = stats.Perception;
-    private int GetAttributePoints()
-    {
-        return secStats.AttributePoints;
-    }
+
 
 
     [Inject]
