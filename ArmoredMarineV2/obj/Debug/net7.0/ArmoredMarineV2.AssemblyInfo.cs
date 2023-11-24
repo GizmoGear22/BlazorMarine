@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ArmoredMarineV2")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c02f8082e4e2ed98065ce91e9164ada0eb739716")]
 [assembly: System.Reflection.AssemblyProductAttribute("ArmoredMarineV2")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ArmoredMarineV2")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

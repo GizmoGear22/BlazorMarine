@@ -53,9 +53,9 @@ namespace ArmoredMarineV2.Managers
             throw new NotImplementedException();
         }
 
-        public void SetPrimaryStats(IMarine humanPlayer, StatsManager.CharacterPrimaryStats newStats)
+        public StatsManager.CharacterPrimaryStats SetPrimaryStats(IMarine humanPlayer, StatsManager.CharacterPrimaryStats newStats)
         {
-            StatsManager.CharacterPrimaryStats.PrimaryStatAllocation(humanPlayer, newStats);
+            return StatsManager.CharacterPrimaryStats.PrimaryStatAllocation(humanPlayer, newStats);
         }
 
         public void SetSecondaryStats(StatsManager.CharacterSecondaryStats stats, IMarine HumanPlayer)

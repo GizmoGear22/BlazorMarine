@@ -15,7 +15,7 @@ namespace ArmoredMarineV2.Managers
             public int Perception { get; set; } = 1;
 
 
-            public static void PrimaryStatAllocation(IMarine HumanPlayer, CharacterPrimaryStats newStats)
+            public static CharacterPrimaryStats PrimaryStatAllocation(IMarine HumanPlayer, CharacterPrimaryStats newStats)
 			{
 				HumanPlayer.PrimaryStats = new CharacterPrimaryStats
 				{
@@ -24,6 +24,7 @@ namespace ArmoredMarineV2.Managers
 					Perception = newStats.Perception,
 					Resilience = newStats.Resilience
 				};
+                return HumanPlayer.PrimaryStats;
 
 			}
 

@@ -79,6 +79,9 @@
 		}
 	}
 </div>
+<div>
+	<h4>@ComputerPlayer.CharacterArmor.ArmorList.Where(x => x.Name == "Head").Select(x => x.ArmorValue).Single()</h4>
+</div>
 
 
 
@@ -97,6 +100,9 @@
 	public bool fireStatusButtonEnable = false;
 	public bool combatStatusButtonEnable { get; set; } = false;
 	public bool playerTurn = false;
+
+	private bool isInitialized = false;
+
 
 
 	public ArmorManager.ArmorPieces fireTarget;
