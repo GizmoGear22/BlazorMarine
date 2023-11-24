@@ -18,17 +18,17 @@
         <MudPaper Class="pa-4">
             <MudForm @ref="form" @bind-IsValid="@success" @bind-Errors="@errors" >
                 <MudNumericField T="int" Label="Strength" @bind-Value="stats.Strength" Min="1"
-                oninput="@(AddAttributes())"
+                oninput="@(Handlers.PlayerStatDistributionHandler.ChangeAttributeNumberFromStrength(stats, secStats, ref originalStrength))"
                   />
                 
                 <MudNumericField T="int" Label="Agility" @bind-Value="stats.Agility" Min="1"
-                 oninput="@(ChangeAttributeNumberFromAgility())" />
+                 oninput="@(Handlers.PlayerStatDistributionHandler.ChangeAttributeNumberFromAgility(stats, secStats, ref originalAgility))" />
 
                 <MudNumericField T="int" Label="Resilience" @bind-Value="stats.Resilience" Min="1"
-                oninput="@(ChangeAttributeNumberFromResilience())"/>
+                oninput="@(Handlers.PlayerStatDistributionHandler.ChangeAttributeNumberFromResilience(stats, secStats, ref originalResilience))"/>
 
                 <MudNumericField T="int" Label="Perception" @bind-Value="stats.Perception" Min="1"
-                oninput="@(ChangeAttributeNumberFromPerception())" />
+                oninput="@((Handlers.PlayerStatDistributionHandler.ChangeAttributeNumberFromPerception(stats, secStats, ref originalPerception)))" />
                 
 
             </MudForm>
@@ -68,8 +68,6 @@
 
     [Inject]
     private NavigationManager NavigationManager { get; set; }
-    [Inject]
-    private Handlers.PlayerStatDistributionHandler characterStatDistribution { get; set; }
 
 
     bool success;
@@ -78,70 +76,6 @@
 
     bool isValid;
 
-        /*private int ChangeAttributeNumberFromStrength()
-        { 
-        int NewStrength = stats.Strength;
-            if (originalStrength < NewStrength)
-        {
-        secStats.AttributePoints -= 1;
-        } 
-        else if (originalStrength > NewStrength)
-            {
-            secStats.AttributePoints += 1;
-        }
-        originalStrength = NewStrength;
-        return secStats.AttributePoints;
-    }*/
-
-    private int AddAttributes()
-    {
-        return secStats.AttributePoints = characterStatDistribution.ChangeAttributeNumberFromStrength(stats, secStats, originalStrength);
-    }
-
-    private int ChangeAttributeNumberFromAgility()
-    {
-        int NewAgility = stats.Agility;
-        if (originalAgility < NewAgility)
-        {
-            secStats.AttributePoints -= 1;
-        }
-        else if (originalAgility > NewAgility)
-        {
-            secStats.AttributePoints += 1;
-        }
-        originalAgility = NewAgility;
-        return secStats.AttributePoints;
-    }
-
-    private int ChangeAttributeNumberFromResilience()
-    {
-        int NewResilience = stats.Resilience;
-        if (originalResilience < NewResilience)
-        {
-            secStats.AttributePoints -= 1;
-        }
-        else if (originalResilience > NewResilience)
-        {
-            secStats.AttributePoints += 1;
-        }
-        originalResilience = NewResilience;
-        return secStats.AttributePoints;
-    }
-
-    private int ChangeAttributeNumberFromPerception()
-    {
-        int NewPerception = stats.Perception;
-        if (originalPerception < NewPerception)
-        {
-            secStats.AttributePoints -= 1;
-        }
-        else if (originalPerception > NewPerception)
-        {
-            secStats.AttributePoints += 1;
-        }
-        originalPerception = NewPerception;
-        return secStats.AttributePoints;
-    }
 
     public void SubmitForm()
     {

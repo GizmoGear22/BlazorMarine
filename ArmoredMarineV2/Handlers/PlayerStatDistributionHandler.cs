@@ -3,9 +3,9 @@ using ArmoredMarineV2.Managers;
 
 namespace ArmoredMarineV2.Handlers
 {
-	public class PlayerStatDistributionHandler : ICharacterStatDistribution
+	public class PlayerStatDistributionHandler
 	{
-		public int ChangeAttributeNumberFromStrength(StatsManager.CharacterPrimaryStats stats, StatsManager.CharacterSecondaryStats secStats, int originalStrength)
+		public static int ChangeAttributeNumberFromStrength(StatsManager.CharacterPrimaryStats stats, StatsManager.CharacterSecondaryStats secStats, ref int originalStrength)
 		{
 
 			int NewStrength = stats.Strength;
@@ -21,19 +21,49 @@ namespace ArmoredMarineV2.Handlers
 			return secStats.AttributePoints;
 		}
 
-		public int ChangeAttributeNumberFromPerception()
+		public static int ChangeAttributeNumberFromPerception(StatsManager.CharacterPrimaryStats stats, StatsManager.CharacterSecondaryStats secStats, ref int originalPerception)
 		{
-			throw new NotImplementedException();
-		}
+            int NewPerception = stats.Perception;
+            if (originalPerception < NewPerception)
+            {
+                secStats.AttributePoints -= 1;
+            }
+            else if (originalPerception > NewPerception)
+            {
+                secStats.AttributePoints += 1;
+            }
+            originalPerception = NewPerception;
+            return secStats.AttributePoints;
+        }
 
-		public int ChangeAttributeNumberFromResilience()
+		public static int ChangeAttributeNumberFromResilience(StatsManager.CharacterPrimaryStats stats, StatsManager.CharacterSecondaryStats secStats, ref int originalResilience)
 		{
-			throw new NotImplementedException();
-		}
+            int NewResilience = stats.Resilience;
+            if (originalResilience < NewResilience)
+            {
+                secStats.AttributePoints -= 1;
+            }
+            else if (originalResilience > NewResilience)
+            {
+                secStats.AttributePoints += 1;
+            }
+            originalResilience = NewResilience;
+            return secStats.AttributePoints;
+        }
 
-		public int ChangeAttributeNumberFromAgility()
+		public static int ChangeAttributeNumberFromAgility(StatsManager.CharacterPrimaryStats stats, StatsManager.CharacterSecondaryStats secStats, ref int originalAgility)
 		{
-			throw new NotImplementedException();
-		}
+            int NewAgility = stats.Agility;
+            if (originalAgility < NewAgility)
+            {
+                secStats.AttributePoints -= 1;
+            }
+            else if (originalAgility > NewAgility)
+            {
+                secStats.AttributePoints += 1;
+            }
+            originalAgility = NewAgility;
+            return secStats.AttributePoints;
+        }
 	}
 }
