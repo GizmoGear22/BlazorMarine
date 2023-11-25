@@ -42,7 +42,7 @@ namespace ArmoredMarineV2.Managers
             {
                 foreach (ArmorPieces piece in marine.CharacterArmor.ArmorList)
                 {
-                    piece.ArmorValue = piece.ArmorValue * marine.PrimaryStats.Resilience * 10;
+                    piece.ArmorValue = Math.Floor(piece.ArmorValue * marine.PrimaryStats.Resilience * 10);
                 }
 
             }

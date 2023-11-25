@@ -24,8 +24,8 @@ namespace ArmoredMarineV2.Managers
 
                 public void DamageDealt(IMarine attacker, IMarine opponent, Random randomNumberSeed, ArmorManager.ArmorType type)
                 {
-                    int armorDamage = 0;
-                    int healthDamage = 0;
+                    double armorDamage = 0.0;
+                    double healthDamage = 0.0;
                     var currentArmorValue = opponent.CharacterArmor.ArmorList.Where(x => x.Name == type.ToString()).Select(x => x.ArmorValue).Single();
                     for (int i = 0; i <= attacker.CurrentlyEquippedWeapon.ShotsPerRound; i++)
                     {

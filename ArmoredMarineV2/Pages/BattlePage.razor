@@ -7,6 +7,12 @@
 
 <h3>BattlePage</h3>
 
+@code {
+	public Random RandomNumberSeed = new Random();
+	MarineManager ComputerPlayer = new MarineManager();
+	public StatsManager ComputerStats = new StatsManager();
+}
+
 <MudStack Class="container">
 	<div class="d-flex justify-content-center mt-auto">
 		@{
@@ -20,6 +26,9 @@
 		</MudPaper>
 		<MudPaper Class="pa-3">
 			<MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="() => CombatStatusButtonHandler()">Status</MudButton>
+		</MudPaper>
+		<MudPaper Class="pa-3">
+			<MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="() => ComputerPlayer.ReduceArmor(HumanPlayer, ArmorManager.ArmorType.Head)">ReduceArmorTest</MudButton>
 		</MudPaper>
 	</div>
 
@@ -80,16 +89,20 @@
 	}
 </div>
 <div>
-	<h4>@ComputerPlayer.CharacterArmor.ArmorList.Where(x => x.Name == "Head").Select(x => x.ArmorValue).Single()</h4>
+	@{
+		var armorStats = userInterface.GetArmorStats(ComputerPlayer);
+		foreach(var item in armorStats)
+		{
+			<h4>@item</h4>
+		}
+	}
 </div>
 
 
 
 @code {
 
-	public Random RandomNumberSeed = new Random();
-	MarineManager ComputerPlayer = new MarineManager();
-	public StatsManager ComputerStats = new StatsManager();
+
 
 	[Parameter]
 	public string message { get; set; }

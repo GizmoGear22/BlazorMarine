@@ -37,7 +37,7 @@ namespace ArmoredMarineV2.Managers
             public int MovementDistance { get; set; }
             public int Credits { get; set; }
             public int AttributePoints { get; set; } = 30;
-            public int Health { get; set; } = 100;
+            public double Health { get; set; } = 100.0;
 
             public void SecondaryStatAllocation(IMarine HumanPlayer, CharacterSecondaryStats stats)
             {
