@@ -51,7 +51,7 @@ namespace ArmoredMarineV2.Managers
 					targetAccuracyModifier = opponent.CharacterArmor.ArmorList.Where(x => x.Name == "RightArm").Select(x => x.AccuracyModifier).Single();
 					break;
 				case ArmorManager.ArmorType.LeftLeg:
-					targetAccuracyModifier = opponent.CharacterArmor.ArmorList.Where(x => x.Name == "LeftLet").Select(x => x.AccuracyModifier).Single();
+					targetAccuracyModifier = opponent.CharacterArmor.ArmorList.Where(x => x.Name == "LeftLeg").Select(x => x.AccuracyModifier).Single();
 					break;
 				case ArmorManager.ArmorType.RightLeg:
 					targetAccuracyModifier = opponent.CharacterArmor.ArmorList.Where(x => x.Name == "RightLeg").Select(x => x.AccuracyModifier).Single();
