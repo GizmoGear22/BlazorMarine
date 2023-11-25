@@ -26,7 +26,7 @@ namespace ArmoredMarineV2.Managers
             armorValue = Convert.ToInt32(armorValue);
             armorValue -= attacker.CurrentlyEquippedWeapon.Damage; //problem is here. LINQ is ready-only. Have to find a way to change value another way.*/
 
-            switch (type)
+            switch (type) //Is there a way to do this with LINQ for readability?
             {
                 case ArmorManager.ArmorType.Head:
                     CharacterArmor.ArmorList[0].ArmorValue -= attacker.CurrentlyEquippedWeapon.Damage;

@@ -39,7 +39,7 @@ namespace ArmoredMarineV2.Managers
             public int AttributePoints { get; set; } = 30;
             public double Health { get; set; } = 100.0;
 
-            public void SecondaryStatAllocation(IMarine HumanPlayer, CharacterSecondaryStats stats)
+            public static CharacterSecondaryStats SecondaryStatAllocation(IMarine HumanPlayer, CharacterSecondaryStats stats)
             {
 				HumanPlayer.SecondaryStats = new CharacterSecondaryStats
 				{
@@ -49,6 +49,7 @@ namespace ArmoredMarineV2.Managers
 					Accuracy = stats.Accuracy,
 					Weight = stats.Weight
 				};
+                return HumanPlayer.SecondaryStats;
 			}
 			public static List<string> ListCombatStats(IMarine HumanPlayer)
 			{

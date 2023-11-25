@@ -58,9 +58,9 @@ namespace ArmoredMarineV2.Managers
             return StatsManager.CharacterPrimaryStats.PrimaryStatAllocation(humanPlayer, newStats);
         }
 
-        public void SetSecondaryStats(StatsManager.CharacterSecondaryStats stats, IMarine HumanPlayer)
+        public StatsManager.CharacterSecondaryStats SetSecondaryStats(StatsManager.CharacterSecondaryStats stats, IMarine HumanPlayer)
         {
-            stats.SecondaryStatAllocation(HumanPlayer, stats);
+            return StatsManager.CharacterSecondaryStats.SecondaryStatAllocation(HumanPlayer, stats);
         }
 
         public IMarine SetSecondaryWeapon()

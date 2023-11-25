@@ -37,7 +37,7 @@ namespace ArmoredMarineV2.Managers
                             armorDamage += attacker.CurrentlyEquippedWeapon.Damage;
                         } else if (confirmedHit < shotHitChance && currentArmorValue <= 0)
                         {
-                            switch (type)
+                            switch (type) //Is there a way to do this with LINQ for readability?
                             {
                                 case ArmorManager.ArmorType.Head:
                                     opponent.CharacterArmor.ArmorList[0].ArmorValue = 0; break;
