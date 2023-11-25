@@ -59,13 +59,18 @@ namespace ArmoredMarineV2.Managers
 				return ShownArmorStats;
 			}
 
+            
+
         }
         public class ArmorPieces : IArmor
         {
             public string Name { get; set; }
             public double ArmorValue { get; set; }
             public double AccuracyModifier { get; set; }
+
+			
         }
+
     }
 }
 

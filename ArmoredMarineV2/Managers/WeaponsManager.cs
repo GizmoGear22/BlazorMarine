@@ -37,7 +37,25 @@ namespace ArmoredMarineV2.Managers
                             armorDamage += attacker.CurrentlyEquippedWeapon.Damage;
                         } else if (confirmedHit < shotHitChance && currentArmorValue <= 0)
                         {
-                            currentArmorValue = 0;
+                            switch (type)
+                            {
+                                case ArmorManager.ArmorType.Head:
+                                    opponent.CharacterArmor.ArmorList[0].ArmorValue = 0; break;
+								case ArmorManager.ArmorType.Torso:
+									opponent.CharacterArmor.ArmorList[1].ArmorValue = 0; break;
+								case ArmorManager.ArmorType.LeftPauldron:
+									opponent.CharacterArmor.ArmorList[2].ArmorValue = 0; break;
+								case ArmorManager.ArmorType.RightPauldron:
+									opponent.CharacterArmor.ArmorList[3].ArmorValue = 0; break;
+								case ArmorManager.ArmorType.LeftArm:
+									opponent.CharacterArmor.ArmorList[4].ArmorValue = 0; break;
+								case ArmorManager.ArmorType.RightArm:
+									opponent.CharacterArmor.ArmorList[5].ArmorValue = 0; break;
+								case ArmorManager.ArmorType.LeftLeg:
+									opponent.CharacterArmor.ArmorList[6].ArmorValue = 0; break;
+								case ArmorManager.ArmorType.RightLeg:
+									opponent.CharacterArmor.ArmorList[7].ArmorValue = 0; break;
+							}
                             opponent.ReduceHealth(attacker);
                             healthDamage += attacker.CurrentlyEquippedWeapon.Damage;
                         }
