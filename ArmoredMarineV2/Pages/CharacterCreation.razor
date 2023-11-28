@@ -4,32 +4,29 @@
 @using MudBlazor;
 @inject IUserInterface userInterface;
 @inject IMarine HumanPlayer;
+@inject Handlers.PlayerStatButtonHandler playerStatButtonHandler;
 
 
 <h3>CharacterCreation</h3>
 
-@code {
-    public static StatsManager.CharacterPrimaryStats stats = new();
-    public static StatsManager.CharacterSecondaryStats secStats = new();
-}
 
 <MudGrid>
     <MudItem xs="12" sm="7">
         <MudPaper Class="pa-4">
             <MudForm @ref="form" @bind-IsValid="@success" @bind-Errors="@errors" >
-                <MudNumericField T="int" Label="Strength" @bind-Value="stats.Strength" Min="1"
-                oninput="@(Handlers.PlayerStatButtonHandler.ChangeAttributeNumberFromStrength(stats, secStats, ref originalStrength))"
+                <MudNumericField T="int" Label="Strength" @bind-Value="HumanPlayer.PrimaryStats.Strength" Min="1"
+                oninput="@(playerStatButtonHandler.ChangeAttributeNumberFromStrength())"
                   />
-                
-                <MudNumericField T="int" Label="Agility" @bind-Value="stats.Agility" Min="1"
-                oninput="@(Handlers.PlayerStatButtonHandler.ChangeAttributeNumberFromAgility(stats, secStats, ref originalAgility))" />
 
-                <MudNumericField T="int" Label="Resilience" @bind-Value="stats.Resilience" Min="1"
-                 oninput="@(Handlers.PlayerStatButtonHandler.ChangeAttributeNumberFromResilience(stats, secStats, ref originalResilience))" />
+                <MudNumericField T="int" Label="Agility" @bind-Value="HumanPlayer.PrimaryStats.Agility" Min="1"
+                oninput="@(playerStatButtonHandler.ChangeAttributeNumberFromAgility())" />
 
-                <MudNumericField T="int" Label="Perception" @bind-Value="stats.Perception" Min="1"
-                 oninput="@((Handlers.PlayerStatButtonHandler.ChangeAttributeNumberFromPerception(stats, secStats, ref originalPerception)))" />
-                
+                <MudNumericField T="int" Label="Resilience" @bind-Value="HumanPlayer.PrimaryStats.Resilience" Min="1"
+                 oninput="@(playerStatButtonHandler.ChangeAttributeNumberFromResilience())" />
+
+                <MudNumericField T="int" Label="Perception" @bind-Value="HumanPlayer.PrimaryStats.Perception" Min="1"
+                 oninput="@(playerStatButtonHandler.ChangeAttributeNumberFromPerception())" />
+
 
             </MudForm>
         </MudPaper>
@@ -52,16 +49,10 @@
     </MudItem>
 </MudGrid>
 
-<h3>Stat Points: @(Handlers.PlayerStatButtonHandler.GetAttributePoints(secStats))</h3>
+<h3>Stat Points: @(playerStatButtonHandler.GetAttributePoints(HumanPlayer))</h3>
 
 
 @code {
-    private int originalStrength = stats.Strength;
-    private int originalAgility = stats.Agility;
-    private int originalResilience = stats.Resilience;
-    private int originalPerception = stats.Perception;
-
-
 
     [Inject]
     private NavigationManager NavigationManager { get; set; }
@@ -76,7 +67,7 @@
 
     public void SubmitForm()
     {
-        if (stats.Strength < 1 || stats.Agility < 1 || stats.Perception < 1 || stats.Resilience < 1 || secStats.AttributePoints < 0)
+        if (HumanPlayer.PrimaryStats.Strength < 1 || HumanPlayer.PrimaryStats.Agility < 1 || HumanPlayer.PrimaryStats.Perception < 1 || HumanPlayer.PrimaryStats.Resilience < 1 || HumanPlayer.SecondaryStats.AttributePoints < 0)
         {
             isValid = false;
         } else
@@ -85,15 +76,14 @@
         }
         if (isValid == true)
         {
-            userInterface.SetPrimaryStats(HumanPlayer, stats);
-            userInterface.SetSecondaryStats(secStats, HumanPlayer);
+
             HumanPlayer.CharacterArmor.ResilienceToArmor(HumanPlayer);
 
             HumanPlayer.SecondaryStats.WeightCalculation(HumanPlayer.CharacterArmor.ArmorList);
             HumanPlayer.SecondaryStats.PossibleMovementDistance(HumanPlayer);
 
             userInterface.SetEquipWeapon(HumanPlayer, new WeaponsManager.MainWeapons.BoltRifle());
-            secStats.StartingStatAccuracyCalculation(HumanPlayer);
+            StatsManager.CharacterSecondaryStats.StartingStatAccuracyCalculation(HumanPlayer);
             
 
 			NavigationManager.NavigateTo("./BattlePage");
@@ -103,6 +93,5 @@
 
 
     }
-
 
 }

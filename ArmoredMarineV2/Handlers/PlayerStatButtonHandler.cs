@@ -5,69 +5,47 @@ namespace ArmoredMarineV2.Handlers
 {
 	public class PlayerStatButtonHandler
 	{
-		public static int ChangeAttributeNumberFromStrength(StatsManager.CharacterPrimaryStats stats, StatsManager.CharacterSecondaryStats secStats, ref int originalStrength)
-		{
-
-			int NewStrength = stats.Strength;
-			if (originalStrength < NewStrength)
-			{
-				secStats.AttributePoints -= 1;
-			}
-			else if (originalStrength > NewStrength)
-			{
-				secStats.AttributePoints += 1;
-			}
-			originalStrength = NewStrength;
-			return secStats.AttributePoints;
-		}
-
-		public static int ChangeAttributeNumberFromPerception(StatsManager.CharacterPrimaryStats stats, StatsManager.CharacterSecondaryStats secStats, ref int originalPerception)
-		{
-            int NewPerception = stats.Perception;
-            if (originalPerception < NewPerception)
-            {
-                secStats.AttributePoints -= 1;
-            }
-            else if (originalPerception > NewPerception)
-            {
-                secStats.AttributePoints += 1;
-            }
-            originalPerception = NewPerception;
-            return secStats.AttributePoints;
-        }
-
-		public static int ChangeAttributeNumberFromResilience(StatsManager.CharacterPrimaryStats stats, StatsManager.CharacterSecondaryStats secStats, ref int originalResilience)
-		{
-            int NewResilience = stats.Resilience;
-            if (originalResilience < NewResilience)
-            {
-                secStats.AttributePoints -= 1;
-            }
-            else if (originalResilience > NewResilience)
-            {
-                secStats.AttributePoints += 1;
-            }
-            originalResilience = NewResilience;
-            return secStats.AttributePoints;
-        }
-
-		public static int ChangeAttributeNumberFromAgility(StatsManager.CharacterPrimaryStats stats, StatsManager.CharacterSecondaryStats secStats, ref int originalAgility)
-		{
-            int NewAgility = stats.Agility;
-            if (originalAgility < NewAgility)
-            {
-                secStats.AttributePoints -= 1;
-            }
-            else if (originalAgility > NewAgility)
-            {
-                secStats.AttributePoints += 1;
-            }
-            originalAgility = NewAgility;
-            return secStats.AttributePoints;
-        }
-        public static int GetAttributePoints(StatsManager.CharacterSecondaryStats secStats)
+        public readonly IMarine _humanPlayer;
+            public PlayerStatButtonHandler(IMarine HumanPlayer)
         {
-            return secStats.AttributePoints;
+            _humanPlayer = HumanPlayer;
+        }
+
+        
+        public int ChangeAttributeNumberFromStrength()
+        {
+            var strengthDifference = _humanPlayer.PrimaryStats.Strength - 1;
+            _humanPlayer.SecondaryStats.AttributePoints = _humanPlayer.SecondaryStats.MaxAttributePoints - strengthDifference;
+
+            return _humanPlayer.SecondaryStats.AttributePoints;
+        }
+
+		public int ChangeAttributeNumberFromPerception()
+		{
+            var perceptionDifference = _humanPlayer.PrimaryStats.Perception - 1;
+            _humanPlayer.SecondaryStats.AttributePoints = _humanPlayer.SecondaryStats.MaxAttributePoints - perceptionDifference;
+
+            return _humanPlayer.SecondaryStats.AttributePoints;
+        }
+
+		public int ChangeAttributeNumberFromResilience()
+		{
+            var resilienceDifference = _humanPlayer.PrimaryStats.Resilience - 1;
+            _humanPlayer.SecondaryStats.AttributePoints = _humanPlayer.SecondaryStats.MaxAttributePoints - resilienceDifference;
+
+            return _humanPlayer.SecondaryStats.AttributePoints;
+        }
+
+		public int ChangeAttributeNumberFromAgility()
+		{
+            var agilityDifference = _humanPlayer.PrimaryStats.Agility - 1;
+            _humanPlayer.SecondaryStats.AttributePoints = _humanPlayer.SecondaryStats.MaxAttributePoints - agilityDifference;
+
+            return _humanPlayer.SecondaryStats.AttributePoints;
+        }
+        public int GetAttributePoints(IMarine player)
+        {
+            return player.SecondaryStats.AttributePoints;
         }
     }
 }

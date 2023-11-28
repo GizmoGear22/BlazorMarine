@@ -37,6 +37,7 @@ namespace ArmoredMarineV2.Managers
             public int MovementDistance { get; set; }
             public int Credits { get; set; }
             public int AttributePoints { get; set; } = 30;
+            public int MaxAttributePoints { get; } = 30;
             public double Health { get; set; } = 100.0;
 
             public static CharacterSecondaryStats SecondaryStatAllocation(IMarine HumanPlayer, CharacterSecondaryStats stats)
@@ -66,12 +67,12 @@ namespace ArmoredMarineV2.Managers
 
 				return ShownCombatStats;
 			}
-			public void StartingStatAccuracyCalculation(IMarine Shooter, double Upgrade = 1)
+			public static void StartingStatAccuracyCalculation(IMarine Shooter, double Upgrade = 1)
             {
                 var PerceptionBonus = (2.0 * Shooter.PrimaryStats.Perception) / (2.0 * Shooter.PrimaryStats.Perception + 5.0);
                 var Aim = PerceptionBonus * Shooter.CurrentlyEquippedWeapon.Accuracy * Upgrade * 100;
 
-                Accuracy = Aim;
+                Shooter.SecondaryStats.Accuracy = Aim;
             }
 
 			public void WeightCalculation(List<ArmorManager.ArmorPieces> List) //Will need to make a pattern for this. Having to do overloads here

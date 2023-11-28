@@ -17,6 +17,8 @@ namespace ArmoredMarineV2.Managers
 		public MarineManager()
         {
             CharacterArmor = new ArmorManager.ArmorSet();
+            PrimaryStats = new StatsManager.CharacterPrimaryStats();
+            SecondaryStats = new StatsManager.CharacterSecondaryStats();
         }
 		
         public void ReduceArmor(IMarine attacker, ArmorManager.ArmorType type)
@@ -68,7 +70,7 @@ namespace ArmoredMarineV2.Managers
         public void EquipWeapon(IMarine shooter, IWeapons weapon)
         {
 			CurrentlyEquippedWeapon = weapon;
-            SecondaryStats.StartingStatAccuracyCalculation(shooter);           
+            StatsManager.CharacterSecondaryStats.StartingStatAccuracyCalculation(shooter);           
 		}
 
         public void ChangeLocation()
