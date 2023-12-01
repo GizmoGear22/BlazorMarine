@@ -1,25 +1,43 @@
-﻿using ArmoredMarineV2.Interfaces;
+﻿using System.Security.Cryptography.X509Certificates;
+using ArmoredMarineV2.Interfaces;
 using ArmoredMarineV2.Managers;
+using Microsoft.AspNetCore.Components;
+using MudBlazor;
 
 namespace ArmoredMarineV2.Handlers
 {
 	public class PlayerStatButtonHandler
 	{
-        public readonly IMarine _humanPlayer;
-            public PlayerStatButtonHandler(IMarine HumanPlayer)
+        
+        private readonly IMarine _humanPlayer;
+
+        public PlayerStatButtonHandler(IMarine HumanPlayer)
         {
             _humanPlayer = HumanPlayer;
         }
 
-        
-        public int ChangeAttributeNumberFromStrength()
+        public int SetStrengthStat()
         {
-            var strengthDifference = _humanPlayer.PrimaryStats.Strength - 1;
-            _humanPlayer.SecondaryStats.AttributePoints = _humanPlayer.SecondaryStats.MaxAttributePoints - strengthDifference;
-
-            return _humanPlayer.SecondaryStats.AttributePoints;
+            return _humanPlayer.PrimaryStats.Strength;
         }
+         
+        public int ChangeAttributeNumberFromStrength(ref int initialStrength)
+         {
+            var strengthValue = _humanPlayer.PrimaryStats.Strength;
+            if (initialStrength < strengthValue)
+            {
+                _humanPlayer.SecondaryStats.AttributePoints -= 1;
 
+            } else
+            {
+                _humanPlayer.SecondaryStats.AttributePoints += 1;
+            }
+            return _humanPlayer.SecondaryStats.AttributePoints;
+
+            /*var strengthDifference = _humanPlayer.PrimaryStats.Strength - 1;
+            _humanPlayer.SecondaryStats.AttributePoints = _humanPlayer.SecondaryStats.MaxAttributePoints - strengthDifference;*/
+        }
+        
 		public int ChangeAttributeNumberFromPerception()
 		{
             var perceptionDifference = _humanPlayer.PrimaryStats.Perception - 1;
@@ -43,9 +61,10 @@ namespace ArmoredMarineV2.Handlers
 
             return _humanPlayer.SecondaryStats.AttributePoints;
         }
-        public int GetAttributePoints(IMarine player)
+        
+        public int GetAttributePoints()
         {
-            return player.SecondaryStats.AttributePoints;
+            return _humanPlayer.SecondaryStats.AttributePoints;
         }
     }
 }

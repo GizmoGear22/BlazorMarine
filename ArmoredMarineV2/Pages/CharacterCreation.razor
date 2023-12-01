@@ -14,18 +14,20 @@
     <MudItem xs="12" sm="7">
         <MudPaper Class="pa-4">
             <MudForm @ref="form" @bind-IsValid="@success" @bind-Errors="@errors" >
-                <MudNumericField T="int" Label="Strength" @bind-Value="HumanPlayer.PrimaryStats.Strength" Min="1"
-                oninput="@(playerStatButtonHandler.ChangeAttributeNumberFromStrength())"
-                  />
 
-                <MudNumericField T="int" Label="Agility" @bind-Value="HumanPlayer.PrimaryStats.Agility" Min="1"
-                oninput="@(playerStatButtonHandler.ChangeAttributeNumberFromAgility())" />
+				<MudNumericField T="int" Label="Strength" @bind-Value="HumanPlayer.PrimaryStats.Strength" Min="1"
+								 oninput="@(playerStatButtonHandler.ChangeAttributeNumberFromStrength(ref initialStrength))" />
 
-                <MudNumericField T="int" Label="Resilience" @bind-Value="HumanPlayer.PrimaryStats.Resilience" Min="1"
-                 oninput="@(playerStatButtonHandler.ChangeAttributeNumberFromResilience())" />
+				<MudNumericField T="int" Label="Agility" @bind-Value="HumanPlayer.PrimaryStats.Agility" Min="1"
+								 oninput="@(playerStatButtonHandler.ChangeAttributeNumberFromAgility())" />
 
-                <MudNumericField T="int" Label="Perception" @bind-Value="HumanPlayer.PrimaryStats.Perception" Min="1"
-                 oninput="@(playerStatButtonHandler.ChangeAttributeNumberFromPerception())" />
+				<MudNumericField T="int" Label="Resilience" @bind-Value="HumanPlayer.PrimaryStats.Resilience" Min="1"
+								 oninput="@(playerStatButtonHandler.ChangeAttributeNumberFromResilience())" />
+
+				<MudNumericField T="int" Label="Perception" @bind-Value="HumanPlayer.PrimaryStats.Perception" Min="1"
+								 oninput="@(playerStatButtonHandler.ChangeAttributeNumberFromPerception())" />
+
+
 
 
             </MudForm>
@@ -33,7 +35,7 @@
         <MudPaper Class="pa-4 mt-4">
             <MudButton Variant="Variant.Filled" Color="Color.Primary" DisableElevation="true" OnClick="@(() => form.Validate())">Validate</MudButton>
             <MudButton Variant="Variant.Filled" Color="Color.Secondary" DisableElevation="true" OnClick="@(() => form.ResetAsync())" Class="mx-2">Reset</MudButton>
-            <MudButton Variant="Variant.Filled" DisableElevation="true" OnClick="@(() => form.ResetValidation())">Reset Validation</MudButton>
+            <MudButton Variant="Variant.Filled" Color="Color.Secondary" DisableElevation="true" OnClick="@(async () => await form.ResetAsync())" Class="mx-2">Reset</MudButton>
             <MudButton Variant="Variant.Filled" Color="Color.Primary" DisableElevation="true" OnClick="@SubmitForm">Submit</MudButton>
 
         </MudPaper>
@@ -49,7 +51,7 @@
     </MudItem>
 </MudGrid>
 
-<h3>Stat Points: @(playerStatButtonHandler.GetAttributePoints(HumanPlayer))</h3>
+<h3>Stat Points: @(playerStatButtonHandler.GetAttributePoints())</h3>
 
 
 @code {
@@ -57,13 +59,20 @@
     [Inject]
     private NavigationManager NavigationManager { get; set; }
 
-
     bool success;
     string[] errors = { };
     MudForm form;
 
     bool isValid;
 
+    public int initialStrength;
+
+    protected override void OnInitialized()
+    {
+       initialStrength = playerStatButtonHandler.SetStrengthStat();
+
+        base.OnInitialized();
+    }
 
     public void SubmitForm()
     {
