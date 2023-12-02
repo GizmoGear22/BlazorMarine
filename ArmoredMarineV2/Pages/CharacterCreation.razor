@@ -4,7 +4,10 @@
 @using MudBlazor;
 @inject IUserInterface userInterface;
 @inject IMarine HumanPlayer;
-@inject Handlers.StrengthStatButtonHandler playerStatButtonHandler;
+@inject Handlers.StrengthStatButtonHandler playerStrengthButtonHandler;
+@inject Handlers.AgilityStatButtonHandler playerAgilityButtonHandler;
+@inject Handlers.ResilienceStatButtonHandler playerResilienceButtonHandler;
+@inject Handlers.PerceptionStatButtonHandler playerPerceptionButtonHandler;
 
 
 <h3>CharacterCreation</h3>
@@ -16,21 +19,17 @@
             <MudForm @ref="form" @bind-IsValid="@success" @bind-Errors="@errors" >
 
 
-				<!--				<MudNumericField T="int" Label="Agility" @bind-Value="HumanPlayer.PrimaryStats.Agility" Min="1"
-												 oninput="@(playerStatButtonHandler.ChangeAttributeNumberFromAgility())" />
+				<MudNumericField T="int" Label="Agility" @bind-Value="HumanPlayer.PrimaryStats.Agility" Min="1"
+								 oninput="@(playerAgilityButtonHandler.ChangeAttributeNumberFromAgility(ref initialAgility))" />
 
-								<MudNumericField T="int" Label="Resilience" @bind-Value="HumanPlayer.PrimaryStats.Resilience" Min="1"
-												 oninput="@(playerStatButtonHandler.ChangeAttributeNumberFromResilience())" />
+				<MudNumericField T="int" Label="Resilience" @bind-Value="HumanPlayer.PrimaryStats.Resilience" Min="1"
+								 oninput="@(playerResilienceButtonHandler.ChangeAttributeNumberFromResilience(ref initialResilience))" />
 
-								<MudNumericField T="int" Label="Perception" @bind-Value="HumanPlayer.PrimaryStats.Perception" Min="1"
-												 oninput="@(playerStatButtonHandler.ChangeAttributeNumberFromPerception())" />-->
+				<MudNumericField T="int" Label="Perception" @bind-Value="HumanPlayer.PrimaryStats.Perception" Min="1"
+								 oninput="@(playerPerceptionButtonHandler.ChangeAttributeNumberFromSPerception(ref initialPerception))" />
 
-
-                <MudNumericField T="int" Label="Strength" @bind-Value="HumanPlayer.PrimaryStats.Strength" Min="1"
-                                 oninput="@(playerStatButtonHandler.ChangeAttributeNumberFromStrength(ref initialStrength))" />
-
-
-
+				<MudNumericField T="int" Label="Strength" @bind-Value="HumanPlayer.PrimaryStats.Strength" Min="1"
+								 oninput="@(playerStrengthButtonHandler.ChangeAttributeNumberFromStrength(ref initialStrength))"  /> 
 
             </MudForm>
         </MudPaper>
@@ -53,7 +52,7 @@
     </MudItem>
 </MudGrid>
 
-<h3>Stat Points: @(playerStatButtonHandler.GetAttributePoints())</h3>
+<h3>Stat Points: @(HumanPlayer.SecondaryStats.AttributePoints)</h3>
 
 
 @code {
@@ -68,9 +67,16 @@
     bool isValid;
 
     public int initialStrength;
+    public int initialAgility;
+    public int initialResilience;
+    public int initialPerception;
+
     protected override void OnInitialized()
     {
-        initialStrength = playerStatButtonHandler.SetStrengthStat();
+        initialStrength = playerStrengthButtonHandler.SetStrengthStat();
+        initialAgility = playerAgilityButtonHandler.SetAgilityStat();
+        initialResilience = playerResilienceButtonHandler.SetResilienceStat();
+        initialPerception = playerPerceptionButtonHandler.SetPerceptionStat();
 
         base.OnInitialized();
     }

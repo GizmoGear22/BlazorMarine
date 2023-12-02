@@ -6,15 +6,10 @@ using MudBlazor;
 
 namespace ArmoredMarineV2.Handlers
 {
-	public class StrengthStatButtonHandler
-	{
+	public class StrengthStatButtonHandler(IMarine HumanPlayer)
+    {
         
-        private readonly IMarine _humanPlayer;
-
-        public StrengthStatButtonHandler(IMarine HumanPlayer)
-        {
-            _humanPlayer = HumanPlayer;
-        }
+        private readonly IMarine _humanPlayer = HumanPlayer;
 
         public int SetStrengthStat()
         {
@@ -35,25 +30,7 @@ namespace ArmoredMarineV2.Handlers
             initialStrength = strengthValue;
             return _humanPlayer.SecondaryStats.AttributePoints;
 
-            /*var strengthDifference = _humanPlayer.PrimaryStats.Strength - 1;
-            _humanPlayer.SecondaryStats.AttributePoints = _humanPlayer.SecondaryStats.MaxAttributePoints - strengthDifference;*/
-        }
-        
-
-
-
-
-		public int ChangeAttributeNumberFromAgility()
-		{
-            var agilityDifference = _humanPlayer.PrimaryStats.Agility - 1;
-            _humanPlayer.SecondaryStats.AttributePoints = _humanPlayer.SecondaryStats.MaxAttributePoints - agilityDifference;
-
-            return _humanPlayer.SecondaryStats.AttributePoints;
-        }
-        
-        public int GetAttributePoints()
-        {
-            return _humanPlayer.SecondaryStats.AttributePoints;
-        }
+        }        
+       
     }
 }
