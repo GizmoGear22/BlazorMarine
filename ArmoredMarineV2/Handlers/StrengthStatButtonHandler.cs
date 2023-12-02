@@ -6,12 +6,12 @@ using MudBlazor;
 
 namespace ArmoredMarineV2.Handlers
 {
-	public class PlayerStatButtonHandler
+	public class StrengthStatButtonHandler
 	{
         
         private readonly IMarine _humanPlayer;
 
-        public PlayerStatButtonHandler(IMarine HumanPlayer)
+        public StrengthStatButtonHandler(IMarine HumanPlayer)
         {
             _humanPlayer = HumanPlayer;
         }
@@ -20,7 +20,7 @@ namespace ArmoredMarineV2.Handlers
         {
             return _humanPlayer.PrimaryStats.Strength;
         }
-         
+
         public int ChangeAttributeNumberFromStrength(ref int initialStrength)
          {
             var strengthValue = _humanPlayer.PrimaryStats.Strength;
@@ -28,31 +28,20 @@ namespace ArmoredMarineV2.Handlers
             {
                 _humanPlayer.SecondaryStats.AttributePoints -= 1;
 
-            } else
+            } else if (initialStrength > strengthValue)
             {
                 _humanPlayer.SecondaryStats.AttributePoints += 1;
             }
+            initialStrength = strengthValue;
             return _humanPlayer.SecondaryStats.AttributePoints;
 
             /*var strengthDifference = _humanPlayer.PrimaryStats.Strength - 1;
             _humanPlayer.SecondaryStats.AttributePoints = _humanPlayer.SecondaryStats.MaxAttributePoints - strengthDifference;*/
         }
         
-		public int ChangeAttributeNumberFromPerception()
-		{
-            var perceptionDifference = _humanPlayer.PrimaryStats.Perception - 1;
-            _humanPlayer.SecondaryStats.AttributePoints = _humanPlayer.SecondaryStats.MaxAttributePoints - perceptionDifference;
 
-            return _humanPlayer.SecondaryStats.AttributePoints;
-        }
 
-		public int ChangeAttributeNumberFromResilience()
-		{
-            var resilienceDifference = _humanPlayer.PrimaryStats.Resilience - 1;
-            _humanPlayer.SecondaryStats.AttributePoints = _humanPlayer.SecondaryStats.MaxAttributePoints - resilienceDifference;
 
-            return _humanPlayer.SecondaryStats.AttributePoints;
-        }
 
 		public int ChangeAttributeNumberFromAgility()
 		{

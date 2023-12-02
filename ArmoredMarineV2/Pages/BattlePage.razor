@@ -105,8 +105,6 @@
 
 
 
-	[Parameter]
-	public string message { get; set; }
 	public List<string> statstatusArray;
 	public List<string> armorStatusArray;
 
@@ -164,7 +162,7 @@
 		ComputerPrimaryStatManager.AssignIndividualComputerStats(ComputerPrimaryStatManager.MainStats.Perception, computerStatArray, ComputerPlayer);
 
 		userInterface.SetEquipWeapon(ComputerPlayer, new WeaponsManager.MainWeapons.BoltRifle());
-		ComputerPlayer.CharacterArmor.ResilienceToArmor(ComputerPlayer);
+		ComputerPlayer.ResilienceToArmor();
 		ComputerPlayer.SetCharacterLocation();
 
 		base.OnInitialized();

@@ -18,5 +18,6 @@ namespace ArmoredMarineV2.Interfaces
         public void SetCharacterLocation();
         public void EquipWeapon(IMarine shooter, IWeapons weapon);
         public void ChangeLocation();
+        public void ResilienceToArmor();
     }
 }

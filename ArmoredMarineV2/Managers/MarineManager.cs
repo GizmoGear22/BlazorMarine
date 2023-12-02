@@ -1,5 +1,6 @@
 ﻿using System.Net.NetworkInformation;
 using ArmoredMarineV2.Interfaces;
+using static ArmoredMarineV2.Managers.ArmorManager;
 
 namespace ArmoredMarineV2.Managers
 {
@@ -78,5 +79,15 @@ namespace ArmoredMarineV2.Managers
             CharacterLocation.XLocation -= SecondaryStats.MovementDistance;
         }
 
-	}
+        public void ResilienceToArmor()
+
+        {
+            foreach (ArmorPieces piece in CharacterArmor.ArmorList)
+            {
+                piece.ArmorValue = Math.Floor(piece.ArmorValue * PrimaryStats.Resilience * 10);
+            }
+
+        }
+
+    }
 }

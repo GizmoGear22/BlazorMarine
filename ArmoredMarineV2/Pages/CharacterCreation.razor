@@ -4,7 +4,7 @@
 @using MudBlazor;
 @inject IUserInterface userInterface;
 @inject IMarine HumanPlayer;
-@inject Handlers.PlayerStatButtonHandler playerStatButtonHandler;
+@inject Handlers.StrengthStatButtonHandler playerStatButtonHandler;
 
 
 <h3>CharacterCreation</h3>
@@ -15,17 +15,19 @@
         <MudPaper Class="pa-4">
             <MudForm @ref="form" @bind-IsValid="@success" @bind-Errors="@errors" >
 
-				<MudNumericField T="int" Label="Strength" @bind-Value="HumanPlayer.PrimaryStats.Strength" Min="1"
-								 oninput="@(playerStatButtonHandler.ChangeAttributeNumberFromStrength(ref initialStrength))" />
 
-				<MudNumericField T="int" Label="Agility" @bind-Value="HumanPlayer.PrimaryStats.Agility" Min="1"
-								 oninput="@(playerStatButtonHandler.ChangeAttributeNumberFromAgility())" />
+				<!--				<MudNumericField T="int" Label="Agility" @bind-Value="HumanPlayer.PrimaryStats.Agility" Min="1"
+												 oninput="@(playerStatButtonHandler.ChangeAttributeNumberFromAgility())" />
 
-				<MudNumericField T="int" Label="Resilience" @bind-Value="HumanPlayer.PrimaryStats.Resilience" Min="1"
-								 oninput="@(playerStatButtonHandler.ChangeAttributeNumberFromResilience())" />
+								<MudNumericField T="int" Label="Resilience" @bind-Value="HumanPlayer.PrimaryStats.Resilience" Min="1"
+												 oninput="@(playerStatButtonHandler.ChangeAttributeNumberFromResilience())" />
 
-				<MudNumericField T="int" Label="Perception" @bind-Value="HumanPlayer.PrimaryStats.Perception" Min="1"
-								 oninput="@(playerStatButtonHandler.ChangeAttributeNumberFromPerception())" />
+								<MudNumericField T="int" Label="Perception" @bind-Value="HumanPlayer.PrimaryStats.Perception" Min="1"
+												 oninput="@(playerStatButtonHandler.ChangeAttributeNumberFromPerception())" />-->
+
+
+                <MudNumericField T="int" Label="Strength" @bind-Value="HumanPlayer.PrimaryStats.Strength" Min="1"
+                                 oninput="@(playerStatButtonHandler.ChangeAttributeNumberFromStrength(ref initialStrength))" />
 
 
 
@@ -66,10 +68,9 @@
     bool isValid;
 
     public int initialStrength;
-
     protected override void OnInitialized()
     {
-       initialStrength = playerStatButtonHandler.SetStrengthStat();
+        initialStrength = playerStatButtonHandler.SetStrengthStat();
 
         base.OnInitialized();
     }
@@ -86,7 +87,7 @@
         if (isValid == true)
         {
 
-            HumanPlayer.CharacterArmor.ResilienceToArmor(HumanPlayer);
+            HumanPlayer.ResilienceToArmor();
 
             HumanPlayer.SecondaryStats.WeightCalculation(HumanPlayer.CharacterArmor.ArmorList);
             HumanPlayer.SecondaryStats.PossibleMovementDistance(HumanPlayer);
