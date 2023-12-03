@@ -23,8 +23,8 @@ namespace ArmoredMarineV2.Managers
 		{
 			var ArmorTargetAccuracy = ArmorTargetAccuracyHandler(target, opponent);
 			var PerceptionBonus = (2.0 * Shooter.PrimaryStats.Perception) / (2.0 * Shooter.PrimaryStats.Perception + 5.0);
-			var Aim = PerceptionBonus * Shooter.CurrentlyEquippedWeapon.Accuracy * Upgrade * Range * ArmorTargetAccuracy * 100.0;
-			Shooter.SecondaryStats.Accuracy = Aim;
+			var TotalAccuracy = PerceptionBonus * Shooter.CurrentlyEquippedWeapon.Accuracy * Upgrade * Range * ArmorTargetAccuracy * 100.0;
+			Shooter.SecondaryStats.Accuracy = TotalAccuracy;
 		}
 		public static double ArmorTargetAccuracyHandler(ArmorManager.ArmorType type, IMarine opponent)
 		{
