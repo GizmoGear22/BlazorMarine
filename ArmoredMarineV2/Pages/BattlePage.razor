@@ -19,13 +19,13 @@
 
 		}
 		<MudPaper Class="pa-3">
-			<MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="FireButtonHandler">Fire</MudButton>
+			<MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="() => Handlers.CombatButtonHandler.CombatButtonSwitch(ref fireStatusButtonEnable)">Fire</MudButton>
 		</MudPaper>
 		<MudPaper Class="pa-3">
 			<MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="() => userInterface.SetNewLocation(HumanPlayer)">Move</MudButton>
 		</MudPaper>
 		<MudPaper Class="pa-3">
-			<MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="() => CombatStatusButtonHandler()">Status</MudButton>
+			<MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="() => Handlers.CombatButtonHandler.CombatButtonSwitch(ref combatStatusButtonEnable)">Status</MudButton>
 		</MudPaper>
 		<MudPaper Class="pa-3">
 			<MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="() => ComputerPlayer.ReduceArmor(HumanPlayer, ArmorManager.ArmorType.Head)">ReduceArmorTest</MudButton>
@@ -110,37 +110,12 @@
 
 
 	public bool fireStatusButtonEnable = false;
-	public bool combatStatusButtonEnable { get; set; } = false;
+	public bool combatStatusButtonEnable = false;
 	public bool playerTurn = false;
 
 	private bool isInitialized = false;
 
 
-
-	public ArmorManager.ArmorPieces fireTarget;
-
-	public void CombatStatusButtonHandler()
-	{
-		if(combatStatusButtonEnable == false)
-		{
-			combatStatusButtonEnable = true;
-		} else if (combatStatusButtonEnable == true)
-		{
-			combatStatusButtonEnable = false;
-		}
-	}
-
-
-	public void FireButtonHandler()
-	{
-		if(fireStatusButtonEnable == false)
-		{
-			fireStatusButtonEnable = true;
-		} else if (fireStatusButtonEnable == true)
-		{
-			fireStatusButtonEnable = false;
-		}
-	}
 
 	protected override void OnInitialized()
 	{
@@ -164,6 +139,8 @@
 		userInterface.SetEquipWeapon(ComputerPlayer, new WeaponsManager.MainWeapons.BoltRifle());
 		ComputerPlayer.ResilienceToArmor();
 		ComputerPlayer.SetCharacterLocation();
+
+		bool whoGoesFirst = Managers.BattleManager.GoFirst(RandomNumberSeed);
 
 		base.OnInitialized();
 	}

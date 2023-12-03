@@ -27,7 +27,7 @@ namespace ArmoredMarineV2.Handlers
             {
                 _humanPlayer.SecondaryStats.AttributePoints += 1;
             }
-            initialStrength = strengthValue;
+            initialStrength = _humanPlayer.PrimaryStats.Strength;
             return _humanPlayer.SecondaryStats.AttributePoints;
 
         }        
