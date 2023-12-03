@@ -56,57 +56,47 @@
 
 @code {
 
-    [Inject]
-    private NavigationManager NavigationManager { get; set; }
+	[Inject]
+	private NavigationManager NavigationManager { get; set; }
 
-    bool success;
-    string[] errors = { };
-    MudForm form;
+	bool success;
+	string[] errors = { };
+	MudForm form;
 
-    bool isValid;
+	bool isValid;
 
-    public int initialStrength;
-    public int initialAgility;
-    public int initialResilience;
-    public int initialPerception;
+	public int initialStrength;
+	public int initialAgility;
+	public int initialResilience;
+	public int initialPerception;
 
-    protected override void OnInitialized()
-    {
-        initialStrength = statButton.SetInitialStat(Handlers.StatButton.StatButtonType.Strength);
-        initialAgility = statButton.SetInitialStat(Handlers.StatButton.StatButtonType.Agility);
-        initialResilience = statButton.SetInitialStat(Handlers.StatButton.StatButtonType.Resilience);
-        initialPerception = statButton.SetInitialStat(Handlers.StatButton.StatButtonType.Perception);
+	protected override void OnInitialized()
+	{
+		initialStrength = statButton.SetInitialStat(Handlers.StatButton.StatButtonType.Strength);
+		initialAgility = statButton.SetInitialStat(Handlers.StatButton.StatButtonType.Agility);
+		initialResilience = statButton.SetInitialStat(Handlers.StatButton.StatButtonType.Resilience);
+		initialPerception = statButton.SetInitialStat(Handlers.StatButton.StatButtonType.Perception);
 
-        base.OnInitialized(); 
-    }
+		base.OnInitialized();
+	}
 
-    public void SubmitForm()
-    {
-        if (HumanPlayer.PrimaryStats.Strength < 1 || HumanPlayer.PrimaryStats.Agility < 1 || HumanPlayer.PrimaryStats.Perception < 1 || HumanPlayer.PrimaryStats.Resilience < 1 || HumanPlayer.SecondaryStats.AttributePoints < 0)
-        {
-            isValid = false;
-        } else
-        {
-            isValid = true;
-        }
-        if (isValid == true)
-        {
+	public void SubmitForm()
+	{
+		if (HumanPlayer.PrimaryStats.Strength >= 1 && HumanPlayer.PrimaryStats.Agility >= 1 && HumanPlayer.PrimaryStats.Perception >= 1 && HumanPlayer.PrimaryStats.Resilience >= 1 && HumanPlayer.SecondaryStats.AttributePoints >= 0)
+		{
+			HumanPlayer.ResilienceToArmor();
 
-            HumanPlayer.ResilienceToArmor();
+			HumanPlayer.SecondaryStats.WeightCalculation(HumanPlayer.CharacterArmor.ArmorList);
+			HumanPlayer.SecondaryStats.PossibleMovementDistance(HumanPlayer);
 
-            HumanPlayer.SecondaryStats.WeightCalculation(HumanPlayer.CharacterArmor.ArmorList);
-            HumanPlayer.SecondaryStats.PossibleMovementDistance(HumanPlayer);
+			userInterface.SetEquipWeapon(HumanPlayer, new WeaponsManager.MainWeapons.BoltRifle());
+			StatsManager.CharacterSecondaryStats.StartingStatAccuracyCalculation(HumanPlayer);
 
-            userInterface.SetEquipWeapon(HumanPlayer, new WeaponsManager.MainWeapons.BoltRifle());
-            StatsManager.CharacterSecondaryStats.StartingStatAccuracyCalculation(HumanPlayer);
-            
 
 			NavigationManager.NavigateTo("./BattlePage");
 		}
 
-    }
-
-
-    }
+	}
+}
 
 }
