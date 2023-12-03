@@ -26,7 +26,7 @@
 								 oninput="@(playerResilienceButtonHandler.ChangeAttributeNumberFromResilience(ref initialResilience))" />
 
 				<MudNumericField T="int" Label="Perception" @bind-Value="HumanPlayer.PrimaryStats.Perception" Min="1"
-								 oninput="@(playerPerceptionButtonHandler.ChangeAttributeNumberFromSPerception(ref initialPerception))" />
+								 oninput="@(playerPerceptionButtonHandler.ChangeAttributeNumberFromPerception(ref initialPerception))" />
 
 				<MudNumericField T="int" Label="Strength" @bind-Value="HumanPlayer.PrimaryStats.Strength" Min="1"
 								 oninput="@(playerStrengthButtonHandler.ChangeAttributeNumberFromStrength(ref initialStrength))"  /> 

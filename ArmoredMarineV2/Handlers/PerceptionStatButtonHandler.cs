@@ -11,7 +11,7 @@ namespace ArmoredMarineV2.Handlers
             return _humanPlayer.PrimaryStats.Perception;
         }
 
-        public int ChangeAttributeNumberFromSPerception(ref int initialPerception)
+        public int ChangeAttributeNumberFromPerception(ref int initialPerception)
         {
             var perceptionValue = _humanPlayer.PrimaryStats.Perception;
             if (initialPerception < perceptionValue)
