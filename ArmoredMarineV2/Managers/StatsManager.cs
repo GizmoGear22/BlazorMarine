@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using ArmoredMarineV2.Handlers;
+
 using ArmoredMarineV2.Interfaces;
 
 namespace ArmoredMarineV2.Managers
@@ -15,7 +15,7 @@ namespace ArmoredMarineV2.Managers
             public int Perception { get; set; } = 1;
 
 
-            public static void PrimaryStatAllocation(IMarine HumanPlayer, CharacterPrimaryStats newStats)
+            public static CharacterPrimaryStats PrimaryStatAllocation(IMarine HumanPlayer, CharacterPrimaryStats newStats)
 			{
 				HumanPlayer.PrimaryStats = new CharacterPrimaryStats
 				{
@@ -24,6 +24,7 @@ namespace ArmoredMarineV2.Managers
 					Perception = newStats.Perception,
 					Resilience = newStats.Resilience
 				};
+                return HumanPlayer.PrimaryStats;
 
 			}
 
@@ -36,9 +37,10 @@ namespace ArmoredMarineV2.Managers
             public int MovementDistance { get; set; }
             public int Credits { get; set; }
             public int AttributePoints { get; set; } = 30;
-            public int Health { get; set; } = 100;
+            public int MaxAttributePoints { get; } = 30;
+            public double Health { get; set; } = 100.0;
 
-            public void SecondaryStatAllocation(IMarine HumanPlayer, CharacterSecondaryStats stats)
+            public static CharacterSecondaryStats SecondaryStatAllocation(IMarine HumanPlayer, CharacterSecondaryStats stats)
             {
 				HumanPlayer.SecondaryStats = new CharacterSecondaryStats
 				{
@@ -48,10 +50,11 @@ namespace ArmoredMarineV2.Managers
 					Accuracy = stats.Accuracy,
 					Weight = stats.Weight
 				};
+                return HumanPlayer.SecondaryStats;
 			}
 			public static List<string> ListCombatStats(IMarine HumanPlayer)
 			{
-				List<string> ShownCombatStats = new();
+				List<string> ShownCombatStats = [];
 
 				var Health = HumanPlayer.SecondaryStats.Health;
 				var Accuracy = HumanPlayer.SecondaryStats.Accuracy;
@@ -64,20 +67,13 @@ namespace ArmoredMarineV2.Managers
 
 				return ShownCombatStats;
 			}
-			public void AccuracyCalculation(IMarine Shooter, double Upgrade = 1)
+			public static void StartingStatAccuracyCalculation(IMarine Shooter, double Upgrade = 1)
             {
-                var PerceptionBonus = (2 * Shooter.PrimaryStats.Perception) / (2 * Shooter.PrimaryStats.Perception + 5);
-                var Aim = PerceptionBonus * Shooter.CurrentlyEquippedWeapon.Accuracy * Upgrade;
+                var PerceptionBonus = (2.0 * Shooter.PrimaryStats.Perception) / (2.0 * Shooter.PrimaryStats.Perception + 5.0);
+                var Aim = PerceptionBonus * Shooter.CurrentlyEquippedWeapon.Accuracy * Upgrade * 100;
 
-                Accuracy = Aim;
+                Shooter.SecondaryStats.Accuracy = Aim;
             }
-			public void AccuracyCalculation(IMarine Shooter, IMarine opponent, ArmorManager.ArmorType target, double Range, double Upgrade = 1)
-			{
-                var targetAccuracy = AttackHandler.ArmorTargetAccuracyHandler(target, opponent);
-				var PerceptionBonus = (2 * Shooter.PrimaryStats.Perception) / (2 * Shooter.PrimaryStats.Perception + 5);
-                var Aim = PerceptionBonus * Shooter.CurrentlyEquippedWeapon.Accuracy * Upgrade * Range * targetAccuracy;
-				Accuracy = Aim;
-			}
 
 			public void WeightCalculation(List<ArmorManager.ArmorPieces> List) //Will need to make a pattern for this. Having to do overloads here
             {

@@ -1,5 +1,5 @@
 ﻿
-using ArmoredMarineV2.Handlers;
+
 using ArmoredMarineV2.Interfaces;
 using ArmoredMarineV2.Pages;
 using Microsoft.AspNetCore.Components;
@@ -35,7 +35,7 @@ namespace ArmoredMarineV2.Managers
 
         public void SetAttackAction(IMarine shooter, IMarine opponent, ArmorManager.ArmorType type, Random randomNumberSeed)
         {
-            AttackHandler.AttackTarget(shooter, opponent, type, randomNumberSeed);
+            AttackManager.AttackTarget(shooter, opponent, type, randomNumberSeed);
         }
 
         public void SetEquipWeapon(IMarine player, IWeapons weapon)
@@ -53,14 +53,14 @@ namespace ArmoredMarineV2.Managers
             throw new NotImplementedException();
         }
 
-        public void SetPrimaryStats(IMarine humanPlayer, StatsManager.CharacterPrimaryStats newStats)
+        public StatsManager.CharacterPrimaryStats SetPrimaryStats(IMarine humanPlayer, StatsManager.CharacterPrimaryStats newStats)
         {
-            StatsManager.CharacterPrimaryStats.PrimaryStatAllocation(humanPlayer, newStats);
+            return StatsManager.CharacterPrimaryStats.PrimaryStatAllocation(humanPlayer, newStats);
         }
 
-        public void SetSecondaryStats(StatsManager.CharacterSecondaryStats stats, IMarine HumanPlayer)
+        public StatsManager.CharacterSecondaryStats SetSecondaryStats(StatsManager.CharacterSecondaryStats stats, IMarine HumanPlayer)
         {
-            stats.SecondaryStatAllocation(HumanPlayer, stats);
+            return StatsManager.CharacterSecondaryStats.SecondaryStatAllocation(HumanPlayer, stats);
         }
 
         public IMarine SetSecondaryWeapon()

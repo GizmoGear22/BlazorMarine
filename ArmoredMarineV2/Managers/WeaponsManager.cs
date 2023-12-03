@@ -24,9 +24,8 @@ namespace ArmoredMarineV2.Managers
 
                 public void DamageDealt(IMarine attacker, IMarine opponent, Random randomNumberSeed, ArmorManager.ArmorType type)
                 {
-                    string message = "";
-                    int armorDamage = 0;
-                    int healthDamage = 0;
+                    double armorDamage = 0.0;
+                    double healthDamage = 0.0;
                     var currentArmorValue = opponent.CharacterArmor.ArmorList.Where(x => x.Name == type.ToString()).Select(x => x.ArmorValue).Single();
                     for (int i = 0; i <= attacker.CurrentlyEquippedWeapon.ShotsPerRound; i++)
                     {
@@ -38,13 +37,30 @@ namespace ArmoredMarineV2.Managers
                             armorDamage += attacker.CurrentlyEquippedWeapon.Damage;
                         } else if (confirmedHit < shotHitChance && currentArmorValue <= 0)
                         {
-                            currentArmorValue = 0;
+                            switch (type) //Is there a way to do this with LINQ for readability?
+                            {
+                                case ArmorManager.ArmorType.Head:
+                                    opponent.CharacterArmor.ArmorList[0].ArmorValue = 0; break;
+								case ArmorManager.ArmorType.Torso:
+									opponent.CharacterArmor.ArmorList[1].ArmorValue = 0; break;
+								case ArmorManager.ArmorType.LeftPauldron:
+									opponent.CharacterArmor.ArmorList[2].ArmorValue = 0; break;
+								case ArmorManager.ArmorType.RightPauldron:
+									opponent.CharacterArmor.ArmorList[3].ArmorValue = 0; break;
+								case ArmorManager.ArmorType.LeftArm:
+									opponent.CharacterArmor.ArmorList[4].ArmorValue = 0; break;
+								case ArmorManager.ArmorType.RightArm:
+									opponent.CharacterArmor.ArmorList[5].ArmorValue = 0; break;
+								case ArmorManager.ArmorType.LeftLeg:
+									opponent.CharacterArmor.ArmorList[6].ArmorValue = 0; break;
+								case ArmorManager.ArmorType.RightLeg:
+									opponent.CharacterArmor.ArmorList[7].ArmorValue = 0; break;
+							}
                             opponent.ReduceHealth(attacker);
                             healthDamage += attacker.CurrentlyEquippedWeapon.Damage;
                         }
                         attacker.CurrentlyEquippedWeapon.Ammo -= 1;
                     }
-                    message = $"{armorDamage} was done to armor, {healthDamage} was done to health";
                 }
             }
             public class AutoBoltRifle : IMainWeapons, IWeapons

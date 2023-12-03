@@ -7,19 +7,28 @@
 
 <h3>BattlePage</h3>
 
+@code {
+	public Random RandomNumberSeed = new Random();
+	MarineManager ComputerPlayer = new MarineManager();
+	public StatsManager ComputerStats = new StatsManager();
+}
+
 <MudStack Class="container">
 	<div class="d-flex justify-content-center mt-auto">
 		@{
 
 		}
 		<MudPaper Class="pa-3">
-			<MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="FireButtonHandler">Fire</MudButton>
+			<MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="() => Handlers.CombatButtonHandler.CombatButtonSwitch(ref fireStatusButtonEnable)">Fire</MudButton>
 		</MudPaper>
 		<MudPaper Class="pa-3">
 			<MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="() => userInterface.SetNewLocation(HumanPlayer)">Move</MudButton>
 		</MudPaper>
 		<MudPaper Class="pa-3">
-			<MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="() => CombatStatusButtonHandler()">Status</MudButton>
+			<MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="() => Handlers.CombatButtonHandler.CombatButtonSwitch(ref combatStatusButtonEnable)">Status</MudButton>
+		</MudPaper>
+		<MudPaper Class="pa-3">
+			<MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="() => ComputerPlayer.ReduceArmor(HumanPlayer, ArmorManager.ArmorType.Head)">ReduceArmorTest</MudButton>
 		</MudPaper>
 	</div>
 
@@ -53,7 +62,7 @@
 						<MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="() => userInterface.SetAttackAction(HumanPlayer, ComputerPlayer, ArmorManager.ArmorType.Head, RandomNumberSeed)">Head</MudButton>
 					</MudPaper>
 					<MudPaper Class="pa-3">
-						<MudButton Variant="Variant.Filled" Color="Color.Primary" @bind-Value="torsoValue" @onclick="() => userInterface.SetAttackAction(HumanPlayer, ComputerPlayer, ArmorManager.ArmorType.Torso, RandomNumberSeed)">Torso</MudButton>
+						<MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="() => userInterface.SetAttackAction(HumanPlayer, ComputerPlayer, ArmorManager.ArmorType.Torso, RandomNumberSeed)">Torso</MudButton>
 					</MudPaper>
 					<MudPaper Class="pa-3">
 						<MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="() => userInterface.SetAttackAction(HumanPlayer, ComputerPlayer, ArmorManager.ArmorType.LeftPauldron, RandomNumberSeed)">Left Pauldron</MudButton>
@@ -79,54 +88,28 @@
 		}
 	}
 </div>
-
+<div>
+	@{
+		var armorStats = userInterface.GetArmorStats(ComputerPlayer);
+		foreach(var item in armorStats)
+		{
+			<h4>@item</h4>
+		}
+	}
+		<h4>Health: @ComputerPlayer.SecondaryStats.Health</h4>
+</div>
 
 
 @code {
 
-	public Random RandomNumberSeed = new Random();
-	MarineManager ComputerPlayer = new MarineManager();
-	public StatsManager ComputerStats = new StatsManager();
-
-	[Parameter]
-	public string message { get; set; }
 	public List<string> statstatusArray;
 	public List<string> armorStatusArray;
 
-
 	public bool fireStatusButtonEnable = false;
-	public bool combatStatusButtonEnable { get; set; } = false;
+	public bool combatStatusButtonEnable = false;
 	public bool playerTurn = false;
 
-	public bool headValue = false;
-	public bool torsoValue = false;
-
-
-
-	public ArmorManager.ArmorPieces fireTarget;
-
-	public void CombatStatusButtonHandler()
-	{
-		if(combatStatusButtonEnable == false)
-		{
-			combatStatusButtonEnable = true;
-		} else if (combatStatusButtonEnable == true)
-		{
-			combatStatusButtonEnable = false;
-		}
-	}
-
-
-	public void FireButtonHandler()
-	{
-		if(fireStatusButtonEnable == false)
-		{
-			fireStatusButtonEnable = true;
-		} else if (fireStatusButtonEnable == true)
-		{
-			fireStatusButtonEnable = false;
-		}
-	}
+	private bool isInitialized = false;
 
 	protected override void OnInitialized()
 	{
@@ -148,8 +131,10 @@
 		ComputerPrimaryStatManager.AssignIndividualComputerStats(ComputerPrimaryStatManager.MainStats.Perception, computerStatArray, ComputerPlayer);
 
 		userInterface.SetEquipWeapon(ComputerPlayer, new WeaponsManager.MainWeapons.BoltRifle());
-		ComputerPlayer.CharacterArmor.ResilienceToArmor(ComputerPlayer);
+		ComputerPlayer.ResilienceToArmor();
 		ComputerPlayer.SetCharacterLocation();
+
+		bool whoGoesFirst = Managers.BattleManager.GoFirst(RandomNumberSeed);
 
 		base.OnInitialized();
 	}

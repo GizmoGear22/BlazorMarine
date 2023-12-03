@@ -4,39 +4,38 @@
 @using MudBlazor;
 @inject IUserInterface userInterface;
 @inject IMarine HumanPlayer;
+@inject Handlers.StatButton statButton;
 
 
 <h3>CharacterCreation</h3>
 
-@code {
-    public static StatsManager.CharacterPrimaryStats stats = new();
-    public static StatsManager.CharacterSecondaryStats secStats = new();
-}
 
 <MudGrid>
     <MudItem xs="12" sm="7">
         <MudPaper Class="pa-4">
             <MudForm @ref="form" @bind-IsValid="@success" @bind-Errors="@errors" >
-                <MudNumericField T="int" Label="Strength" @bind-Value="stats.Strength" Min="1"
-                oninput="@(ChangeAttributeNumberFromStrength())"
-                  />
-                
-                <MudNumericField T="int" Label="Agility" @bind-Value="stats.Agility" Min="1"
-                 oninput="@(ChangeAttributeNumberFromAgility())" />
 
-                <MudNumericField T="int" Label="Resilience" @bind-Value="stats.Resilience" Min="1"
-                oninput="@(ChangeAttributeNumberFromResilience())"/>
 
-                <MudNumericField T="int" Label="Perception" @bind-Value="stats.Perception" Min="1"
-                oninput="@(ChangeAttributeNumberFromPerception())" />
-                
+                <MudNumericField T="int" Label="Strength" @bind-Value="HumanPlayer.PrimaryStats.Strength" Min="1"
+                                 oninput="@(statButton.ChangeAttributeNumberFromStat(ref initialStrength, Handlers.StatButton.StatButtonType.Strength))" />
+
+				<MudNumericField T="int" Label="Agility" @bind-Value="HumanPlayer.PrimaryStats.Agility" Min="1"
+								 oninput="@(statButton.ChangeAttributeNumberFromStat(ref initialAgility, Handlers.StatButton.StatButtonType.Agility))" />
+
+				<MudNumericField T="int" Label="Resilience" @bind-Value="HumanPlayer.PrimaryStats.Resilience" Min="1"
+								 oninput="@(statButton.ChangeAttributeNumberFromStat(ref initialResilience, Handlers.StatButton.StatButtonType.Resilience))" />
+
+				<MudNumericField T="int" Label="Perception" @bind-Value="HumanPlayer.PrimaryStats.Perception" Min="1"
+                                 oninput="@(statButton.ChangeAttributeNumberFromStat(ref initialPerception, Handlers.StatButton.StatButtonType.Perception))" />
+
+
 
             </MudForm>
         </MudPaper>
         <MudPaper Class="pa-4 mt-4">
             <MudButton Variant="Variant.Filled" Color="Color.Primary" DisableElevation="true" OnClick="@(() => form.Validate())">Validate</MudButton>
             <MudButton Variant="Variant.Filled" Color="Color.Secondary" DisableElevation="true" OnClick="@(() => form.ResetAsync())" Class="mx-2">Reset</MudButton>
-            <MudButton Variant="Variant.Filled" DisableElevation="true" OnClick="@(() => form.ResetValidation())">Reset Validation</MudButton>
+            <MudButton Variant="Variant.Filled" Color="Color.Secondary" DisableElevation="true" OnClick="@(async () => await form.ResetAsync())" Class="mx-2">Reset</MudButton>
             <MudButton Variant="Variant.Filled" Color="Color.Primary" DisableElevation="true" OnClick="@SubmitForm">Submit</MudButton>
 
         </MudPaper>
@@ -52,23 +51,13 @@
     </MudItem>
 </MudGrid>
 
-<h3>Stat Points: @(GetAttributePoints())</h3>
+<h3>Stat Points: @(HumanPlayer.SecondaryStats.AttributePoints)</h3>
 
 
 @code {
-    private int originalStrength = stats.Strength;
-    private int originalAgility = stats.Agility;
-    private int originalResilience = stats.Resilience;
-    private int originalPerception = stats.Perception;
-    private int GetAttributePoints()
-    {
-        return secStats.AttributePoints;
-    }
-
 
     [Inject]
     private NavigationManager NavigationManager { get; set; }
-
 
     bool success;
     string[] errors = { };
@@ -76,69 +65,24 @@
 
     bool isValid;
 
-    private int ChangeAttributeNumberFromStrength()
-    { 
-        int NewStrength = stats.Strength;
-        if (originalStrength < NewStrength)
-        {
-            secStats.AttributePoints -= 1;
-        } 
-        else if (originalStrength > NewStrength)
-        {
-            secStats.AttributePoints += 1;
-        }
-        originalStrength = NewStrength;
-        return secStats.AttributePoints;
-    }
+    public int initialStrength;
+    public int initialAgility;
+    public int initialResilience;
+    public int initialPerception;
 
-    private int ChangeAttributeNumberFromAgility()
+    protected override void OnInitialized()
     {
-        int NewAgility = stats.Agility;
-        if (originalAgility < NewAgility)
-        {
-            secStats.AttributePoints -= 1;
-        }
-        else if (originalAgility > NewAgility)
-        {
-            secStats.AttributePoints += 1;
-        }
-        originalAgility = NewAgility;
-        return secStats.AttributePoints;
-    }
+        initialStrength = statButton.SetInitialStat(Handlers.StatButton.StatButtonType.Strength);
+        initialAgility = statButton.SetInitialStat(Handlers.StatButton.StatButtonType.Agility);
+        initialResilience = statButton.SetInitialStat(Handlers.StatButton.StatButtonType.Resilience);
+        initialPerception = statButton.SetInitialStat(Handlers.StatButton.StatButtonType.Perception);
 
-    private int ChangeAttributeNumberFromResilience()
-    {
-        int NewResilience = stats.Resilience;
-        if (originalResilience < NewResilience)
-        {
-            secStats.AttributePoints -= 1;
-        }
-        else if (originalResilience > NewResilience)
-        {
-            secStats.AttributePoints += 1;
-        }
-        originalResilience = NewResilience;
-        return secStats.AttributePoints;
-    }
-
-    private int ChangeAttributeNumberFromPerception()
-    {
-        int NewPerception = stats.Perception;
-        if (originalPerception < NewPerception)
-        {
-            secStats.AttributePoints -= 1;
-        }
-        else if (originalPerception > NewPerception)
-        {
-            secStats.AttributePoints += 1;
-        }
-        originalPerception = NewPerception;
-        return secStats.AttributePoints;
+        base.OnInitialized(); 
     }
 
     public void SubmitForm()
     {
-        if (stats.Strength < 1 || stats.Agility < 1 || stats.Perception < 1 || stats.Resilience < 1 || secStats.AttributePoints < 0)
+        if (HumanPlayer.PrimaryStats.Strength < 1 || HumanPlayer.PrimaryStats.Agility < 1 || HumanPlayer.PrimaryStats.Perception < 1 || HumanPlayer.PrimaryStats.Resilience < 1 || HumanPlayer.SecondaryStats.AttributePoints < 0)
         {
             isValid = false;
         } else
@@ -147,15 +91,14 @@
         }
         if (isValid == true)
         {
-            userInterface.SetPrimaryStats(HumanPlayer, stats);
-            userInterface.SetSecondaryStats(secStats, HumanPlayer);
-            HumanPlayer.CharacterArmor.ResilienceToArmor(HumanPlayer);
+
+            HumanPlayer.ResilienceToArmor();
 
             HumanPlayer.SecondaryStats.WeightCalculation(HumanPlayer.CharacterArmor.ArmorList);
             HumanPlayer.SecondaryStats.PossibleMovementDistance(HumanPlayer);
 
             userInterface.SetEquipWeapon(HumanPlayer, new WeaponsManager.MainWeapons.BoltRifle());
-            secStats.AccuracyCalculation(HumanPlayer);
+            StatsManager.CharacterSecondaryStats.StartingStatAccuracyCalculation(HumanPlayer);
             
 
 			NavigationManager.NavigateTo("./BattlePage");
@@ -165,6 +108,5 @@
 
 
     }
-
 
 }

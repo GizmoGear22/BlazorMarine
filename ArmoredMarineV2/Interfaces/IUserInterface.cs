@@ -7,8 +7,8 @@ namespace ArmoredMarineV2.Interfaces
     {
 		StatsManager GetPrimaryStats();
         StatsManager GetSecondaryStats();
-        void SetPrimaryStats(IMarine humanPlayer, StatsManager.CharacterPrimaryStats newStats);
-        void SetSecondaryStats(StatsManager.CharacterSecondaryStats stats, IMarine HumanPlayer);
+        StatsManager.CharacterPrimaryStats SetPrimaryStats(IMarine humanPlayer, StatsManager.CharacterPrimaryStats newStats);
+        StatsManager.CharacterSecondaryStats SetSecondaryStats(StatsManager.CharacterSecondaryStats stats, IMarine HumanPlayer);
         IMarine SetMainWeapon(IMarine player, IMainWeapons weapon);
         IMarine SetSecondaryWeapon();
         IMarine SetMeleeWeapon();

@@ -1,4 +1,5 @@
 using ArmoredMarineV2.Data;
+using ArmoredMarineV2.Handlers;
 using ArmoredMarineV2.Interfaces;
 using ArmoredMarineV2.Managers;
 using Microsoft.AspNetCore.Components;
@@ -17,6 +18,7 @@ builder.Services.AddMudServices();
 
 builder.Services.AddSingleton<IUserInterface, UserInterfaceManager>();
 builder.Services.AddSingleton<IMarine, MarineManager>();
+builder.Services.AddSingleton<StatButton>();
 
 
   var app = builder.Build();
