@@ -18,10 +18,7 @@ builder.Services.AddMudServices();
 
 builder.Services.AddSingleton<IUserInterface, UserInterfaceManager>();
 builder.Services.AddSingleton<IMarine, MarineManager>();
-builder.Services.AddSingleton<StrengthStatButtonHandler>();
-builder.Services.AddSingleton<AgilityStatButtonHandler>();
-builder.Services.AddSingleton<ResilienceStatButtonHandler>();
-builder.Services.AddSingleton<PerceptionStatButtonHandler>();
+builder.Services.AddSingleton<StatButton>();
 
 
   var app = builder.Build();
