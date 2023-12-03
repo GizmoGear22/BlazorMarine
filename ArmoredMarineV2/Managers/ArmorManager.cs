@@ -37,15 +37,6 @@ namespace ArmoredMarineV2.Managers
                 ];
             }
          
-            public void ResilienceToArmor(IMarine marine)
-
-            {
-                foreach (ArmorPieces piece in marine.CharacterArmor.ArmorList)
-                {
-                    piece.ArmorValue = Math.Floor(piece.ArmorValue * marine.PrimaryStats.Resilience * 10);
-                }
-
-            }
 
             public List<string> ArmorStats(IMarine player)
             {
@@ -58,8 +49,6 @@ namespace ArmoredMarineV2.Managers
 
 				return ShownArmorStats;
 			}
-
-            
 
         }
         public class ArmorPieces : IArmor
