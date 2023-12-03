@@ -15,16 +15,16 @@ namespace ArmoredMarineV2.Managers
 		public static double RangeAccuracyConversion(IMarine player, IMarine computer) //Will need to rename these adjusters to conversions for clarity
 		{
 			var range = FieldManager.DistanceBetweenCharacters(player, computer);
-			double RangeAimAdjust = (range + 30.0) / (2.0 * range);
-			return RangeAimAdjust;
+			double rangeAimAdjust = (range + 30.0) / (2.0 * range);
+			return rangeAimAdjust;
 		}
 
-		public static void BattleAccuracyCalculation(IMarine Shooter, IMarine opponent, ArmorManager.ArmorType target, double Range, double Upgrade = 1)
+		public static void BattleAccuracyCalculation(IMarine shooter, IMarine opponent, ArmorManager.ArmorType target, double Range, double Upgrade = 1)
 		{
-			var ArmorTargetAccuracy = ArmorTargetAccuracyHandler(target, opponent);
-			var PerceptionBonus = (2.0 * Shooter.PrimaryStats.Perception) / (2.0 * Shooter.PrimaryStats.Perception + 5.0);
-			var TotalAccuracy = PerceptionBonus * Shooter.CurrentlyEquippedWeapon.Accuracy * Upgrade * Range * ArmorTargetAccuracy * 100.0;
-			Shooter.SecondaryStats.Accuracy = TotalAccuracy;
+			var armorTargetAccuracy = ArmorTargetAccuracyHandler(target, opponent);
+			var perceptionBonus = (2.0 * shooter.PrimaryStats.Perception) / (2.0 * shooter.PrimaryStats.Perception + 5.0);
+			var totalAccuracy = perceptionBonus * shooter.CurrentlyEquippedWeapon.Accuracy * Upgrade * Range * armorTargetAccuracy * 100.0;
+			shooter.SecondaryStats.Accuracy = totalAccuracy;
 		}
 		public static double ArmorTargetAccuracyHandler(ArmorManager.ArmorType type, IMarine opponent)
 		{

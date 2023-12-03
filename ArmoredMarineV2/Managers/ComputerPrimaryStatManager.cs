@@ -14,7 +14,7 @@ namespace ArmoredMarineV2.Managers
 			Perception
 		}
 
-		public static int[] RandomStatsArray(Random RandomNumberSeed)
+		public static int[] RandomstatsArray(Random RandomNumberSeed)
 		{
 
 			var statPointsAvailable = 30;
@@ -33,21 +33,21 @@ namespace ArmoredMarineV2.Managers
 			HelperFunctions.Shuffle(statStorage, RandomNumberSeed);
 			return statStorage;
 		}
-		public static void AssignIndividualComputerStats(MainStats stat, int[] StatsArray, MarineManager computerMarine)
+		public static void AssignIndividualComputerStats(MainStats stat, int[] statsArray, MarineManager computerMarine)
 		{
 			switch (stat)
 			{
 				case MainStats.Strength:
-					computerMarine.PrimaryStats.Strength += StatsArray[0];
+					computerMarine.PrimaryStats.Strength += statsArray[0];
 					break;
 				case MainStats.Agility:
-					computerMarine.PrimaryStats.Agility += StatsArray[1];
+					computerMarine.PrimaryStats.Agility += statsArray[1];
 					break;
 				case MainStats.Resilience:
-					computerMarine.PrimaryStats.Resilience += StatsArray[2];
+					computerMarine.PrimaryStats.Resilience += statsArray[2];
 					break;
 				case MainStats.Perception:
-					computerMarine.PrimaryStats.Perception += StatsArray[3];
+					computerMarine.PrimaryStats.Perception += statsArray[3];
 					break;
 			}
 
